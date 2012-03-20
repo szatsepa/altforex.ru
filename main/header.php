@@ -19,3 +19,5 @@ header('Content-Type: text/html; charset=utf-8');
         <script type="text/javascript" src="../js/js_scripts.js"></script>
 </head>
     <body onload="">
+        <div class="main">
+            <div class="main_0">

@@ -45,8 +45,14 @@ if(isset ($_SESSION[id])) {
 switch ($attributes[act]) {
     case 'main':
         include 'main/header.php';
-        echo "Привет участникам автопробега!!!";
+        include 'main/selector.php';
+        include 'main/main.php';
         break;
+    
+      case 'auth':
+        include 'main/header.php';
+        include 'query/authentication.php';
+       break;
     
         case "logout":
         include 'action/logout.php'; 

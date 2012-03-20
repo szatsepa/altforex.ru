@@ -1,0 +1,280 @@
+/* 
+    Document   : style
+    Created on : 02.02.2012, 14:26:00
+    Author     : seroga arcady.1254@gmail.com
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root { 
+    display: block;
+}
+html, body {
+  margin:0;
+  padding:0;
+  width:100%;
+  height:100%;
+ font-family: arial, sans-serif;  	
+ font-size: 10pt;
+}
+div.main{
+    width: 100%;
+    height: 768px;
+    background-color: #eeeeee;
+}
+div.main_0{
+    width: 1024px;
+    margin: 0 auto;
+    outline: 1px solid red;
+}
+div.selector {
+	background-color:#cccccc;
+	border-top:3px solid #a7a7a7;
+	border-bottom:1px solid white;
+	font-size:4ex;
+	padding: 0 0 0 0;
+        padding-left: 22px;
+	margin-top:7px;
+	width:98%;
+        height: 28px;
+} 
+span.selector3 {
+	display: inline;
+	position: relative;
+        float: right;
+	margin:auto 27px auto auto;
+	padding-top: 2px;
+	font-size: 1ex;
+}
+div.glagne{
+    position: relative;
+    background-color: #eeeeee;
+    width: 696px;
+    margin: 0 auto;
+    outline: 1px solid grey;
+}
+div.title_main{
+    position: relative;
+    width: 100%;
+    font-size: 36px;
+/*    font-weight: bold;*/
+    color:firebrick;
+    text-align: center;
+    outline: 1px solid aqua;
+}
+div.square{
+    position: relative;
+    float: left;
+    width: 232px;
+    height: 340px;
+    background-image: url("../images/square.gif");
+    outline: 1px solid green;
+    z-index: 1;
+}
+div.circle{
+    position: absolute;
+/*    float: left;*/
+    margin-left: 232px;
+/*    margin-top: 33px;*/
+    width: 232px;
+    height: 340px;
+    background-image: url("../images/circle.gif");
+    outline: 1px solid green;
+    z-index: 2;
+}
+div.triangle{
+    position: absolute;
+    margin-left: 464px;
+    width: 232px;
+    height: 340px;
+    background-image: url("../images/triangle.gif"); 
+    outline: 1px solid green;
+    z-index: 3;
+}
+div.envelope_base{
+    position: relative;
+    width: 1024px;
+    height: 800px;
+}
+div.envelope{
+    position: relative;
+    float: left;
+    width: 801px;
+    height: 563px;
+    margin-top: 20px;
+    margin-left: 120px;
+    background-image: url("../images/cover.png");
+    display: block;
+}
+div.registration{
+    position: relative;
+    float: left;
+    width: 801px;
+    height: 563px;
+    margin-top: 20px;
+    margin-left: 120px;
+    background-image: url(../images/registration_bg.png);
+    background-color: white;
+    display: block;    
+}
+div.regs_fields{
+    position: absolute;
+    width: 220px;
+    height: 225px;
+    margin-top: 50px;
+    margin-left: 185px;
+    z-index: 1;
+}
+div.r_surname{
+    position: relative;
+    width: 420px;
+    height: 28px;
+    padding-top: 1px;
+    padding-bottom: 0;
+}
+div.reg_index{
+    position: absolute;
+    width: 370px;
+    height: 75px;
+    margin-top: 254px;
+    margin-left: 18px;
+    z-index: 2;
+    background-color: #ffffff;
+}
+div.r_index_0{
+    position: absolute;
+    width: 44px;
+    height: 72px;
+    margin-top: 12px;
+    padding-left: 8px;
+    padding-top: 7px;
+    z-index: 0;
+}
+
+div.reg_submit{
+    position: absolute;
+    position: absolute;
+    width: 70px;
+    height: 35px;
+    margin-top: 240px;
+    margin-left: 608px;
+    z-index: 3;
+    padding-left: 6px;
+    padding-top: 12px;
+}
+div.change_code{
+    position: absolute;
+    position: absolute;
+    width: 70px;
+    height: 35px;
+    margin-top: 290px;
+    margin-left: 428px;
+    z-index: 3;
+    padding-left: 6px;
+    padding-top: 12px;
+}
+div.stamp{
+    position: relative;
+    background-image: url(../images/stamp.gif);
+    width: 145px;
+    height: 145px;
+    margin-top: 35px;
+    margin-left: 613px;
+}
+div.recipe{
+    position: relative;
+    width: 220px;
+    height: 24px;
+    margin-left: 563px;
+    margin-top: 52px;
+    padding-top: 2px;
+    padding-left: 2px;
+}
+div.send{
+    position: relative;
+    width: 220px;
+    height: 24px;
+    margin-left: 563px;
+    margin-top: 12px;
+    padding-top: 2px;
+    padding-left: 2px;
+}
+div.submit_cover{
+    position: relative;
+    width: 142px;
+    height: 31px;
+    margin-left: 643px;
+    margin-top: 12px;
+}
+div.add_mail{
+    position: relative;
+    float: left;
+    width: 801px;
+    height: 563px;
+    margin-top: 20px;
+    margin-left: 120px;
+    background-color: #ffffff;
+    display: block;
+    z-index: 0;
+}
+div.txt_add_mail{ 
+    position: absolute;
+    width: 560px;
+    height: 28px;
+    margin-left: 5px;
+    margin-top: 2px;
+    z-index: 1;
+    font: 14px Arial;
+    font-weight: normal;
+    color: #000000;
+}
+div.stamp_add_mail{
+    position: absolute;
+    float: right;
+    background-image: url(../images/stamp.gif);
+    width: 145px;
+    height: 145px;
+    margin-top: 35px;
+    margin-left: 613px;
+    z-index: 2;
+}
+div.input_mail{
+    position: absolute;
+    width: 220px;
+    height: 28px;
+    margin-left: 115px;
+    margin-top: 62px;
+    z-index: 3;
+    font: 14px Arial;
+    font-weight: bold;
+    color: #000000;
+    padding-top: 2px;
+    padding-left: 3px;
+}
+div.confirm{
+    position: absolute;
+    width: 220px;
+    height: 28px;
+    margin-left: 185px;
+    margin-top: 102px;
+    z-index: 4;
+}
+
+input.submit3 {
+	font-size: 8pt;
+	font-weight: bold;
+	margin-left: 3px;
+	margin-bottom: 0px;
+	margin-right: 0px;
+	margin-top:0px;	
+	position:relative;	
+}
+p.reg{
+    font-size: 10px;
+    color: #000000;
+}

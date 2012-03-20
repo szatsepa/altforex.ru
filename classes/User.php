@@ -14,7 +14,7 @@ class User{
     
     function setUser($id){  
         
-        $query = "SELECT u.id, u.surname, u.name, u.patronymic, u.key_word, u.phone, u.address, u.bank_card, s.id AS email_id, s.email, s.eps_cod AS eps FROM eps_users AS u, eps_sender AS s WHERE u.email_id = s.id AND u.id = $id";
+        $query = "SELECT u.id, u.surname, u.name FROM users AS u WHERE u.id = $id";
         
         $result = mysql_query($query) or die ($query);
         
