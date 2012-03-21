@@ -18,7 +18,7 @@ if (isset($_SESSION['auth']) and !isset($attributes[out])) {
    if($_SESSION[auth] == 1) $user->setUser($user_id);
      
     }
-    
+
     if(!($user->data)){
         $_SESSION[auth] = 0;
         unset($_SESSION[id]);

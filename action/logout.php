@@ -1,7 +1,5 @@
 <?php 
 
-$res = $_SERVER[SERVER_NAME];
-
 unset ($attributes);
 
 unset($_SESSION[auth]);

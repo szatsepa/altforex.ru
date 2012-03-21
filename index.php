@@ -25,7 +25,7 @@ if(isset($attributes[id])){
          
 }
 
-if(isset($attributes[di]) && !isset ($_SESSION[auth])){
+if(isset($attributes[di]) && !isset ($_SESSION[auth]) && $attributes[di] != ''){
          
    $_SESSION[id] = $attributes[di];
    
@@ -42,11 +42,36 @@ include 'action/quotesmart.php';
 if(isset ($_SESSION[id])) {
     include 'query/checkauth.php';
 }
+//print_r($_SESSION);
+//echo "-5<br/>";
+//print_r($attributes);
+
 switch ($attributes[act]) {
     case 'main':
+        include 'query/status.php';
         include 'main/header.php';
         include 'main/selector.php';
         include 'main/main.php';
+        break;
+    
+    case 'rmail':
+        include 'main/header.php';
+        include 'main/selector.php';
+        include 'main/regmail.php';
+        break;
+    
+    case 'addm':
+        include 'action/add_email.php';
+        break;
+    
+    case 'regu':
+        include 'main/header.php';
+        include 'main/selector.php';
+        include 'main/about_me.php';
+        break;
+    case 'vote':
+        include 'main/header.php';
+        include 'action/vote.php';
         break;
     
       case 'auth':
@@ -54,7 +79,7 @@ switch ($attributes[act]) {
         include 'query/authentication.php';
        break;
     
-        case "logout":
+     case "logout":
         include 'action/logout.php'; 
         break;
  

@@ -8,15 +8,7 @@ if(isset ($attributes[ismail]) && $attributes[ismail] == 1){
     $email = $_SESSION[email];
     
     unset($_SESSION[email]);
-    ?>
-<script language="javascript">   
-    
-//    alert("На адрес <?php echo $email;?>, был отправлен ключ.");
-//    
-//        document.location.href = "http://e-ps.me/index.php?act=main";
-//    
-</script>
-    <?php
+
 }else{
     
 $code = quote_smart($attributes[code]);
@@ -37,7 +29,7 @@ $code = quote_smart($attributes[code]);
                      
                      setcookie("di", $_SESSION['id'], time()+(3600*12));
                
-                     
+//  echo $query;                   
                
 ?>
 

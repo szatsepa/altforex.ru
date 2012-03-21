@@ -96,6 +96,19 @@ div.triangle{
     outline: 1px solid green;
     z-index: 3;
 }
+div.rate{
+    position: absolute;
+    width: 100%;
+/*    height: 32px;*/
+    top: 260px;
+/*    outline: 1px solid yellow;*/
+}
+p.rate{
+    font: 27px Arial;
+    font-weight: bold;
+    text-align: center;
+    color: firebrick;
+}
 div.envelope_base{
     position: relative;
     width: 1024px;
@@ -118,8 +131,8 @@ div.registration{
     height: 563px;
     margin-top: 20px;
     margin-left: 120px;
-    background-image: url(../images/registration_bg.png);
-    background-color: white;
+/*    background-image: url(../images/registration_bg.png);*/
+    background-color: #eeeeee;
     display: block;    
 }
 div.regs_fields{
@@ -181,10 +194,14 @@ div.change_code{
 div.stamp{
     position: relative;
     background-image: url(../images/stamp.gif);
-    width: 145px;
-    height: 145px;
+    width: 142px;
+    height: 140px;
     margin-top: 35px;
     margin-left: 613px;
+    font: 14px Arial;
+    color: firebrick;
+    text-align: center;
+    padding-top: 10px;
 }
 div.recipe{
     position: relative;

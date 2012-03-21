@@ -14,7 +14,7 @@ class User{
     
     function setUser($id){  
         
-        $query = "SELECT u.id, u.surname, u.name FROM users AS u WHERE u.id = $id";
+        $query = "SELECT u.id, u.surname, u.name, u.email, a.cash, a.bonus FROM users AS u, my_account AS a WHERE u.id = $id AND u.id = a.user_id";
         
         $result = mysql_query($query) or die ($query);
         
@@ -22,7 +22,7 @@ class User{
         
         $this->data = $row; 
         
-        unset($row);
+        unset($row); 
         
         mysql_free_result($result);
     }
