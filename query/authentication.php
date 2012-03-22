@@ -47,9 +47,9 @@ $code = quote_smart($attributes[code]);
     ?>
 <script language="javascript">   
 //        alert(<?php echo $query;?>); 
-//         document.write ('<form action="index.php?act=info" method="post"><input name="scr_W" type="hidden" value="'+ screen.width + '"><input name="scr_H" type="hidden" value="'+screen.height + '"><input name="colorDepth" type="hidden" value="'+screen.colorDepth+ '"></form>');
+//         document.write ('<form action="index.php?act=main" method="post"></form>');
 //         document.forms[0].submit();
-    
+    document.location.href = "http://altforex.ru/index.php?act=main";
 </script>    
     <?php } 
     

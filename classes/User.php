@@ -14,12 +14,12 @@ class User{
     
     function setUser($id){  
         
-        $query = "SELECT u.id, u.surname, u.name, u.email, a.cash, a.bonus FROM users AS u, my_account AS a WHERE u.id = $id AND u.id = a.user_id";
+        $query = "SELECT u.id, u.surname, u.name, u.email, u.phone, u.key_code, a.cash, a.bonus FROM users AS u   LEFT JOIN my_account AS a ON u.id = a.user_id WHERE u.id = $id";
         
         $result = mysql_query($query) or die ($query);
         
         $row = mysql_fetch_assoc($result);
-        
+                
         $this->data = $row; 
         
         unset($row); 

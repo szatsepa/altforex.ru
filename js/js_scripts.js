@@ -42,16 +42,64 @@ function _writeUser(ID){
    }else{
        act = "chngus";
    }
-    
+  
   var obj = document.getElementById(ID);
   
   var email = obj.email.value;
+  
+//   alert(email); 
   
    if(!_emlWalidation(email)){
             alert("Пожалуйста, проверте правильно ли введен адрес получателя.");
         }
 
-    document.write("<form action='index.php?act="+act+"' method='post'><input type='hidden' name='upd' value='"+upd+"'/><input type='hidden' name='code' value='"+obj.code.value+"'/><input type='hidden' name='user_id' value='"+obj.user_id.value+"'/><input type='hidden' name='surname' value='"+obj.surname.value+"'/><input type='hidden' name='name' value='"+obj.name.value+"'/><input type='hidden' name='patronymic' value='"+obj.patronymic.value+"'/><input type='hidden' name='residens' value='"+obj.residens.value+"'/><input type='hidden' name='email' value='"+obj.email.value+"'/><input type='hidden' name='phone' value='"+obj.phone.value+"'/><input type='hidden' name='word' value='"+obj.word.value+"'/><input type='hidden' name='bank_card' value='"+obj.bank_card.value+"'/></form>");
+    document.write("<form action='index.php?act="+act+"' method='post'><input type='hidden' name='user_id' value='"+obj.user_id.value+"'/><input type='hidden' name='surname' value='"+obj.surname.value+"'/><input type='hidden' name='name' value='"+obj.name.value+"'/><input type='hidden' name='email' value='"+obj.email.value+"'/><input type='hidden' name='phone' value='"+obj.phone.value+"'/><input type='hidden' name='word' value='"+obj.word.value+"'/></form>");
     document.forms[0].submit();
     
 }
+function _goAbout(ID){
+    
+     var uid = document.getElementById(ID).id.value;
+        
+     var email = document.getElementById(ID).email.value;
+       
+     document.write("<form id='gohach' action='index.php?act=regu' method='post'><input type='hidden' name='id' value='"+uid+"'/><input type='hidden' name='email' value='"+email+"'/></form>");
+     document.forms[0].submit();
+}
+function timer()
+{
+    
+  sec--; /* уменьшаем на одну секунду */
+  if (sec<0) /* следующая минута */
+  {
+    sec = 59;
+    min--;
+  }
+  var smin = ''+min;
+  var ssec = ''+sec;
+//  if (smin.length<2) smin = '0'+smin; /* добавляем ведущие нули */
+  if (ssec.length<2) ssec = '0'+ssec;
+  document.getElementById('time').innerHTML = smin+':'+ssec; /* и выводим на страницу текущее значение */
+  if (min==0 && sec==0)
+  {
+    clearInterval(timerid); /* останавливаем таймер */
+//    alert('Дождались');  /* и производим какие-то свои действия */
+    document.location.reload();
+  }
+}
+    
+function _goRmail(aga, whot){
+   
+    var whot_array = new Array('квадрат','круг','треугольник');
+    
+    if(aga == 0){
+        document.location='http://altforex.ru/index.php?act=rmail';
+    }else{
+        if(confirm("\t\tВы желаете отдать голос за "+whot_array[whot]+"?\n С вашего счета будет списано 5 (или скоканада) балов")){
+           document.location='http://altforex.ru/index.php?act=vote&whot='+whot; 
+        }else{
+           document.location='http://altforex.ru/index.php?act=main'; 
+        }
+    }
+    
+} 

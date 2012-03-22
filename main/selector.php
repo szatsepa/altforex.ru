@@ -3,7 +3,7 @@
 /*
  * created by arcady.1254@gmail.com 2/2/2012
  */
-
+//print_r($user);
 ?>
 <div class="selector">&nbsp;
 <?php 
@@ -26,11 +26,21 @@ if (!isset ($_SESSION[id]) && $_SESSION[auth] == 0) {
     
 <form id="ofice" action='index.php?act=logout' method='post'>
     <?php if($user->data[name]){
-        echo $user->data[name]." ". $user->data[surname];
+        echo $user->data[name]." ". $user->data[surname]; 
+        $email = $user->data[email];
+        $id = $user->data[id];
     }else{
-        echo $attributes[email];
-        echo "<input type='hidden' name='id' value='$attributes[id]'/><input type='hidden' name='email' value='$attributes[email]'/>";
+        if(isset($user->data[email])){
+            echo $user->data[email];
+            
+        }else{
+            echo $attributes[email];
+        }
+         $email = $attributes[email];
+         $id = $attributes[id];
+        
     }
+    echo "<input type='hidden' name='id' value='$id'/><input type='hidden' name='email' value='$email'/>";
 ?>
     <input type='button' class='submit3' value='Кабинет' style='color:green;' onclick="javascript:_goAbout('ofice');" />
     <input type='submit' class='submit3' value='X' style='color:red'/>
@@ -42,14 +52,6 @@ if (!isset ($_SESSION[id]) && $_SESSION[auth] == 0) {
 
 ?>
 </div>
-<script language="javascript">
-    function _goAbout(ID){
-        
-        var uid = document.getElementById(ID).id.value;
-        
-        var email = document.getElementById(ID).email.value;
-        
-        document.write("<form action='index.php?act=regu' method='post'><input type='hidden' name='id' value='"+uid+"'/><input type='hidden' name='email' value='"+email+"'/></form>");
-        document.forms[0].submit();
-    }
-</script>
+<!--<script language="javascript">
+
+</script>-->

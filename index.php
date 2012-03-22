@@ -64,6 +64,14 @@ switch ($attributes[act]) {
         include 'action/add_email.php';
         break;
     
+    case 'chngus':
+        include 'action/change_user.php';
+        break;
+    
+    case 'addus':
+        include 'action/add_user.php';
+        break;
+    
     case 'regu':
         include 'main/header.php';
         include 'main/selector.php';

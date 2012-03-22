@@ -14,6 +14,9 @@ if($_SESSION[auth] == 1){
 ?>
 <div class="glagne">
     <div class="title_main">
+        <div id="time">	
+            1:30
+        </div>
         <p>Голосование.</p>
     </div>
     <div class="square"> 
@@ -36,21 +39,10 @@ if($_SESSION[auth] == 1){
     </div>
 </div>
 <script language="javascript">
-    
-function _goRmail(aga, whot){
    
-    var whot_array = new Array('квадрат','круг','треугольник');
-    
-    if(aga == 0){
-        document.location='http://altforex.ru/index.php?act=rmail';
-    }else{
-        if(confirm("\t\tВы желаете отдать голос за "+whot_array[whot]+"?\n С вашего счета будет списано 5 (или скоканада) балов")){
-           document.location='http://altforex.ru/index.php?act=vote&whot='+whot; 
-        }else{
-           document.location='http://altforex.ru/index.php?act=main'; 
-        }
-    }
-    
-}    
-    
+    var min = 1;
+    var sec = 30;
+    var timerid;
+    timerid = setInterval(timer,1000); /* запускаем таймер */
+   
 </script>

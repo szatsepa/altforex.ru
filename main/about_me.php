@@ -10,19 +10,9 @@ $us = 0;
 
 if(isset($user)){
     $us = 1;
-    
-//    $eps = $user->data[eps];
-
-//    $eps_array = str_split($eps);
-
 }
 if(isset($attributes[eps]) && isset ($attributes[key])){
     $email = $attributes[email];
- ?>   
-<script language="javascript">
-//        alert("Кодовое слово было отправлено по адресу - <?php echo $email;?>");
-</script>
-   <?php 
 }
 ?>
 <br/>
@@ -31,35 +21,49 @@ if(isset($attributes[eps]) && isset ($attributes[key])){
      <form id="reg_form_<?php echo $us;?>">   
         <div class="regs_fields">
             <input type="hidden" name="user_id" value="<?php echo $user->data[id];?>"/>
-<!--            <input type="hidden" name="email_id" value="<?php echo $user->data[email_id];?>"/> -->
             <input type="hidden" name="eps" value="<?php echo $eps;?>"/>
             <div class="r_surname">
-                <input size="42" type="text" required name="surname" value="<?php echo $user->data[surname];?>"/> 
+                <div class="t_surname">Фамилия</div>
+                <div class="input_surname">
+                    <input size="36" type="text" required name="surname" value="<?php echo $user->data[surname];?>"/> 
+            </div>
+                </div>
+            <div class="r_surname">
+                <div class="t_surname">Имя</div>
+                <div class="input_surname">
+                    <input size="36" type="text" required name="name" value="<?php echo $user->data[name];?>"/>
+            </div>
+                </div>
+<!--            <div class="r_surname">
+                <input size="36" type="text" name="patronymic" value="<?php echo $user->data[patronymic];?>"/>
+            </div>-->
+<!--            <div class="r_surname">
+                <input size="36" type="text" name="residens" value="<?php echo $user->data[address];?>"/>
+            </div>-->
+            <div class="r_surname">
+               <div class="t_surname">Емейл</div> 
+               <div class="input_surname">
+                   <input size="36" type="text" required name="email" value="<?php echo $user->data[email];?>"/>
+                </div>
+                </div>
+            <div class="r_surname">
+                <div class="t_surname">Телефон</div>
+                <div class="input_surname">
+                    <input size="36" type="text" required name="phone" value="<?php echo $user->data[phone];?>"/>
+                </div>
+                </div>
+            <div class="r_surname">
+                <div class="t_surname">Код</div>
+                <div class="input_surname">
+                    <input size="36" type="text" name="word" value="<?php echo $user->data[key_code];?>"/>
+                </div>
+                </div>
+<!--            <div class="r_surname">
+                <input size="36" type="text" required name="bank_card" value="<?php echo $user->data[bank_card];?>"/>
             </div>
             <div class="r_surname">
-                <input size="42" type="text" required name="name" value="<?php echo $user->data[name];?>"/>
-            </div>
-            <div class="r_surname">
-<!--                <input size="42" type="text" name="patronymic" value="<?php echo $user->data[patronymic];?>"/>-->
-            </div>
-            <div class="r_surname">
-<!--                <input size="42" type="text" name="residens" value="<?php echo $user->data[address];?>"/>-->
-            </div>
-            <div class="r_surname">
-                <input size="42" type="text" required name="email" value="<?php echo $user->data[email];?>"/>
-            </div>
-            <div class="r_surname">
-                <input size="42" type="text" required name="phone" value="<?php echo $user->data[phone];?>"/>
-            </div>
-            <div class="r_surname">
-                <input size="42" type="text" name="word" value="<?php echo $user->data[key_word];?>"/>
-            </div>
-            <div class="r_surname">
-<!--                <input size="42" type="text" required name="bank_card" value="<?php echo $user->data[bank_card];?>"/>-->
-            </div>
-            <div class="r_surname">
-<!--               <input type="button" value="Изменить код" onclick="javascript:_changeCode('reg_form_<?php echo $us;?>');"/>  -->
-            </div>
+               <input type="button" value="Изменить код" onclick="javascript:_changeCode('reg_form_<?php echo $us;?>');"/>  
+            </div>-->
         </div>
         <div class="reg_submit"> 
             <input type="button" value="Сохранить" onclick="javascript:_writeUser('reg_form_<?php echo $us;?>');"/>
@@ -69,11 +73,12 @@ if(isset($attributes[eps]) && isset ($attributes[key])){
         </div>-->
          </form> 
 
-        <div class="stamp">
+        <div class="stamp" title="Вернутся на главную" onclick="javascript:document.location.href='index.php?act=main';">
+<!--                        <input type="image" src="http://e-ps.me/images/stamp.gif" width="145" height="145" alt="BUTTON" title="Вернутся на главную" onclick="javascript:document.location.href='index.php?act=main';"/>-->
             <p>На вашем счету</p>
             <p style="font-size: 22px;font-weight: bold;"><?php echo $user->data[cash];?></p>
             <p>баллов</p>
-<!--            <input type="image" src="http://e-ps.me/images/stamp.gif" width="145" height="145" alt="BUTTON" title="Вернутся на главную" onclick="javascript:document.location.href='index.php?act=main';"/>-->
+
         </div>
 <!--            <div class="reg_index">-->
             

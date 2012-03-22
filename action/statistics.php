@@ -22,12 +22,10 @@ $agent = quote_smart($_SERVER["HTTP_USER_AGENT"]);
 
 $query = "INSERT INTO statistics 
                         (ip,
-                         user,
                         resolution,
                         agent,
                         colorDepth)
                 VALUES ($ip,
-                        $id,
                         $resolution,
                         $agent,
                         $color)";
