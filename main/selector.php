@@ -25,21 +25,22 @@ if (!isset ($_SESSION[id]) && $_SESSION[auth] == 0) {
 <span class="selector3">
     
 <form id="ofice" action='index.php?act=logout' method='post'>
-    <?php if($user->data[name]){
+    <?php
+    if($user->data[name]){
         echo $user->data[name]." ". $user->data[surname]; 
         $email = $user->data[email];
         $id = $user->data[id];
     }else{
         if(isset($user->data[email])){
             echo $user->data[email];
-            
+            $email = $user->data[email];
+            $id = $user->data[id];
         }else{
             echo $attributes[email];
+            $email = $attributes[email];
+            $id = $attributes[id];
         }
-         $email = $attributes[email];
-         $id = $attributes[id];
-        
-    }
+   }
     echo "<input type='hidden' name='id' value='$id'/><input type='hidden' name='email' value='$email'/>";
 ?>
     <input type='button' class='submit3' value='Кабинет' style='color:green;' onclick="javascript:_goAbout('ofice');" />

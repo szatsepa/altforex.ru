@@ -15,7 +15,12 @@ if(!isset($_SESSION)){
     session_start();  
 }
 
+//print_r($_SESSION);
+//echo "-5<br/>";
+//print_r($attributes);
+
 if($_SESSION[auth] != 1)$_SESSION[auth] = 0;
+
 
 if(isset($attributes[id])){
          
@@ -39,12 +44,11 @@ include 'action/connect.php';
 
 include 'action/quotesmart.php';
 
+//if(!$_SESSION[id])$_SESSION[auth] = 0;
 if(isset ($_SESSION[id])) {
     include 'query/checkauth.php';
 }
-//print_r($_SESSION);
-//echo "-5<br/>";
-//print_r($attributes);
+
 
 switch ($attributes[act]) {
     case 'main':

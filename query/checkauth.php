@@ -10,16 +10,16 @@ if(!isset ($user)){
     
     $user = new User();
 
-if (isset($_SESSION['auth']) and !isset($attributes[out])) {
+if (isset($_SESSION[auth]) and !isset($attributes[out])) {
 	
     
-    $user_id = $_SESSION['id'];
+    $user_id = $_SESSION[id];
     
    if($_SESSION[auth] == 1) $user->setUser($user_id);
      
     }
 
-    if(!($user->data)){
+    if(!($user->data[id])){
         $_SESSION[auth] = 0;
         unset($_SESSION[id]);
         unset($_COOKIE[di]);

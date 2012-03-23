@@ -83,23 +83,28 @@ function timer()
   if (min==0 && sec==0)
   {
     clearInterval(timerid); /* останавливаем таймер */
-//    alert('Дождались');  /* и производим какие-то свои действия */
-    document.location.reload();
+ /* и производим какие-то свои действия */
+    document.location.href = "http://altforex.ru/index.php?act=main";
   }
 }
     
-function _goRmail(aga, whot){
-   
-    var whot_array = new Array('квадрат','круг','треугольник');
+function _goRmail(aga, whot, cash){
     
-    if(aga == 0){
-        document.location='http://altforex.ru/index.php?act=rmail';
+    if(cash != 0 && aga != 0){
+         
+         var whot_array = new Array('квадрат','круг','треугольник');
+
+                 if(confirm("\t\tВы желаете отдать голос за "+whot_array[whot]+"?\n С вашего счета будет списано 5 (или скоканада) балов")){
+                     document.location='http://altforex.ru/index.php?act=vote&whot='+whot; 
+                 }else{
+                     document.location='http://altforex.ru/index.php?act=main'; 
+                 }
+         
+    }else if(cash != 0 && aga == 0){
+        alert("На вашем счете не достаточно средств!\r\n\t\tНадо бы пополнить!"); 
     }else{
-        if(confirm("\t\tВы желаете отдать голос за "+whot_array[whot]+"?\n С вашего счета будет списано 5 (или скоканада) балов")){
-           document.location='http://altforex.ru/index.php?act=vote&whot='+whot; 
-        }else{
-           document.location='http://altforex.ru/index.php?act=main'; 
-        }
+        document.location='http://altforex.ru/index.php?act=rmail';
     }
+
     
 } 

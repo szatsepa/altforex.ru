@@ -18,15 +18,11 @@ $row = mysql_fetch_row($qry_game);
 
 $game = $row[0] + 1;
 
-echo "$game<br/>";
-
 $qury_name = mysql_query("SELECT name FROM figures WHERE id = $figure");
 
 $row = mysql_fetch_assoc($qury_name);
 
 $name = $row[name];
-
-echo "$name<br/>";
 
 unset ($row);
 
@@ -36,29 +32,43 @@ $result = mysql_query("UPDATE rate SET point = (point + $count) WHERE user_id = 
 
 $upd = mysql_affected_rows();
 
-echo "$upd 1-> UPDATE rate SET point = (point + $count) WHERE user_id = $_SESSION[id] AND election_id = $game AND figure_id = $figure<br/>";
-
 if($upd == 0){
 mysql_query("INSERT INTO rate (user_id, election_id, figure_id, point) VALUES ($_SESSION[id], $game, $figure, $count)");
-
-echo "INSERT INTO rate (user_id, election_id, figure_id, point) VALUES ($_SESSION[id], $game, $figure, $count)<br/>";
 }
  
 $query = "UPDATE my_account SET cash = (cash - $count) WHERE user_id = $user_id";
-
-echo "$query<br/>";
 
 $result = mysql_query($query) or die ($query); 
 
 if(mysql_affected_rows() > 0){
     
-    $query = "UPDATE `election` SET `$name` = (`$name` + $count)";
+    $query = "UPDATE `election` SET `$name` = (`$name` + $count), date_change = now()";
     
     $result = mysql_query($query) or die ($query);
     
-    echo "$query<br/>";
+    checkCash($user_id);
     
     header("location:index.php?act=main");
+    
+}
+
+function checkCash($id){
+    
+    $_SESSION[id] = $id;
+    
+    $query = "SELECT cash FROM my_account WHERE user_id = $id";
+    
+    $result = mysql_query($query) or die ($query);
+    
+    $row = mysql_fetch_row($result);
+    
+    $cash = $row[0];
+    
+    if($cash <= 0){
+        
+        mysql_query("UPDATE my_account SET cash = 0 WHERE user_id = $id");
+    
+    }
     
 }
 ?>
