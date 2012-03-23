@@ -35,19 +35,19 @@ if($_SESSION[auth] == 1){
     </div>
     <div class="square"> 
         <input type="image" src="http://<?php echo $host;?>/images/square.gif" alt="Button" onclick="javascript:_goRmail('<?php echo $_SESSION[auth];?>',0,<?php echo $cash;?>);"/>
-        <div class="rate">
+        <div class="rate" title="Показать статистику." onclick="javascript:_gameStatistics('stat');">
             <p class="rate"><?php echo $square;?></p>
         </div>
     </div>
     <div class="circle">
          <input type="image" src="http://<?php echo $host;?>/images/circle.gif" alt="Button" onclick="javascript:_goRmail('<?php echo $_SESSION[auth];?>',1,<?php echo $cash;?>);"/>
-         <div class="rate">
+         <div class="rate" title="Показать статистику." onclick="javascript:_gameStatistics('stat');">
             <p class="rate"><?php echo $circle;?></p>
         </div>
     </div>
     <div class="triangle">
          <input type="image" src="http://<?php echo $host;?>/images/triangle.gif" alt="Button" onclick="javascript:_goRmail('<?php echo $_SESSION[auth];?>',2,<?php echo $cash;?>);"/>
-         <div class="rate">
+         <div class="rate" title="Показать статистику." onclick="javascript:_gameStatistics('stat');">
             <p class="rate"><?php echo $triangle;?></p>
         </div>
     </div>

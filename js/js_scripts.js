@@ -104,7 +104,9 @@ function _goRmail(aga, whot, cash){
         alert("На вашем счете не достаточно средств!\r\n\t\tНадо бы пополнить!"); 
     }else{
         document.location='http://altforex.ru/index.php?act=rmail';
-    }
-
-    
+    }   
 } 
+function _gameStatistics(ID){
+    
+    var stat = window.open('http://altforex.ru/index.php?act=stat', 'statisyics', 'location,width=600,height=400,top=0'); 
+}

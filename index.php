@@ -81,15 +81,22 @@ switch ($attributes[act]) {
         include 'main/selector.php';
         include 'main/about_me.php';
         break;
+    
     case 'vote':
         include 'main/header.php';
         include 'action/vote.php';
         break;
     
-      case 'auth':
+    case 'auth':
         include 'main/header.php';
         include 'query/authentication.php';
-       break;
+        break;
+    
+    case 'stat':
+        include 'query/statistics.php';
+        include 'main/header.php'; 
+        include 'main/statistics.php';
+        break;
     
      case "logout":
         include 'action/logout.php'; 
