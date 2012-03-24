@@ -8,7 +8,7 @@ $user_id = intval($_SESSION[id]);
 
 $figure = intval($attributes[whot]) + 1;
 
-$count = 5;
+$count = 1;
 
 $query = "SELECT MAX(id) FROM election_archiv";
 
