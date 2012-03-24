@@ -4,11 +4,11 @@
  * created by arcady.1254@gmail.com 5/3/2012
  */
 
-$email = $attributes[email];
+$email = $attributes[email]; 
 
 $key_code = _cod(6, 3);
 
-$query = "SELECT Count(*) FROM users WHERE email = '$email' AND key_code = '$key_code'";
+$query = "SELECT Count(*) FROM users WHERE email = '$email'";
 
 $res = mysql_query($query) or die ($query);
 
@@ -32,6 +32,21 @@ $result = mysql_query($query) or die($query);
                  header("location:index.php?act=main&id=$new_id&email=$email");
         }
               
+}else{
+    
+    $query = "SELECT key_code, id FROM users WHERE email = '$email'";
+    
+    $result = mysql_query($query) or die ($query);
+    
+    $row = mysql_fetch_row($result);
+    
+    $key_code = $row[0];
+    
+    $user_id = $row[1];
+    
+    _gomail($email, $key_code);
+    
+    header("location:index.php?act=main&id=$user_id&email=$email");
 }
 function _gomail($email, $key){ 
 

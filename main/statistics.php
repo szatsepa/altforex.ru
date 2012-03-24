@@ -4,7 +4,7 @@
  * created by arcady.1254@gmail.com 23/3/2012.
  */
 ?>
-<table border="1" width="600">
+<!--<table border="1" width="600">
  <thead style="font-size: 16px;font-weight: bold;text-align: center;">
   <tr>
    <td>
@@ -27,14 +27,24 @@
              <?php echo $statistics[0][date_event];?>
          </td>
          <td>
-             <table border="1">
-                 <thead>
+                  </td>
+     </tr>
+ </tbody>
+</table>-->
+<div style="position: relative;float: left; width: 595px;">
+<p style="font-size: 22px;text-align: center;">Раунд <?php echo $statistics[0][round];?></p>
+
+<p style="font-size: 19px;text-align: center;">Начат - <?php echo $statistics[0][date_event];?></p>
+</div>
+<div style="position:relative;float: left; width: 590px;margin: 0 auto;">
+             <table width="587" border="1">
+                 <thead style="font-size: 12px;font-weight: bold;text-align: center;outline: 1px solid #a7a7a7;">
                      <tr>
-                         <td>
+                         <td colspan="2">
                             Участник 
                          </td>
                          <td>
-                             Фигура
+                             Фигура 
                          </td>
                          <td>
                              Ставка
@@ -54,37 +64,34 @@
                          
                      ?>
                      <tr>
-                         <td>
+                         <td colspan="2">
                              <?php echo $value[email];?>
                          </td>
-                         <td>
+                         <td >
                              <?php  echo $figures[$value[figures]];?>
                          </td>
                          <td align="center">
-                             <?php  echo $value[point]; $all += $value[point];?>
+                             <?php  echo $value[point]; $all += $value[point];?> 
                          </td>
                      </tr>
                      <?php
                      }
                      ?>
-                     <tr style="font-size: 12px;font-weight: bold;">
+                     <tr style="font-size: 12px;font-weight: bold;text-align: center;">
                          <td>
-                             ИТОГО:<?php  echo $all; ?>
+                             ИТОГО: <?php  echo $all; ?>&nbsp;
                          </td>
                          <td>
-                             квадрат:<?php  echo $sq; ?>
+                             квадрат: <?php  echo $sq; ?>
                          </td>
                          <td>
-                             круг:<?php  echo $cr; ?>
+                             круг: <?php  echo $cr; ?>
                          </td>
                          <td>
-                             треугольник:<?php  echo $tr; ?>
+                             треугольник:<?php  echo $tr; ?>&nbsp; 
                          </td>
                      </tr>
                  </tbody>
              </table>
              
-         </td>
-     </tr>
- </tbody>
-</table>
+  </div>  

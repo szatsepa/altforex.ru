@@ -92,9 +92,9 @@ switch ($attributes[act]) {
         include 'query/authentication.php';
         break;
     
-    case 'stat':
+    case 'stat':  
         include 'query/statistics.php';
-        include 'main/header.php'; 
+        include 'main/header.php';  
         include 'main/statistics.php';
         break;
     
