@@ -72,7 +72,7 @@ div.square{
     float: left;
     width: 232px;
     height: 340px;
-    background-image: url("../images/square.gif");
+/*    background-image: url("../images/square.gif");*/
 /*    outline: 1px solid green;*/
     z-index: 1;
 }
@@ -83,7 +83,7 @@ div.circle{
 /*    margin-top: 33px;*/
     width: 232px;
     height: 340px;
-    background-image: url("../images/circle.gif");
+/*    background-image: url("../images/circle.gif");*/
 /*    outline: 1px solid green;*/
     z-index: 2;
 }
@@ -92,7 +92,7 @@ div.triangle{
     margin-left: 464px;
     width: 232px;
     height: 340px;
-    background-image: url("../images/triangle.gif"); 
+/*    background-image: url("../images/triangle.gif"); */
 /*    outline: 1px solid green;*/
     z-index: 3;
 }
@@ -307,7 +307,37 @@ div.confirm{
     margin-top: 102px;
     z-index: 4;
 }
-
+div.stat_head{
+    position: relative;
+    float: left;
+    width: 595px;
+    text-align: center;
+}
+p.stat_head{
+    font-size: 22px;
+}
+p.stat_head_1{
+    font-size: 19px;
+/*    text-align: center;*/
+}
+div.stat_table{
+    position:relative;
+    float: left;
+    width: 590px;
+    margin: 0 auto;
+    
+}
+thead.stat_table{
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    outline: 1px solid #a7a7a7;
+}
+tr.stat_table{
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+}
 input.submit3 {
 	font-size: 8pt;
 	font-weight: bold;

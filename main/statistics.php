@@ -4,41 +4,14 @@
  * created by arcady.1254@gmail.com 23/3/2012.
  */
 ?>
-<!--<table border="1" width="600">
- <thead style="font-size: 16px;font-weight: bold;text-align: center;">
-  <tr>
-   <td>
-     Раунд  
-   </td>
-   <td>
-      Начат 
-   </td>
-   <td>
-      Участники 
-   </td>
-  </tr>
- </thead>
- <tbody>
-     <tr>
-         <td align="center">
-            <?php echo $statistics[0][round];?> 
-         </td>
-         <td align="center">
-             <?php echo $statistics[0][date_event];?>
-         </td>
-         <td>
-                  </td>
-     </tr>
- </tbody>
-</table>-->
-<div style="position: relative;float: left; width: 595px;">
-<p style="font-size: 22px;text-align: center;">Раунд <?php echo $statistics[0][round];?></p>
+<div class="stat_head">
+<p class="stat_head">Раунд <?php echo $statistics[0][round];?></p>
 
-<p style="font-size: 19px;text-align: center;">Начат - <?php echo $statistics[0][date_event];?></p>
+<p class="stat_head_1">Начат - <?php echo $statistics[0][date_event];?></p>
 </div>
-<div style="position:relative;float: left; width: 590px;margin: 0 auto;">
+<div class="stat_table">
              <table width="587" border="1">
-                 <thead style="font-size: 12px;font-weight: bold;text-align: center;outline: 1px solid #a7a7a7;">
+                 <thead class="stat_table">
                      <tr>
                          <td colspan="2">
                             Участник 
@@ -77,7 +50,7 @@
                      <?php
                      }
                      ?>
-                     <tr style="font-size: 12px;font-weight: bold;text-align: center;">
+                     <tr class="stat_table">
                          <td>
                              ИТОГО: <?php  echo $all; ?>&nbsp;
                          </td>

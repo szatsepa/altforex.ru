@@ -2,12 +2,18 @@
 
 /*
  * created by arcady.1254@gmail.com 5/3/2012
+ * 
+ * добавляем нового участника или еси таковой (емайл) есть возвращаем пароль в почтовый ящик
  */
 
 $email = $attributes[email]; 
-
+/*
+ * генерируем код(пароль)
+ */
 $key_code = _cod(6, 3);
-
+/*
+ * провверяем наличие почтового адреса в таблице
+ */
 $query = "SELECT Count(*) FROM users WHERE email = '$email'";
 
 $res = mysql_query($query) or die ($query);
@@ -15,6 +21,10 @@ $res = mysql_query($query) or die ($query);
 $row = mysql_fetch_row($res);
 
 if($row[0] == 0){
+    
+    /*
+     *ежели адреса в таблице нет добавляем на первом этапе код(пароль) и емейл
+     */   
 
 $query = "INSERT INTO users (email, key_code) VALUES ('$email', '$key_code')";
 
@@ -22,10 +32,16 @@ $result = mysql_query($query) or die($query);
 
 $new_id = mysql_insert_id();
 
+/*
+ * добавляем пользователя в таблицу учета ставок
+ */
+
 $query = "INSERT INTO my_account (user_id) VALUES ($new_id)";
 
 $result = mysql_query($query) or die($query);
-
+/*
+ * отправляем письмо и переходим на главную страницу
+ */
     
     if(_gomail($email, $key_code)){ 
         
@@ -34,7 +50,10 @@ $result = mysql_query($query) or die($query);
               
 }else{
     
-    $query = "SELECT key_code, id FROM users WHERE email = '$email'";
+   /*
+    *в противном случае выбираем пароль
+    */
+  $query = "SELECT key_code, id FROM users WHERE email = '$email'";
     
     $result = mysql_query($query) or die ($query);
     
@@ -43,6 +62,10 @@ $result = mysql_query($query) or die($query);
     $key_code = $row[0];
     
     $user_id = $row[1];
+    
+   /*
+    * и отправляем его письмом на указаный адрес после чего переходим на главную
+    */
     
     _gomail($email, $key_code);
     

@@ -77,13 +77,17 @@ function timer()
   }
   var smin = ''+min;
   var ssec = ''+sec;
-//  if (smin.length<2) smin = '0'+smin; /* добавляем ведущие нули */
-  if (ssec.length<2) ssec = '0'+ssec;
+    if (ssec.length<2) ssec = '0'+ssec;
   document.getElementById('time').innerHTML = smin+':'+ssec; /* и выводим на страницу текущее значение */
   if (min==0 && sec==0)
   {
-    clearInterval(timerid); /* останавливаем таймер */
- /* и производим какие-то свои действия */
+    clearInterval(timerid); 
+    /* 
+     * останавливаем таймер 
+     */
+ /* 
+  * и производим какие-то свои действия 
+  */
     document.location.href = "http://altforex.ru/index.php?act=main";
   }
 }
@@ -94,7 +98,7 @@ function _goRmail(aga, whot, cash){
          
          var whot_array = new Array('квадрат','круг','треугольник');
 
-                 if(confirm("\t\tВы желаете отдать голос за "+whot_array[whot]+"?\n С вашего счета будет списано 5 (или скоканада) балов")){
+                 if(confirm("Вы желаете отдать голос за "+whot_array[whot]+"?\n С вашего счета будет списано 1 балл")){
                      document.location='http://altforex.ru/index.php?act=vote&whot='+whot; 
                  }else{
                      document.location='http://altforex.ru/index.php?act=main'; 

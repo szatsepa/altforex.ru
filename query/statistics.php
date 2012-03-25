@@ -7,7 +7,9 @@
 $statistics = array();
 
 $figures = array('square'=>'квадрат', 'circle'=>'круг', 'triangle'=>'треугольник');
-
+/*
+ * выбираем последний записаный раунд 
+ */
 $query = "SELECT MAX(id) FROM election_archiv";
 
 $result = mysql_query($query) or die($query);
@@ -22,7 +24,9 @@ if($result){
     
     $round = 1;
 }
-
+/*
+ * определяем ставки по фигурам и участникам в актуальном раунде
+ */
 foreach ($figures as $key => $value) { 
     
     $query = "SELECT u.email,
@@ -40,8 +44,6 @@ foreach ($figures as $key => $value) {
                 AND r.user_id = u.id
                 ORDER BY u.email";
     
-//    echo "$query<br/>";
-    
     $result = mysql_query($query) or die ($query);
     
     while ($var = mysql_fetch_assoc($result)){
@@ -54,7 +56,9 @@ foreach ($figures as $key => $value) {
 mysql_fetch_array($result);
 
 sort($statistics);
-
+/*
+ * если раунд не начат(ставок еще не было) сообщаем об этом
+ */
 if(!count($statistics)){
     
     ?>

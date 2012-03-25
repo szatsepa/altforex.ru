@@ -14,7 +14,7 @@ class User{
     
     function setUser($id){  
         
-        $query = "SELECT u.id, u.surname, u.name, u.email, u.phone, u.key_code, a.cash, a.bonus FROM users AS u   LEFT JOIN my_account AS a ON u.id = a.user_id WHERE u.id = $id";
+        $query = "SELECT u.id, u.surname, u.name, u.email, u.phone, u.key_code, a.cash, a.element_id FROM users AS u   LEFT JOIN my_account AS a ON u.id = a.user_id WHERE u.id = $id";
         
         $result = mysql_query($query) or die ($query);
         
