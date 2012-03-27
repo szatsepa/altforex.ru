@@ -39,6 +39,8 @@ if(isset($attributes[di]) && !isset ($_SESSION[auth]) && $attributes[di] != ''){
 }
 
 include 'classes/User.php';
+
+include 'classes/constitution.php';
   
 include 'action/connect.php';
 

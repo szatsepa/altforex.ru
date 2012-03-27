@@ -19,6 +19,13 @@ if($_SESSION[auth] == 1){
 }else{
     $cash = 0;
 }
+if($_SESSION[auth] == 1 && $attributes[vote] == 1){
+    ?>
+<script language="javascript">
+    alert("Вы не можете закрыть раунд.");
+</script>
+<?php
+}
 ?>
 <div class="glagne">
     <div class="title_main">

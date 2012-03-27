@@ -5,19 +5,47 @@
  * 
  * считываем состояние раунда
  */
+$with_its = NULL;
 
-$vote_array = _readVote();
+$status_game = NULL;
+
+
+/*
+ * правило №2
+ */
+
+$vote_array = vote_one();
+
+if($vote_array)$status_game = 1;
+
+if(!$vote_array && !$status_game){
+    $vote_array = vote_two ();
+    }
+    
+if($vote_array && !$status_game)$status_game = 2;
+
+if(!$vote_array && !$status_game){
+    $vote_array = _readVote();
+    }
+    
+    foreach ($vote_array as $value) {
+        
+        if($value >= 10)$status_game = 3;
+    
+}
 
 $vote = NULL;
 
 /*
  * раунд заканчивается в тот момент когда одна из фигур набирает  100 голосов
+ * или по правилам №№-2\3
  */
-foreach ($vote_array as $value) {
-    
-    if($value >= 10)$vote = _restartVote($vote_array);
-    
+if($vote_array){
+    if($status_game)$vote = _restartVote($vote_array);
+   
 }
+
+
 /*
  *  если раунд закончен обновляем массив рейтинга фигур
  * и записываем результаты в кошельки игроков
@@ -26,26 +54,10 @@ if($vote && $vote > 0){
     
     $vote_array = _readVote ();
     
-    _game_results($vote);
+    _game_results($status_game);
     
     }
-    
 
-
-function _readVote(){
-    
-    $vote_array = array();
-    
-    $query = "SELECT e.id, e.start_vote, e.square, e.circle, e.triangle FROM `election` AS e";
-
-    $result = mysql_query($query) or die($query);
-
-    $vote_array = mysql_fetch_assoc($result);
-
-    mysql_free_result($result);
-    
-    return $vote_array;
-}
 function _restartVote($arr){ 
     
      $query = "INSERT INTO election_archiv (date_event, square, circle, triangle) VALUES (now(), $arr[square], $arr[circle],$arr[triangle])";
@@ -62,128 +74,6 @@ function _restartVote($arr){
      
      return $id;
 }
-function _game_results($id){
-   /* формула первая самая простая:
-    * шаг игры один голос за одну фигуру:
-    * раунд заканчивается в тот момент когда одна из фигур набирает  100 голосов
-    * фигура набравшая меньше всего очков считается "выигравшей раунд"
-    * игрокам кто за нее голосовал количество отданных голосов возвращается в двойном размере
-    * Фигура набравшая больше всего очков считается "проигравшей раунд"
-    * все голоса отданные за нее остаются в кассе оператора игры
-    * Фигура между выигравшей и проигравшей в статусе "при своих" все голоса за эту фигуру возвращаются игрокам обратно
-    * 
-    * выбираем список игроков - участников
-    */
-    $query = "SELECT user_id FROM `rate` WHERE election_id = (SELECT MAX(id) FROM election_archiv) GROUP BY user_id";
-    
-    $result = mysql_query($query) or die ($query);
-    /*
-     * массив игроков участников
-     */
-    $user_array = array();
-    /*
-     * маиссив ставок игроков
-     */
-    $user_rate = array();
-    /*
-     * ставки суммы по фигурам
-     */
-    $square = 0;
-    
-    $circle = 0;
-    
-    $triangle = 0;
-    
-    while ($var = mysql_fetch_row($result)){
-        
-        array_push($user_array, $var[0]);
-        
-    }
-    
-    
-    
-    foreach ($user_array as $value) { 
-        
-        $game_results = array();
-/*
- * выборка ставок по игрокам и фигурам
- */    
-    $query = "SELECT u.id AS user_id,
-                    f.name AS figures,
-                    f.id AS f_id,
-                    r.point                      
-                FROM `election_archiv` AS e 
-                JOIN `figures` AS f 
-                JOIN `rate` AS r 
-                JOIN `users` AS u 
-                ON r.election_id  = (SELECT MAX(id) FROM election_archiv)
-                AND r.figure_id = f.id 
-                AND u.id = $value
-                AND r.user_id = u.id
-        ORDER BY f.id";
-    
-    $result = mysql_query($query) or die ($query);
-    
-    while ($var = mysql_fetch_assoc($result)){
-        
-        array_push($game_results, $var);
-        
-        if($var[figures] == 'square')$square += $var[point];
-        if($var[figures] == 'circle')$circle += $var[point];
-        if($var[figures] == 'triangle')$triangle += $var[point];
-        
-        } 
-        
-        array_push($user_rate, $game_results);
-        
-    }
-    
-    $summ_array = array('square'=>$square,'circle'=>$circle, 'triangle'=>$triangle);
-    
-    arsort($summ_array);
-    /*
-     * проигыш
-     */
-    $loss = each($summ_array);
-    /*
-     * типа ничья ставки вертаюццо
-     */
-    $standoff = each($summ_array);
-    /*
-     * выигрыш (в смысле фигура\ставка)
-     */
-    $prize = each($summ_array);
-    /*
-     * в цыкле обновляем содержимое кошельков игроков участников по ставкам на фигуры
-     */
-    for($i = 0;$i < count($user_rate);$i++){
-            foreach ($user_rate[$i] as $key => $value) { 
 
-                 if($value[figures] == $standoff[0]){
 
-                     _back_points($value[user_id], $value[point], 1);
-                 }
-                if($value[figures] == $prize[0]){
-
-                    _back_points($value[user_id], $value[point], 2);
-                 }
-         }
-    }
-    
-
-}
-function _back_points($user_id, $points, $qw){
-    /*
-     *собсно обновление кошельков участников раунда
-     */
-    $cash = $points*$qw;
-    
-    $query = "UPDATE my_account SET cash = (cash + $cash) WHERE user_id = $user_id";
-    
-    $result = mysql_query($query) or die ($query);
-    
-    $num_aff = mysql_affected_rows();
-    
-    return $num_aff;
-}
 ?>
