@@ -8,3 +8,9 @@ function _entryA(ID){
     
     
 }
+function _delUser(id){
+    alert(id);
+}
+function _redUser(id){
+    alert(id);
+}

@@ -54,15 +54,15 @@ include 'header.php';
 
 switch ($attributes[act]) {
     case 'main':
-        include 'main.php';
+        include 'main/main.php';
         break;
     
     case 'entry':
-        include 'authentication.php';
+        include 'query/authentication.php';
         break;
     
     case 'cab':
-        include 'main_menu.php';
+        include 'main/main_menu.php';
         break;
     
     case 'players':

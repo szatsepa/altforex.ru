@@ -6,7 +6,7 @@
 ?>
 <div class="users">
     <?php 
-$header_array = array('Имя','Фамилия','Е-мейл','Статус','Баланс'); 
+$header_array = array('Имя','Фамилия','Е-мейл','Статус','Баланс','Удалить','Редактировать'); 
 
 //print_r($user_array);
 
@@ -25,7 +25,7 @@ $header_array = array('Имя','Фамилия','Е-мейл','Статус','Б
                     <?php
                     foreach ($user_array as $value) {
                         echo " <tr>";
-                        echo "<td>$value[name]</td><td>$value[surname]</td><td>$value[email]</td><td>$value[status]</td><td>$value[cash]</td>";
+                        echo "<td>$value[name]</td><td>$value[surname]</td><td>$value[email]</td><td>$value[status]</td><td>$value[cash]</td><td><a href='#' onclick='javascript:_delUser($value[id]);'>Удалить</a></td><td><a href='#' onclick='javascript:_redUser($value[id]);'>Изменить</a></td>";
                         echo "</tr>";
                     }
            ?>
