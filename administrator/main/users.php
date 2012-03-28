@@ -8,9 +8,7 @@
     <?php 
 $header_array = array('Имя','Фамилия','Е-мейл','Статус','Баланс','Удалить','Редактировать'); 
 
-//print_r($user_array);
-
-    ?>
+?>
     <table border="1" width="800">
         <thead>
             <tr style="font-size: 14px;font-weight: bold;text-align: center;">
@@ -25,7 +23,7 @@ $header_array = array('Имя','Фамилия','Е-мейл','Статус','Б
                     <?php
                     foreach ($user_array as $value) {
                         echo " <tr>";
-                        echo "<td>$value[name]</td><td>$value[surname]</td><td>$value[email]</td><td>$value[status]</td><td>$value[cash]</td><td><a href='#' onclick='javascript:_delUser($value[id]);'>Удалить</a></td><td><a href='#' onclick='javascript:_redUser($value[id]);'>Изменить</a></td>";
+                        echo "<td>$value[name]</td><td>$value[surname]</td><td>$value[email]</td><td>$value[status]</td><td>$value[cash]</td><td><a href='#' onclick='javascript:_delUserWindow($value[id]);'>Удалить</a></td><td><a href='#' onclick='javascript:_redUserWindow($value[id]);'>Изменить</a></td>";
                         echo "</tr>";
                     }
            ?>

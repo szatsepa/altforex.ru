@@ -7,7 +7,8 @@
 $query = "SELECT u.id, u.name, u.surname, u.email, a.cash, e.name AS status, e.id AS element 
             FROM `users` u, `my_account` a, `elements` e 
             WHERE u.id = a.user_id AND a.element_id = e.id
-            AND u.status <> 1";
+            AND u.status <> 1
+            AND u.activ = 1";
 
 $result = mysql_query($query) or die($query);
 

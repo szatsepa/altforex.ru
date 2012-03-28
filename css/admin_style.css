@@ -75,3 +75,11 @@ div.users{
     width: 990px;
     margin: 0 auto;
 }
+div.user_red{
+    position: relative;
+    width: 320px;
+    margin-top: 16px;
+    margin-left: 212px;
+    padding-top: 0;
+    padding-left: 8px;;
+}

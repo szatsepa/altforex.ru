@@ -70,6 +70,15 @@ switch ($attributes[act]) {
         include 'main/main_menu.php'; 
         include 'main/users.php';
         break;
+    
+    case 'redu':
+        include 'query/user.php';
+        include 'main/user.php';
+        break;
+    
+    case 'delu':
+        include 'action/user_delete.php';
+        break;
 
     case 'statistics':
          include '../action/statistics.php';

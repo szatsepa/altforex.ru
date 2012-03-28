@@ -13,7 +13,7 @@ if(isset ($attributes[ismail]) && $attributes[ismail] == 1){
     
 $code = quote_smart($attributes[code]);
 
-        $query = "SELECT id FROM users WHERE key_code = $code";
+        $query = "SELECT id FROM users WHERE key_code = $code AND activ = 1";
         
         $result = mysql_query($query) or die($query);
         
