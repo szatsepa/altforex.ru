@@ -37,4 +37,50 @@ if(isset($attributes[di]) && !isset ($_SESSION[auth]) && $attributes[di] != ''){
    $_SESSION[auth] = 1;
          
 } 
+
+include '../classes/User.php';
+
+include '../classes/constitution.php';
+  
+include '../action/connect.php';
+
+include '../action/quotesmart.php';
+
+if(isset ($_SESSION[id])) {
+    include '../query/checkauth.php';
+}
+
+include 'header.php'; 
+
+switch ($attributes[act]) {
+    case 'main':
+        include 'main.php';
+        break;
+    
+    case 'entry':
+        include 'authentication.php';
+        break;
+    
+    case 'cab':
+        include 'main_menu.php';
+        break;
+    
+    case 'players':
+        include 'query/users.php';
+        include 'main/main_menu.php'; 
+        include 'main/users.php';
+        break;
+
+    case 'statistics':
+         include '../action/statistics.php';
+         break;
+     
+    default :
+        include '../action/redirect.php';
+        break;
+}
+
+include '../main/footer.php';
+
+mysql_close($link);
 ?>
