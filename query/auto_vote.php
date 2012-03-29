@@ -43,15 +43,15 @@ function _getAuto_vote($votes_array){
     
         if((ceil($n/3)-floor($n/3)) == 0){
             if(isset ($tmp_array))array_push ($auto_array, $tmp_array);
-            $tmp_array = array('round'=>$value[round],'count'=>$value[count]);
+            $tmp_array = array('id'=>$value[id],'round'=>$value[round],'count'=>$value[count]);
              $round = $value[round];
         }
-        if($round == $value[round]){ 
+        if($round == $value[round]){ }
             
-            if($value[name] == 'square')$tmp_array['square'] = 1;
-            if($value[name] == 'circle')$tmp_array['circle'] = 1;
-            if($value[name] == 'triangle')$tmp_array['triangle'] = 1;
-        }
+            if($value[name] == 'square')$tmp_array['square'] = $value[id];
+            if($value[name] == 'circle')$tmp_array['circle'] = $value[id];
+            if($value[name] == 'triangle')$tmp_array['triangle'] = $value[id];
+        
          $n++;
           if(count($votes_array) == $n)array_push ($auto_array, $tmp_array);
     }

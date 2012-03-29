@@ -117,12 +117,12 @@ function _gameStatistics(ID){
 function _chngAuto(ID, rows){
     var obj = document.getElementById(ID);
     var str = '';
-    var cell = new Array('round_','count_','square_','circle_','triangle_'); 
+    var cell = new Array('round_','count_','square_','circle_','triangle_', 'id_'); 
     for(var i = 0; i<rows;i++){
         var n = i.toString();
-         str += obj[cell[0]+n].name+"="+obj[cell[0]+n].value+"; "+obj[cell[1]+n].name+"="+obj[cell[1]+n].value+"; "+obj[cell[2]+n].name+"="+obj[cell[2]+n].checked+"; "+obj[cell[3]+n].name+"="+obj[cell[3]+n].checked+"; "+obj[cell[4]+n].name+"="+obj[cell[4]+n].checked+"#\n";
+         str += "id="+obj[cell[5]+n].value+"; round="+obj[cell[0]+n].value+"; count="+obj[cell[1]+n].value+"; 1="+obj[cell[2]+n].checked+"; 2="+obj[cell[3]+n].checked+"; 3="+obj[cell[4]+n].checked+"#";
     }
    
-    document.write("<form action='index.php?act=chngvote' method='post'><input type='hidden' name='avto' value='"+str+"'/><form>");
+    document.write("<form action='index.php?act=chngvote' method='post'><input type='hidden' name='auto' value='"+str+"'/><form>");
     document.forms[0].submit();
 }
