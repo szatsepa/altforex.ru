@@ -14,7 +14,19 @@ class User{
     
     function setUser($id){  
         
-        $query = "SELECT u.id, u.surname, u.name, u.email, u.phone, u.key_code, a.cash, a.element_id FROM users AS u   LEFT JOIN my_account AS a ON u.id = a.user_id WHERE u.id = $id AND u.activ = 1";
+        $query = "SELECT u.id,
+                         u.surname, 
+                         u.name, 
+                         u.email, 
+                         u.phone, 
+                         u.key_code, 
+                         a.cash, 
+                         a.element_id, 
+                         (SELECT Count(u.id) FROM users AS u, user_task AS t WHERE u.id = t.user_id AND u.id = $id) AS task 
+                 FROM users AS u   
+                 LEFT JOIN my_account AS a 
+                 ON u.id = a.user_id 
+                 WHERE u.id = $id AND u.activ = 1";
         
         $result = mysql_query($query) or die ($query);
         

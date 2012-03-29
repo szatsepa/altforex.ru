@@ -124,16 +124,16 @@ div.envelope{
     background-image: url("../images/cover.png");
     display: block;
 }
-div.registration{
+div.registration{ 
     position: relative;
     float: left;
     width: 801px;
-    height: 563px;
+    height: 313px;
     margin-top: 20px;
     margin-left: 120px;
-/*    background-image: url(../images/registration_bg.png);*/
     background-color: #eeeeee;
-    display: block;    
+    display: block;
+/*    outline: 1px solid green;*/
 }
 div.regs_fields{
     position: absolute;
@@ -197,19 +197,49 @@ div.r_index_0{
 
 div.reg_submit{
     position: absolute;
-    position: absolute;
     width: 70px;
     height: 35px;
-    margin-top: 240px;
-    margin-left: 608px;
+    margin-top: 195px;
+    margin-left: 408px;
     z-index: 3;
     padding-left: 6px;
     padding-top: 12px;
 }
+div.auto_vote{
+    position: absolute;
+    width: 760px;
+    height: 35px;
+    margin-top: 245px;
+    margin-left: 12px;
+    z-index: 4;
+    padding-left: 46px;
+    padding-top: 12px;
+/*    outline: 1px solid aqua;*/
+}
+div.auto_chbox{
+    position: relative;
+    width: 540px;
+    height: 27px;
+    float: left;
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    color: #000000;
+}
+div.setting_vote{ 
+    position: relative;
+    float: left;
+    width: 801px;
+/*    height: 313px;*/
+    margin-top: 20px;
+    margin-left: 120px;
+    background-color: #eeeeee;
+    display: block;
+/*    outline: 1px solid green;*/
+}
 div.change_code{
     position: absolute;
-    position: absolute;
-    width: 70px;
+    width: 700px;
     height: 35px;
     margin-top: 290px;
     margin-left: 428px;

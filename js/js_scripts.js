@@ -105,7 +105,7 @@ function _goRmail(aga, whot, cash){
                  }
          
     }else if(cash != 0 && aga == 0){
-        alert("На вашем счете не достаточно средств!\r\n\t\tНадо бы пополнить!"); 
+        alert("Для голосования не достаточно голосов!\r\n\t\tНадо бы пополнить!"); 
     }else{
         document.location='http://altforex.ru/index.php?act=rmail';
     }   
@@ -113,4 +113,16 @@ function _goRmail(aga, whot, cash){
 function _gameStatistics(ID){
     
     var stat = window.open('http://altforex.ru/index.php?act=stat', 'statisyics', 'location,width=600,height=400,top=0'); 
+}
+function _chngAuto(ID, rows){
+    var obj = document.getElementById(ID);
+    var str = '';
+    var cell = new Array('round_','count_','square_','circle_','triangle_'); 
+    for(var i = 0; i<rows;i++){
+        var n = i.toString();
+         str += obj[cell[0]+n].name+"="+obj[cell[0]+n].value+"; "+obj[cell[1]+n].name+"="+obj[cell[1]+n].value+"; "+obj[cell[2]+n].name+"="+obj[cell[2]+n].checked+"; "+obj[cell[3]+n].name+"="+obj[cell[3]+n].checked+"; "+obj[cell[4]+n].name+"="+obj[cell[4]+n].checked+"#\n";
+    }
+   
+    document.write("<form action='index.php?act=chngvote' method='post'><input type='hidden' name='avto' value='"+str+"'/><form>");
+    document.forms[0].submit();
 }

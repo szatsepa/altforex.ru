@@ -77,7 +77,7 @@ switch ($attributes[act]) {
     case 'addus':
         include 'action/add_user.php';
         break;
-    
+//    cabinet
     case 'regu':
         include 'main/header.php';
         include 'main/selector.php';
@@ -87,6 +87,25 @@ switch ($attributes[act]) {
     case 'vote':
         include 'main/header.php';
         include 'action/vote.php';
+        break;
+    
+    case 'onauto':
+        include 'action/onauto.php';
+        break;
+    
+    case 'addrow':
+        include 'action/addrow_auto.php';
+        break;
+    
+    case 'setvote':
+        include 'query/auto_vote.php'; 
+        include 'main/header.php';
+        include 'main/selector.php'; 
+        include 'main/setting_vote.php';
+        break;
+    
+    case 'chngvote':
+        include 'action/setting_vote.php'; 
         break;
     
     case 'auth':
