@@ -10,7 +10,8 @@ $query = "SELECT t.id,
                  t.round, 
                  t.count, 
                  t.figure_id, 
-                 f.name 
+                 f.name,
+                 t.auto
             FROM user_task AS t 
             LEFT JOIN figures AS f 
             ON t.user_id = $user_id 
@@ -19,43 +20,19 @@ $query = "SELECT t.id,
 
 $result = mysql_query($query) or die($query);
 
-$votes_array = array();
+$num_rows = mysql_num_rows($result);
+
+if($num_rows == 0){
+    header ("location:index.php?act=regu");
+}else{
+
+$auto_array = array();
 
 while ($var = mysql_fetch_assoc($result)){
-    array_push($votes_array, $var);
+    array_push($auto_array, $var);
 }
 
 mysql_free_result($result);
 
-$auto_array = _getAuto_vote($votes_array);
-
-unset($votes_array);
-
-function _getAuto_vote($votes_array){
-
-    $auto_array = array();
-    
-    $round = 0;
-    
-    $n = 0;
-    
-    foreach ($votes_array as $key => $value) {
-    
-    
-        if((ceil($n/3)-floor($n/3)) == 0){
-            if(isset ($tmp_array))array_push ($auto_array, $tmp_array);
-            $tmp_array = array('id'=>$value[id],'round'=>$value[round],'count'=>$value[count]);
-             $round = $value[round];
-        }
-        if($round == $value[round]){ }
-            
-            if($value[name] == 'square')$tmp_array['square'] = $value[id];
-            if($value[name] == 'circle')$tmp_array['circle'] = $value[id];
-            if($value[name] == 'triangle')$tmp_array['triangle'] = $value[id];
-        
-         $n++;
-          if(count($votes_array) == $n)array_push ($auto_array, $tmp_array);
-    }
-    return $auto_array;
 }
 ?>

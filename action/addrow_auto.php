@@ -6,13 +6,9 @@
 
 $user_id = $user->data[id];
 
-for($i=0;$i<3;$i++){
-
-$query = "INSERT INTO user_task (user_id,auto) VALUES ($user_id, 1)";
+$query = "INSERT INTO user_task (user_id,auto) VALUES ($user_id, 0)";
 
 mysql_query($query);
-
-}
 
 header("location:index.php?act=setvote");
 ?>

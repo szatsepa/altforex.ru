@@ -114,15 +114,20 @@ function _gameStatistics(ID){
     
     var stat = window.open('http://altforex.ru/index.php?act=stat', 'statisyics', 'location,width=600,height=400,top=0'); 
 }
-function _chngAuto(ID, rows){
+function _chngAuto(ID){
     var obj = document.getElementById(ID);
     var str = '';
-    var cell = new Array('round_','count_','square_','circle_','triangle_', 'id_'); 
-    for(var i = 0; i<rows;i++){
-        var n = i.toString();
-         str += "id="+obj[cell[5]+n].value+"; round="+obj[cell[0]+n].value+"; count="+obj[cell[1]+n].value+"; 1="+obj[cell[2]+n].checked+"; 2="+obj[cell[3]+n].checked+"; 3="+obj[cell[4]+n].checked+"#";
+    for(var i in obj.figure[0]){
+        if(i=='chcked'){
+            str += i.value+"<br/>";
+        }         
     }
    
-    document.write("<form action='index.php?act=chngvote' method='post'><input type='hidden' name='auto' value='"+str+"'/><form>");
-    document.forms[0].submit();
+    str += "id="+obj.id.value+";round="+obj.round.value+";count="+obj.count.value+";figure="+obj.figure+";activ=1"; 
+   document.write(str);
+//    document.write("<form action='index.php?act=chngvote' method='post'><input type='text' name='auto' value='"+str+"'/><form>");
+//    document.forms[0].submit();
+}
+function _onauto(ID){
+    document.location = "index.php?act=onauto";
 }
