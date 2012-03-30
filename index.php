@@ -51,6 +51,9 @@ if(isset ($_SESSION[id])) {
     include 'query/checkauth.php';
 }
 
+if(isset ($user->data[auto]) && $user->data[auto] > 0){
+    include 'main/controller.php';
+}
 
 switch ($attributes[act]) {
     case 'main':

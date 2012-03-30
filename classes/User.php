@@ -22,7 +22,8 @@ class User{
                          u.key_code, 
                          a.cash, 
                          a.element_id, 
-                         (SELECT Count(u.id) FROM users AS u, user_task AS t WHERE u.id = t.user_id AND u.id = $id) AS task 
+                         (SELECT Count(u.id) FROM users AS u, user_task AS t WHERE u.id = t.user_id AND u.id = $id) AS task,
+                         (SELECT Count(u.id) FROM users AS u, user_task AS t WHERE u.id = t.user_id AND u.id = 1 AND t.auto = 1) AS auto 
                  FROM users AS u   
                  LEFT JOIN my_account AS a 
                  ON u.id = a.user_id 
