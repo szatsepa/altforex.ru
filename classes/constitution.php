@@ -278,7 +278,172 @@ function _autoVote(){
      *  голосования продолжаются за заранее выбранные фигуры но на более дорогом поле.
      */
 }
-function _setTask(){
+
+class Task{
     
+    var $data;
+    var $round;
+    var $count;
+    var $figure;
+    var $step;
+    
+    function Task($id){
+        
+        $this->step = 0;
+        
+        $this->data = array();
+        
+        $this->updateTask($id);        
+        
+    }
+    
+    function updateTask($id){
+     
+            $query = "SELECT t.id, 
+                             t.round, 
+                             t.count, 
+                             t.figure_id
+                        FROM user_task AS t 
+                       WHERE t.user_id = $id
+                       AND t.auto = 1
+                    ORDER BY t.id";
+
+            $result = mysql_query($query) or die($query);
+
+            $tmp_arr = array();
+            
+            $n = 0;
+
+            while ($var = mysql_fetch_assoc($result)){ 
+                        array_push($tmp_arr, $var);
+                 }
+                
+                $this->data = $tmp_arr;   
+    }
+    function _move($id){
+        
+        $out = $this->data[$this->step][figure_id];
+        
+        $user_id = $id;
+        
+        $cnt_0 = count($this->data);
+        
+        $cnt_1 = $this->step;
+        
+        if($cnt_1 > $cnt_0){
+            $this->step = 0;
+        }
+        
+        echo "<br/>$cnt_0 X $cnt_1<br/>PI";
+        
+//        header("location:http://altforex.ru/action/vote_automatic.php?whot=$out&id=$user_id");
+        
+        $this->step++;
+        
+        
+    }
+}
+class Game{
+    
+    var $id;
+    var $time;
+    var $vote;
+    var $square;
+    var $circle;
+    var $triangle;
+    var $gamer_id;
+    
+    function Game(){
+        
+        $this->updateGame();
+    }
+    
+    function updateGame(){
+            
+            $figures = array('square', 'circle','triangle');  
+    
+            $step = 0;
+    
+            $tmp_arr = array();
+    
+            $query = "SELECT MAX(id) AS ID, MAX(time) AS time
+                         FROM rate WHERE election_id = ((SELECT MAX( id ) 
+                         FROM election_archiv )+1)";
+    
+            $result = mysql_query($query) or die($query);
+    
+            $tmp_arr = mysql_fetch_assoc($result);
+    
+            $fig_array = array();
+    
+            for ($i=0;$i<3;$i++){
+        
+                $query = "SELECT id
+                            FROM rate 
+                         WHERE election_id = ((SELECT MAX( id ) 
+                             FROM election_archiv )+1)
+                        AND figure_id = ($i+1)";
+            
+                    $result = mysql_query($query) or die($query);
+            
+                    $figure_votes = 0;
+            
+                    while ($var = mysql_fetch_assoc($result)){
+                 
+                         $figure_votes++;
+                 
+                         $step++;
+
+                }
+            
+             $fig_array[$figures[$i]] = $figure_votes;
+            }
+    
+            $tmp_arr['step']= $tmp_arr['vote'] = $step;
+            $tmp =  array_merge($tmp_arr,$fig_array);
+            
+            $this->id = $tmp[ID];
+            $this->time = $tmp[time];
+            $this->vote = $tmp[vote];
+            $this->square = $tmp[square];
+            $this->circle = $tmp[circle];
+            $this->triangle = $tmp[triangle];
+    
+    }
+    function checkStep($check){
+        
+            $query = "SELECT MAX(id) AS ID 
+                            FROM rate WHERE election_id = ((SELECT MAX( id ) 
+                            FROM election_archiv )+1)";
+    
+            $result = mysql_query($query) or die($query);
+            
+            $row = mysql_fetch_row($result);
+            
+            $max_id = $row[0];
+            
+            if($check < $max_id){
+                
+                 $query = "SELECT user_id AS ID 
+                            FROM rate WHERE election_id = ((SELECT MAX( id ) 
+                            FROM election_archiv )+1) AND id = $max_id";
+    
+                 $result = mysql_query($query) or die($query);
+            
+                $row = mysql_fetch_row($result);
+            
+                $this->gamer_id = $row[0];
+                
+                $this->updateGame();
+                
+                $step = 1;
+                
+            }  else {
+                
+                $step = 0;
+            }
+            
+            return $step;
+    }
 }
 ?>

@@ -14,8 +14,8 @@ $query = "SELECT t.id,
                  t.auto
             FROM user_task AS t 
             LEFT JOIN figures AS f 
-            ON t.user_id = $user_id 
-            AND t.figure_id = f.id
+            ON  t.figure_id = f.id
+            WHERE t.user_id = $user_id 
             ORDER BY t.id";
 
 $result = mysql_query($query) or die($query);

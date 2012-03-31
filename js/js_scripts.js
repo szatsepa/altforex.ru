@@ -93,7 +93,9 @@ function timer()
 }
     
 function _goRmail(aga, whot, cash){
-    
+    /*
+     * ето главная функция - голосование если авторизован или переход к регистрации ящика
+     */
     if(cash != 0 && aga != 0){
          
          var whot_array = new Array('квадрат','круг','треугольник');

@@ -39,7 +39,7 @@ $coll_array = array('Раунд','Квадрат','Круг','Треугольн
             <form action="index.php?act=chngvote" method="post" id="set_vote_<?php echo $n;?>">
                 <tr align='center'>
                     <td>
-                        <input type='hidden' name='id' value='<?php echo $value[id];?>'/>
+                        <input type='hidden' name='row' value='<?php echo $value[id];?>'/>
                         <input name='round' value='<?php echo $value[round];?>' size='2'/>
                     </td>
                     <td>
@@ -70,7 +70,7 @@ $coll_array = array('Раунд','Квадрат','Круг','Треугольн
             <form action="index.php?act=chngvote" method="post" id="set_vote_<?php echo $n;?>">
                 <tr align='center'>
                     <td>
-                        <input type='hidden' name='id' value='<?php echo $value[id];?>'/>
+                        <input type='hidden' name='row' value='<?php echo $value[id];?>'/>
                         <input name='round' value='1' size='2'/>
                     </td>
                     <td>

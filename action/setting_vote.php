@@ -4,9 +4,9 @@
  * created by arcady.1254@gmail.com 29/3/2012
  */
 
-//$user_id = $user->data[id];
+$user_id = $user->data[id];
 
-$id = intval($attributes[id]);
+$id = intval($attributes[row]);
 
 $round = intval($attributes[round]);
 

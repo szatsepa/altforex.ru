@@ -3,6 +3,9 @@
 /*
  * created by arcady.1254@gmail.com 19/3/2012
  */
+include 'classes/User.php';
+
+include 'classes/constitution.php';
  
  if(!isset($attributes) || !is_array($attributes)) {
      
@@ -38,10 +41,6 @@ if(isset($attributes[di]) && !isset ($_SESSION[auth]) && $attributes[di] != ''){
          
 }
 
-include 'classes/User.php';
-
-include 'classes/constitution.php';
-  
 include 'action/connect.php';
 
 include 'action/quotesmart.php';
@@ -51,9 +50,9 @@ if(isset ($_SESSION[id])) {
     include 'query/checkauth.php';
 }
 
-if(isset ($user->data[auto]) && $user->data[auto] > 0){
-    include 'main/controller.php';
-}
+
+    include 'classes/controller.php';  
+
 
 switch ($attributes[act]) {
     case 'main':

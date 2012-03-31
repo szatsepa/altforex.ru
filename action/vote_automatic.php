@@ -1,14 +1,20 @@
 <?php
 
 /*
- * created by arcady.1254@gmail.com 21/3/2012
- * 
- * собсно голосование
+ * created by arcady.1254@gmail.com 31/3/2012
  */
+if(!isset($_SESSION)){
 
-$user_id = intval($_SESSION[id]);
+    session_start();  
+}
 
-$figure = intval($attributes[whot]) + 1;
+include 'connect.php';
+include '../classes/constitution.php';
+
+
+$user_id = intval($_POST[id]);
+
+$figure = intval($_POST[whot]) + 1;
 
 $count = 1;
 
@@ -82,5 +88,10 @@ if(mysql_affected_rows() > 0){
     $str_out = "&vote=$status_vote";
 }
 
-header("location:index.php?act=main$str_out");
+mysql_close($link);
+
+header("location:http://altforex.ru/index.php?act=main&id=$user_id");
+
+
+
 ?>
