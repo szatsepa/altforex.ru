@@ -19,11 +19,11 @@ if(!isset ($_SESSION[check])){
     $_SESSION[check] = $_SESSION[game]->id;
 }
 
-$check = $_SESSION[game]->checkStep($_SESSION[check]); 
+$check = $_SESSION[game]->checkStep($_SESSION[check], $user->data[id]); 
 
-echo "$check => ". $user->data[id]." != ".$_SESSION[game]->gamer_id;
+echo "<= $check => ";
 
-if($check == 1 && ($user->data[id]) != $_SESSION[game]->gamer_id){
+if($check == 1){
     
     $_SESSION[task]->_move($user->data[id]);
     

@@ -51,11 +51,11 @@ if(isset ($_SESSION[id])) {
 }
 
 
-    include 'classes/controller.php';  
-
-
 switch ($attributes[act]) {
     case 'main':
+        if(isset ($_SESSION[auth]) && $_SESSION[auth] == 1){
+             include 'classes/controller.php';
+        }
         include 'query/status.php';
         include 'main/header.php';
         include 'main/selector.php';
@@ -87,8 +87,13 @@ switch ($attributes[act]) {
         break;
     
     case 'vote':
-        include 'main/header.php';
+        include 'main/header.php';  
         include 'action/vote.php';
+        break;
+    
+    case 'avote':
+        print_r($attributes);
+//        include 'action/vote_automatic.php';
         break;
     
     case 'onauto':

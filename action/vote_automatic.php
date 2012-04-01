@@ -3,14 +3,6 @@
 /*
  * created by arcady.1254@gmail.com 31/3/2012
  */
-if(!isset($_SESSION)){
-
-    session_start();  
-}
-
-include 'connect.php';
-include '../classes/constitution.php';
-
 
 $user_id = intval($_POST[id]);
 
@@ -90,7 +82,7 @@ if(mysql_affected_rows() > 0){
 
 mysql_close($link);
 
-header("location:http://altforex.ru/index.php?act=main&id=$user_id");
+header("location:http://altforex.ru/index.php?act=main");
 
 
 

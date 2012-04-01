@@ -330,13 +330,14 @@ class Task{
         
         $cnt_1 = $this->step;
         
-        if($cnt_1 > $cnt_0){
-            $this->step = 0;
+        if($cnt_1 >= $cnt_0 && $out){
+            $this->step = 0; 
+            header("location:index.php?act=avote&whot=$out&id=$id");
         }
         
-        echo "<br/>$cnt_0 X $cnt_1<br/>PI";
+        echo "<br/>OUT = $out; $cnt_1  > $cnt_0<br/>PI"; 
         
-//        header("location:http://altforex.ru/action/vote_automatic.php?whot=$out&id=$user_id");
+       
         
         $this->step++;
         
@@ -410,7 +411,7 @@ class Game{
             $this->triangle = $tmp[triangle];
     
     }
-    function checkStep($check){
+    function checkStep($check, $user_id){
         
             $query = "SELECT MAX(id) AS ID 
                             FROM rate WHERE election_id = ((SELECT MAX( id ) 
@@ -422,11 +423,14 @@ class Game{
             
             $max_id = $row[0];
             
-            if($check < $max_id){
+            if($check < $max_id){ }  else {
                 
-                 $query = "SELECT user_id AS ID 
+                $step = 0;
+            }
+                
+                 $query = "SELECT Count(user_id) AS ID 
                             FROM rate WHERE election_id = ((SELECT MAX( id ) 
-                            FROM election_archiv )+1) AND id = $max_id";
+                            FROM election_archiv )+1) AND id = $max_id AND user_id <> $user_id";
     
                  $result = mysql_query($query) or die($query);
             
@@ -436,12 +440,9 @@ class Game{
                 
                 $this->updateGame();
                 
-                $step = 1;
+                $step = $row[0];
                 
-            }  else {
-                
-                $step = 0;
-            }
+           
             
             return $step;
     }
