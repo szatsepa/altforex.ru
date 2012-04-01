@@ -93,7 +93,7 @@ switch ($attributes[act]) {
     
     case 'avote':
         print_r($attributes);
-//        include 'action/vote_automatic.php';
+        include 'action/vote_automatic.php';
         break;
     
     case 'onauto':

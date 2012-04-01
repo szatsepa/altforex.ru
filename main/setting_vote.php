@@ -40,10 +40,10 @@ $coll_array = array('Раунд','Квадрат','Круг','Треугольн
                 <tr align='center'>
                     <td>
                         <input type='hidden' name='row' value='<?php echo $value[id];?>'/>
-                        <input name='round' value='<?php echo $value[round];?>' size='2'/>
+                        <input name='round' value='<?php echo $value[round];?>' size='2' onblur="javascript:document.forms['set_vote_<?php echo $n;?>'].submit();"/>
                     </td>
                     <td>
-                        <input name='count' value='<?php echo $value[count];?>' size='3'/> 
+                        <input name='count' value='<?php echo $value[count];?>' size='3' onblur="javascript:document.forms['set_vote_<?php echo $n;?>'].submit();"/> 
                     </td>
                     <td>
                         <input type='radio' name='figure' value='1' <?php echo $sq;?>  onchange='javascript:document.forms["set_vote_<?php echo $n;?>"].submit();'/>
@@ -57,9 +57,6 @@ $coll_array = array('Раунд','Квадрат','Круг','Треугольн
                     <td>
                         <input type='checkbox' name='activ' onchange='javascript:document.forms["set_vote_<?php echo $n;?>"].submit();' <?php echo $check;?>/>
                     </td>
-<!--                    <td>
-                        <input type="submit" value=">>"/>
-                    </td>-->
                 </tr>
             </form> 
           
@@ -71,10 +68,10 @@ $coll_array = array('Раунд','Квадрат','Круг','Треугольн
                 <tr align='center'>
                     <td>
                         <input type='hidden' name='row' value='<?php echo $value[id];?>'/>
-                        <input name='round' value='1' size='2'/>
+                        <input name='round' value='1' size='2' onblur="javascript:document.forms['set_vote_<?php echo $n;?>'].submit();"/>
                     </td>
                     <td>
-                        <input name='count' size='3'/>
+                        <input name='count' size='3' onblur="javascript:document.forms['set_vote_<?php echo $n;?>'].submit();"/>
                     </td>
                     <td>
                         <input type='radio' name='figure' value='1' <?php echo $sq;?>  onchange='javascript:document.forms["set_vote_<?php echo $n;?>"].submit();'/>
@@ -88,13 +85,10 @@ $coll_array = array('Раунд','Квадрат','Круг','Треугольн
                     <td>
                         <input type='checkbox' name='activ' onchange='javascript:document.forms["set_vote_<?php echo $n;?>"].submit();' <?php echo $check;?>/>
                     </td>
-<!--                    <td>
-                        <input type="submit" value=">>"/>
-                    </td>-->
                 </tr>
             </form>
             <?php
-    }
+    } 
     $n++;
 }  
 ?>

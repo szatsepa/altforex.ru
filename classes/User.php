@@ -44,6 +44,26 @@ class User{
         $this->data = $array;
         
     }
+    
+    function checkCash($id){
+        
+         $query = "SELECT cash FROM my_account WHERE user_id = $id";
+    
+         $result = mysql_query($query) or die ($query);
+    
+         $row = mysql_fetch_row($result);
+    
+         $cash = $row[0];
+    
+        if($cash <= 0){
+        
+            mysql_query("UPDATE my_account SET cash = 0 WHERE user_id = $id");
+    
+        }
+        
+        return $cash;
+    
+    }
  
 }
 ?>

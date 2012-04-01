@@ -20,8 +20,8 @@ if(!isset ($_SESSION[check])){
 }
 
 $check = $_SESSION[game]->checkStep($_SESSION[check], $user->data[id]); 
-
-echo "<= $check => ";
+print_r($_SESSION[task]);
+echo "<br/><= $check => ";
 
 if($check == 1){
     
@@ -29,8 +29,5 @@ if($check == 1){
     
     $_SESSION[check] = $_SESSION[game]->id;
 }
-//print_r($_SESSION[game]);
-
-
 
 ?>

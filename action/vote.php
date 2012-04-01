@@ -74,7 +74,7 @@ if(mysql_affected_rows() > 0){
     /*
      * проверяем кошелек участника на наличие средств(голосов)
      */
-    checkCash($user_id);
+    $check = $user->checkCash($user_id);
         
 }
   

@@ -111,25 +111,6 @@ function close_game($figures_id, $user_id, $round){
     return $str_out;
 }
 
-function checkCash($id){
-    
-    $_SESSION[id] = $id;
-    
-    $query = "SELECT cash FROM my_account WHERE user_id = $id";
-    
-    $result = mysql_query($query) or die ($query);
-    
-    $row = mysql_fetch_row($result);
-    
-    $cash = $row[0];
-    
-    if($cash <= 0){
-        
-        mysql_query("UPDATE my_account SET cash = 0 WHERE user_id = $id");
-    
-    }
-    
-}
 function _game_results($with_its){
    /* формула первая самая простая:
     * шаг игры один голос за одну фигуру:
@@ -281,23 +262,31 @@ function _autoVote(){
 
 class Task{
     
-    var $data;
+    var $rows;
     var $round;
     var $count;
     var $figure;
     var $step;
+    var $seek;
     
     function Task($id){
         
         $this->step = 0;
         
-        $this->data = array();
+//        $this->task = array();
         
-        $this->updateTask($id);        
+        $this->updateTask($id, 0);        
         
     }
     
-    function updateTask($id){
+    function updateTask($id, $seek){
+        
+        if($seek <= $this->rows){
+            $this->seek = $seek;
+            $out = 1;
+        }else{
+            $out = NULL;
+        }
      
             $query = "SELECT t.id, 
                              t.round, 
@@ -309,36 +298,36 @@ class Task{
                     ORDER BY t.id";
 
             $result = mysql_query($query) or die($query);
-
-            $tmp_arr = array();
             
             $n = 0;
-
-            while ($var = mysql_fetch_assoc($result)){ 
-                        array_push($tmp_arr, $var);
+            while ($var = mysql_fetch_assoc($result)){
+               if($n == $seek){
+                 $this->round = $var[round];
+                 $this->count = $var[count];
+                 $this->figure = $var[figure_id];
+                 $this->id = $var[id];
                  }
-                
-                $this->data = $tmp_arr;   
-    }
+                   $n++;
+            }
+            
+            $this->rows = $n;
+            
+     }
     function _move($id){
         
-        $out = $this->data[$this->step][figure_id];
+        $out = $this->figure;
         
         $user_id = $id;
         
-        $cnt_0 = count($this->data);
+        $cnt_0 = count($this->task);
         
         $cnt_1 = $this->step;
         
-        if($cnt_1 >= $cnt_0 && $out){
+        if($cnt_1 <= $cnt_0 && $out){
             $this->step = 0; 
             header("location:index.php?act=avote&whot=$out&id=$id");
         }
-        
-        echo "<br/>OUT = $out; $cnt_1  > $cnt_0<br/>PI"; 
-        
-       
-        
+
         $this->step++;
         
         
