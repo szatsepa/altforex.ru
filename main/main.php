@@ -5,27 +5,19 @@
  */
 if($_SESSION[auth] == 1){
     
-    $square = $vote_array[square];
+    $square = $actual_game->square;
     
-    $circle = $vote_array[circle];
+    $circle = $actual_game->circle;
     
-    $triangle = $vote_array[triangle];
+    $triangle = $actual_game->triangle;
     
     $cash = $user->data[cash];
     
-    if($cash == 0){
-        echo "<script language='javascript'>alert('Вам необходимо пополнить счет!');</script>";
-    }
+
 }else{
     $cash = 0;
 }
-if($_SESSION[auth] == 1 && $attributes[vote] == 1){
-    ?>
-<script language="javascript">
-    alert("Вы не можете закрыть раунд.");
-</script>
-<?php
-}
+
 ?>
 <div class="glagne">
     <div class="title_main">

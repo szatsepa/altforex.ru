@@ -100,8 +100,8 @@ function _goRmail(aga, whot, cash){
          
          var whot_array = new Array('квадрат','круг','треугольник');
 
-                 if(confirm("Вы желаете отдать голос за "+whot_array[whot]+"?\n С вашего счета будет списано 1 балл")){
-                     document.location='http://altforex.ru/index.php?act=vote&whot='+whot; 
+                 if(confirm("Вы желаете отдать голос за "+whot_array[whot]+"?\n")){
+                     document.location='http://altforex.ru/index.php?act=main&whot='+whot; 
                  }else{
                      document.location='http://altforex.ru/index.php?act=main'; 
                  }

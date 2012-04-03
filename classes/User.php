@@ -21,7 +21,7 @@ class User{
                          u.phone, 
                          u.key_code, 
                          a.cash, 
-                         a.element_id, 
+                         a.level,  
                          (SELECT Count(u.id) FROM users AS u, user_task AS t WHERE u.id = t.user_id AND u.id = $id) AS task,
                          (SELECT Count(u.id) FROM users AS u, user_task AS t WHERE u.id = t.user_id AND u.id = 1 AND t.auto = 1) AS auto 
                  FROM users AS u   
@@ -45,25 +45,7 @@ class User{
         
     }
     
-    function checkCash($id){
-        
-         $query = "SELECT cash FROM my_account WHERE user_id = $id";
-    
-         $result = mysql_query($query) or die ($query);
-    
-         $row = mysql_fetch_row($result);
-    
-         $cash = $row[0];
-    
-        if($cash <= 0){
-        
-            mysql_query("UPDATE my_account SET cash = 0 WHERE user_id = $id");
-    
-        }
-        
-        return $cash;
-    
-    }
+
  
 }
 ?>
