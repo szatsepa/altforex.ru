@@ -34,7 +34,11 @@ if(isset($attributes[whot])){
     
     $votes = intval($attributes[votes]);
     
-   if($actual_game->move((intval($attributes[whot])+1), $votes)){
+    $move = $actual_game->move((intval($attributes[whot])+1), $votes);
+    
+    echo "MOVE => $move; ...."; 
+    
+   if($move){
        header ("location:index.php?act=main");
    }else{
        $er = $actual_game->error;

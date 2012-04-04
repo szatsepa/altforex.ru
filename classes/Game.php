@@ -48,7 +48,7 @@ class Game{
     
     function move($figure, $vote){
         
-        $ret = NULL;
+        unset ($_SESSION[str]);
         
         $status_vote = NULL;
         
@@ -92,27 +92,38 @@ class Game{
     
                 $result = mysql_query($query) or die ($query);
                 
-                $query = "SELECT $name FROM election WHERE id = $this->id";
+                $afr = mysql_affected_rows();
+                
+                $query = "SELECT square, circle, triangle FROM election WHERE id = $this->id";
                 
                 $result = mysql_query($query) or die($query);
                 
-                $row = mysql_fetch_row($result);
+                $row = mysql_fetch_assoc($result);
                 
-                $ret = 1;
+                $check_75 = $this->_check75($row);
                 
-                if($row[0] >= 100){
+                if($check_75){
+                    $_SESSION[str] .= "....na close = $check_75";
+                    $ret = $this->_close($check_75);  
+                }
+                
+                if($row[$name] >= 100 && !$ret){
                     $ret = $this->_roundClose();
+                }
+                
+                if($afr > 0 && !$ret){
+                    $ret = 1;
                 }
               }
   
         }
         
-        return $ret;;
+        return $ret;
         
     }
     function _roundClose(){
         
-        $str = NULL;
+//        $str = NULL;
         
         $query = "SELECT square, circle, triangle FROM election WHERE id = $this->id";
         
@@ -120,69 +131,63 @@ class Game{
         
         $data = mysql_fetch_assoc($result);
 
-        $with_its = array();
+//        $with_its = array();
         
-        $closed = NULL;
+        $null = NULL;
         
         $status = NULL;
-        
-        $point_75 = NULL;
-        
+                
         /*
          * три фигуры и одна дошла до финиша
          * 
          */
         foreach ($data as $key => $value) {
-            
-            if($value == 100)$closed = 1;
-            if($value >= 75)$point_75 = 1;
+            if($value > 0)$status += 1;
         }
-        $str .= $closed." & ".$point_75."; ";
-        if($closed){
+        if($status != 3){
             foreach ($data as $key => $value) {
-                if($value == 0){
-                    $status += 1;
-                    array_push($with_its, $key);
-                    }
-            }
-            if($status == 2){               
-                $closed = 1;
-            }  else {
-                while (count($with_its)){
-                    array_pop($with_its);
-                }
-            }
-        }
-        $str .= $closed." & ".$point_75."; ";
-        if($point_75){
-            $status = NULL;
-            foreach ($data as $key => $value) {
-                if($value == 0){
-                    $status += 1;
-                    array_push($with_its, $key);
-                }
-            }
-            if($status == 1){
+                if($value == 0)$null+=1;
                 
-                $closed = 1;
             }
         }
-        $str .= $closed." & ".$point_75."; ";
+        if($status != 3 && $null == 1){
+            $status = 1;
+        }
         
-        $_SESSION[str] = $str;
-        if($closed)$closed = $this->_close ();
-        if($closed)$closed = $this->_game_results ($with_its);
+$_SESSION[str] .= " ....STATUS (_roundClose) = $status"; 
+        $closed = $this->_close ($status);
  
     /*
-     * если в раунде голосуют только за две фигуры (одна из фигур остается нулевой)
-     * а одна из двух набирают более чем 75 голосов 
-     * раунд прекращается 
+     *
      * обе фигуры попалают в статус при своих(with its)
      *
      * если в раунде голосовали только за одну фигуру
      *  она остается в статусе при своих(with its)
      */
     return $closed;
+        
+    }
+    
+    function _check75($data){
+        /*
+         * если в раунде голосуют только за две фигуры (одна из фигур остается нулевой)
+         * а одна из двух набирают более чем 75 голосов 
+         * раунд прекращается 
+         */
+        $out = NULL;
+        
+        foreach ($data as $key => $value) {
+            if($value >= 75)$ch75+=1;
+            if($value == 0)$ch0 +=1;            
+        }
+        
+        if($ch0 == 1 && $ch75 >= 1){
+            $out = 1;
+            }
+            
+  $_SESSION[str] .= "....STATUS (_check75) = $ch0 + $ch75 = $out"; 
+  
+        return $out;
         
     }
 
@@ -229,15 +234,24 @@ class Game{
         return $row[0];
     }
     
-    function _close(){
+    function _close($status){
+        $_SESSION[str] .= "....STATUS (_close)stat  = $status....."; 
         
         $duery = "UPDATE election SET stop_round = 1 WHERE id = $this->id";
+        
+        $_SESSION[str] .= $query;
         
         $result = mysql_query($query) or die($query);
         
         $num_aff = mysql_affected_rows();
         
-        return $num_aff;
+        $_SESSION[str] .= "....STATUS (_close)NA  = $num_aff"; 
+        
+        $out =$this->_game_results($status);
+        
+         $_SESSION[str] .= "....STATUS (_close)  = $out"; 
+        
+        return $out;
     }
     
     function _game_results($with_its){
@@ -251,7 +265,11 @@ class Game{
     * Фигура между выигравшей и проигравшей в статусе "при своих" все голоса за эту фигуру возвращаются игрокам обратно
     * 
     * выбираем список игроков - участников
+    * 
     */
+         $_SESSION[str] .= "....STATUS (__game_results)  = $with_its";
+        
+        $out = NULL;
         
         $query = "SELECT user_id FROM `rate` WHERE election_id = $this->id GROUP BY user_id";
     
@@ -341,11 +359,11 @@ class Game{
                 
                     if($value[figures] == $standoff[0]){
 
-                        $this-> _back_points($value[user_id], $value[point], 1);
+                       $out +=   $this-> _back_points($value[user_id], $value[point], 1);
                      }
                     if($value[figures] == $prize[0]){
 
-                        $this->_back_points($value[user_id], $value[point], 2);
+                       $out +=   $this->_back_points($value[user_id], $value[point], 2);
                     }
                 }
             }
@@ -354,13 +372,13 @@ class Game{
             for($i = 0;$i < count($user_rate);$i++){
                 foreach ($user_rate[$i] as $key => $value) { 
 
-                        $this->_back_points($value[user_id], $value[point], 1);
+                       $out +=  $this->_back_points($value[user_id], $value[point], 1);
                  
                  }
             }
         }
 
-        return 1;
+        return $out;
 
     }
     function _back_points($user_id, $points, $qw){
