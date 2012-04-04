@@ -386,3 +386,19 @@ p.reg{
   top: 60px;
   left: 20px;
 }
+div.insert{
+    position: absolute;
+    float: left;
+    width: 200px;
+    height: 64px;
+    top: 275px;
+    left: 400px;
+    border: 2px solid #999999;
+    display: none;
+    font-size: 12px;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    z-index: 13;
+    background-color: aquamarine;
+}

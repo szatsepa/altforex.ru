@@ -24,6 +24,8 @@ if(!isset($_SESSION)){
 //echo "-5<br/>";
 //print_r($attributes);
 
+echo $_SESSION[str]."<br/>";
+
 if($_SESSION[auth] != 1)$_SESSION[auth] = 0;
 
 

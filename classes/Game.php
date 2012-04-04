@@ -48,14 +48,29 @@ class Game{
     
     function move($figure, $vote){
         
-        $status_vote = $this->close_game($figure);
+        $ret = NULL;
         
-        if(!$status_vote){
+        $status_vote = NULL;
+        
+        $check = $this->_checkCash($vote);
+        if(!$check){
+            $this->error = "c";
+        }
+        
+        $fig_name = $this->_figuresName($figure);
+        
+        if((($this->$fig_name)+$vote) >= 100 && $check){
+            $aga = $this->_getVote($figure);
+            if($aga > 0){
+                $status_vote = 1;
+                $this->error = "v";
+             }
+        }
+        
+       if(!$status_vote){
             
             
             $name = $this->_figuresName($figure);
-           
-
 /*
  *  создаем соотв запись в таблице
  */
@@ -77,27 +92,33 @@ class Game{
     
                 $result = mysql_query($query) or die ($query);
                 
-                $query = "SELECT square, circle, triangle FROM election WHERE id = $this->id";
+                $query = "SELECT $name FROM election WHERE id = $this->id";
                 
                 $result = mysql_query($query) or die($query);
                 
-                $row = mysql_fetch_assoc($result);
+                $row = mysql_fetch_row($result);
                 
-                $this->_roundClose($row);
+                $ret = 1;
                 
-                return 1;
-   
+                if($row[0] >= 100){
+                    $ret = $this->_roundClose();
                 }
+              }
   
-        }else{
-            
-            return NULL;
         }
         
+        return $ret;;
         
     }
-    function _roundClose($data){
+    function _roundClose(){
         
+        $str = NULL;
+        
+        $query = "SELECT square, circle, triangle FROM election WHERE id = $this->id";
+        
+        $result = mysql_query($query) or die($query);
+        
+        $data = mysql_fetch_assoc($result);
 
         $with_its = array();
         
@@ -113,10 +134,10 @@ class Game{
          */
         foreach ($data as $key => $value) {
             
-            if($value == 10)$closed = 1;
-            if($value >= 7)$point_75 = 1;
+            if($value == 100)$closed = 1;
+            if($value >= 75)$point_75 = 1;
         }
-        
+        $str .= $closed." & ".$point_75."; ";
         if($closed){
             foreach ($data as $key => $value) {
                 if($value == 0){
@@ -132,6 +153,7 @@ class Game{
                 }
             }
         }
+        $str .= $closed." & ".$point_75."; ";
         if($point_75){
             $status = NULL;
             foreach ($data as $key => $value) {
@@ -145,6 +167,11 @@ class Game{
                 $closed = 1;
             }
         }
+        $str .= $closed." & ".$point_75."; ";
+        
+        $_SESSION[str] = $str;
+        if($closed)$closed = $this->_close ();
+        if($closed)$closed = $this->_game_results ($with_its);
  
     /*
      * если в раунде голосуют только за две фигуры (одна из фигур остается нулевой)
@@ -155,58 +182,10 @@ class Game{
      * если в раунде голосовали только за одну фигуру
      *  она остается в статусе при своих(with its)
      */
+    return $closed;
         
     }
-    function close_game($figure){
-        
-        $check = NULL;
-        
-        $fig_name = $this->_figuresName($figure);
-    
-    /*
-     * Участник может голосовать в рамках одного раунда сколько угодно 
-     *   НО - Если участник в этом раунде уже голосовал, он не может голосовать
-     *  еще раз, если его голос является закрывающим раунд 
-     * (добавленный участником голос или голоса завершат раунд)
-     */
-       
-        $query = "SELECT $fig_name FROM election WHERE id = $this->id";
-    
-        $result = mysql_query($query) or die($query);
-    
-        $row = mysql_fetch_row($result);
-    
-        $points = $row[0];
-    
-        if($points == 9){
-            
-            $this->error = "v";
-            
-            $user_vote = $this->_getVote($figure);
 
-            
-           /*
-            * проверяем кошелек участника на наличие средств(голосов)
-            */
-            if($user_vote > 0){
-
-                $check = $this->_checkCash($figure);
-                
-                if(!$check){
-                    $this->error = "c";
-                }
-            }  else {
-                $check = 1;
-            }
-            
-            
-            
-         } else {
-             $check = NULL; 
-         }  
-        
-         return $check;
-    }
     function _figuresName($figure){
         
         $f_name = mysql_query("SELECT name FROM figures WHERE id = $figure");
@@ -218,18 +197,10 @@ class Game{
         return $name;
 
     }
-    function _checkCash($figure){
-        
-         $figure_name = $this->_figuresName($figure);
+    function _checkCash($vote){
+     
+        $check = NULL;
             
-         $query = "SELECT (9 - $figure_name) AS votes FROM election WHERE id = $this->id"; 
-            
-         $result = mysql_query($query) or die ($query);
-            
-         $row = mysql_fetch_row($result);
-         
-         $count = $row[0];
-        
          $query = "SELECT cash FROM my_account WHERE user_id = $this->user";
     
          $result = mysql_query($query) or die ($query);
@@ -238,12 +209,13 @@ class Game{
     
          $cash = $row[0];
     
-        if($cash < $count){
-            return NULL;
-         }  else {
-             
-             return 1;
-         }   
+        if($cash >= $vote){
+        
+            $check = 1;
+            
+         }
+         
+         return $check;
     }
     
     function _getVote($figure){
@@ -255,6 +227,164 @@ class Game{
         $row = mysql_fetch_row($result);
         
         return $row[0];
+    }
+    
+    function _close(){
+        
+        $duery = "UPDATE election SET stop_round = 1 WHERE id = $this->id";
+        
+        $result = mysql_query($query) or die($query);
+        
+        $num_aff = mysql_affected_rows();
+        
+        return $num_aff;
+    }
+    
+    function _game_results($with_its){
+   /* формула первая самая простая:
+    * шаг игры один голос за одну фигуру:
+    * раунд заканчивается в тот момент когда одна из фигур набирает  100 голосов
+    * фигура набравшая меньше всего очков считается "выигравшей раунд"
+    * игрокам кто за нее голосовал количество отданных голосов возвращается в двойном размере
+    * Фигура набравшая больше всего очков считается "проигравшей раунд"
+    * все голоса отданные за нее остаются в кассе оператора игры
+    * Фигура между выигравшей и проигравшей в статусе "при своих" все голоса за эту фигуру возвращаются игрокам обратно
+    * 
+    * выбираем список игроков - участников
+    */
+        
+        $query = "SELECT user_id FROM `rate` WHERE election_id = $this->id GROUP BY user_id";
+    
+        $result = mysql_query($query) or die ($query);
+    /*
+     * массив игроков участников
+     */
+        $user_array = array();
+    /*
+     * маиссив ставок игроков
+     */
+        $user_rate = array();
+    /*
+     * ставки суммы по фигурам
+     */
+        $square = 0;
+    
+        $circle = 0;
+    
+        $triangle = 0;
+    
+        while ($var = mysql_fetch_row($result)){
+        
+            array_push($user_array, $var[0]);
+        
+        }
+    
+    
+    
+        foreach ($user_array as $value) { 
+        
+            $game_results = array();
+/*
+ * выборка ставок по игрокам и фигурам
+ */    
+            $query = "SELECT u.id AS user_id,
+                    f.name AS figures,
+                    f.id AS f_id,
+                    r.point                      
+                FROM `figures` AS f 
+                JOIN `rate` AS r 
+                JOIN `users` AS u 
+                ON r.election_id  = $this->id
+                AND r.figure_id = f.id 
+                AND u.id = $value
+                AND r.user_id = u.id
+                ORDER BY f.id";
+    
+            $result = mysql_query($query) or die ($query);
+    
+             while ($var = mysql_fetch_assoc($result)){
+        
+                array_push($game_results, $var);
+        
+                 if($var[figures] == 'square')$square += $var[point];
+                 if($var[figures] == 'circle')$circle += $var[point];
+                 if($var[figures] == 'triangle')$triangle += $var[point];
+        
+             } 
+        
+         array_push($user_rate, $game_results);
+        
+        }
+    
+        $summ_array = array('square'=>$square,'circle'=>$circle, 'triangle'=>$triangle);
+    
+        arsort($summ_array);
+    /*
+     * проигыш
+     */
+        $loss = each($summ_array);
+    /*
+     * типа ничья ставки вертаюццо
+     */
+        $standoff = each($summ_array);
+    /*
+     * выигрыш (в смысле фигура\ставка)
+     */
+        $prize = each($summ_array);
+    /*
+     * в цыкле обновляем содержимое кошельков игроков участников по ставкам на фигуры
+     */
+   
+        if($with_its == 3){
+            for($i = 0;$i < count($user_rate);$i++){
+                foreach ($user_rate[$i] as $key => $value) { 
+                
+                    if($value[figures] == $standoff[0]){
+
+                        $this-> _back_points($value[user_id], $value[point], 1);
+                     }
+                    if($value[figures] == $prize[0]){
+
+                        $this->_back_points($value[user_id], $value[point], 2);
+                    }
+                }
+            }
+         }  else {
+      
+            for($i = 0;$i < count($user_rate);$i++){
+                foreach ($user_rate[$i] as $key => $value) { 
+
+                        $this->_back_points($value[user_id], $value[point], 1);
+                 
+                 }
+            }
+        }
+
+        return 1;
+
+    }
+    function _back_points($user_id, $points, $qw){
+    /*
+     *собсно обновление кошельков участников раунда
+     */
+        $cash = $points*$qw;
+    
+        $query = "UPDATE my_account SET cash = (cash + $cash) WHERE user_id = $user_id";
+    
+        $result = mysql_query($query) or die ($query);
+    
+        $num_aff = mysql_affected_rows();
+    
+        return $num_aff;
+    }
+    function _autoVote(){
+    /*
+     *       игрок может выбрать режим «автоматической игры»: 
+     *  - в этом режиме он назначает цепочку-очередность  фигур
+     *  за которые он голосует система в каждом раунде голосует вместо него,
+     *  в результате вероятных выигрышей  при поступлении в кошелек необходимой суммы
+     *  голосования продолжаются за заранее выбранные фигуры но на более дорогом поле.
+     */
     }
 }
 

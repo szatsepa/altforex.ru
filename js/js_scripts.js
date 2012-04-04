@@ -96,12 +96,18 @@ function _goRmail(aga, whot, cash){
     /*
      * ето главная функция - голосование если авторизован или переход к регистрации ящика
      */
+    var obj = document.getElementById(whot);
+    
+    var fig = obj.figure_id.value;
+    
+    var votes = obj.votes.value;
+    
     if(cash != 0 && aga != 0){
          
          var whot_array = new Array('квадрат','круг','треугольник');
 
-                 if(confirm("Вы желаете отдать голос за "+whot_array[whot]+"?\n")){
-                     document.location='http://altforex.ru/index.php?act=main&whot='+whot; 
+                 if(confirm("Вы желаете отдать голос за "+whot_array[fig]+"?\n\t\t\tВсего "+votes)){
+                     document.location='http://altforex.ru/index.php?act=main&whot='+fig+'&votes='+votes; 
                  }else{
                      document.location='http://altforex.ru/index.php?act=main'; 
                  }
