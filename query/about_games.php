@@ -3,7 +3,7 @@
 /*
  * created by arcady.1254@gmail.com 3/4/2012
  */
-//print_r($_SESSION);
+print_r($user);
 
 if(isset ($attributes[check])){
     if($attributes[check] == "v"){

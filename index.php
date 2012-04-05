@@ -8,6 +8,8 @@ include 'classes/User.php';
 include 'classes/Games.php';
 
 include 'classes/Game.php';
+
+include 'classes/Tasks.php';
  
  if(!isset($attributes) || !is_array($attributes)) {
      
@@ -66,6 +68,7 @@ switch ($attributes[act]) {
         break;
     
     case 'rmail':
+        $title = 'KABINET';
         include 'main/header.php';
         include 'main/selector.php';
         include 'main/regmail.php';

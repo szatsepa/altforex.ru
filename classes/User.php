@@ -7,9 +7,12 @@
 class User{
     
     var $data;
+    var $id;
+    var $task;
     
     function User(){
         $this->data = array();
+        $this->task = new Tasks();
     }
     
     function setUser($id){  
@@ -23,7 +26,7 @@ class User{
                          a.cash, 
                          a.level,  
                          (SELECT Count(u.id) FROM users AS u, user_task AS t WHERE u.id = t.user_id AND u.id = $id) AS task,
-                         (SELECT Count(u.id) FROM users AS u, user_task AS t WHERE u.id = t.user_id AND u.id = 1 AND t.auto = 1) AS auto 
+                         (SELECT Count(u.id) FROM users AS u, user_task AS t WHERE u.id = t.user_id AND u.id = $id AND t.auto = 1) AS auto 
                  FROM users AS u   
                  LEFT JOIN my_account AS a 
                  ON u.id = a.user_id 
@@ -32,8 +35,14 @@ class User{
         $result = mysql_query($query) or die ($query);
         
         $row = mysql_fetch_assoc($result);
+        
+        $this->id = $row[id];
                 
         $this->data = $row; 
+        
+        if($this->data[task] > 0){
+            $this->task->setTasks($this->id);
+        }
         
         unset($row); 
         
@@ -44,8 +53,24 @@ class User{
         $this->data = $array;
         
     }
+    function _createCode($num_cnt, $str_cnt){
     
+        $cod = '';
 
+        $simbol_array = array('A','S','D','F','G','H','J','K','L','Q','W','E','R','T','Y','U','I','O','P','Z','X','C','V','B','N','M');
+
+        for($i = 0;$i<$str_cnt;$i++){
+            
+            $cod .= $simbol_array[rand(0, count($simbol_array))];
+            
+        }
+
+        for($i = 0;$i<$num_cnt;$i++){
+            $cod .= rand(0, 9);
+        }
+
+        return $cod;
+    }
  
 }
 ?>

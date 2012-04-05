@@ -190,8 +190,6 @@ class Game{
     
     function _roundClose($data){
         
-        $_SESSION[r_close] = " _roundClose";
-        
         $null = NULL;
         
         $status = NULL;
