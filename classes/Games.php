@@ -56,6 +56,8 @@ class Games{
                 mysql_query("INSERT INTO election (level) VALUES ($value)");
             }
         }
+        unset ($_SESSION[level]);
+        header("location:index.php?act=main");
     }
 }
 

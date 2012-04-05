@@ -71,23 +71,23 @@ switch ($attributes[act]) {
         include 'main/regmail.php';
         break;
     
-//    case 'addm':
-//        include 'action/add_email.php';
-//        break;
-//    
-//    case 'chngus':
-//        include 'action/change_user.php';
-//        break;
-//    
-//    case 'addus':
-//        include 'action/add_user.php';
-//        break;
-////    cabinet
-//    case 'regu':
-//        include 'main/header.php';
-//        include 'main/selector.php';
-//        include 'main/about_me.php';
-//        break;
+    case 'addm':
+        include 'action/add_email.php';
+        break;
+    
+    case 'chngus':
+        include 'action/change_user.php';
+        break;
+    
+    case 'addus':
+        include 'action/add_user.php';
+        break;
+//    cabinet
+    case 'regu':
+        include 'main/header.php';
+        include 'main/selector.php';
+        include 'main/about_me.php';
+        break;
 //    
 //    case 'vote':
 //        include 'main/header.php';  
@@ -106,28 +106,28 @@ switch ($attributes[act]) {
 //    case 'addrow':
 //        include 'action/addrow_auto.php';
 //        break;
-//    
-//    case 'setvote':
-//        include 'query/auto_vote.php'; 
-//        include 'main/header.php';
-//        include 'main/selector.php'; 
-//        include 'main/setting_vote.php';
-//        break;
-//    
-//    case 'chngvote':
-//        include 'action/setting_vote.php'; 
-//        break;
-//    
+//     
+    case 'setvote':
+        include 'query/auto_vote.php'; 
+        include 'main/header.php';
+        include 'main/selector.php'; 
+        include 'main/setting_vote.php';
+        break;
+    
+    case 'chngvote':
+        include 'action/setting_vote.php'; 
+        break;
+    
     case 'auth':
         include 'main/header.php';
         include 'query/authentication.php';
         break;
-//    
-//    case 'stat':  
-//        include 'query/statistics.php';
-//        include 'main/header.php';  
-//        include 'main/statistics.php';
-//        break;
+    
+    case 'stat':  
+        include 'query/statistics.php';
+        include 'main/header.php';  
+        include 'main/statistics.php';
+        break;
     
      case "logout":
         include 'action/logout.php'; 

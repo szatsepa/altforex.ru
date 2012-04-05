@@ -3,6 +3,8 @@
 /*
  * created by arcady.1254@gmail.com
  */
+$status_array = array('Воздух','Сталь','Медь','Серебро','Золото','Платина','Бриллиант');
+
 if($_SESSION[auth] == 1){
     
     $square = $actual_game->square;
@@ -12,13 +14,26 @@ if($_SESSION[auth] == 1){
     $triangle = $actual_game->triangle;
     
     $cash = $user->data[cash];
-    
+ ?>
+<div style="position: relative;float: left;width: 100%;height: 32px;z-index: 6;">
+  <?php
+  for($i=0;$i<$games->count;$i++){
+      $dis='';
+      if(($i+1) == $actual_game->level)$dis = 'disabled';
+      ?>
+    <input style="font-size: 14px;font-weight: bold;color: black;" type="button" value="<?php echo $status_array[$i];?>" onclick="javascript:document.location.href = 'http://altforex.ru/index.php?act=main&level=<?php echo ($i+1);?>';" <?php echo $dis;?>/>
+    <?php
+  }
+  ?>
+</div>
+<?php
 
 }else{
     $cash = 0;
 }
 
 ?>
+
 <div class="glagne">
     <div class="title_main">
         <div id="time" style="font-size: 14px;">	

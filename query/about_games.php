@@ -3,40 +3,55 @@
 /*
  * created by arcady.1254@gmail.com 3/4/2012
  */
-//print_r($user);
+//print_r($_SESSION);
+
 if(isset ($attributes[check])){
     if($attributes[check] == "v"){
-        ?>
-<script language="javascript">
-    alert("Вы не можете закрыть раунд.");
-</script>
-        <?php
+         echo "<script language='javascript'>alert('Вы не можете закрыть раунд.');</script>"; 
     }
     if($attributes[check] == "c"){
-      echo "<script language='javascript'>alert('Вам необходимо пополнить счет!');</script>"; 
+        ?>
+<script language='javascript'>
+    alert('\tВы не можете голосовать!\n\r Вам необходимо пополнить счет!');
+</script> 
+<?php
+      
     }
 }
 $games = new Games();
 
 $actual_game = new Game($user->data[id]);
 
-//print_r($attributes);
-//
-//echo "<br/>";
-
 $games->setGames($user->data[level]);
 
-$num_g = $games->data[($games->count)-1][id]; 
+if(isset ($attributes[level])){
+    
+    $num_g = intval($attributes[level]);
+    
+    $_SESSION[level] = $num_g;
+    
+}  else {
+    
+    if(isset ($_SESSION[level])){
+        
+        $num_g = intval($_SESSION[level]);
+        
+    }else{
+       
+        $num_g = $games->data[($games->count)-1][id]; 
+        
+    }
+    
+}
+
 
 $actual_game->setGame($num_g);
 
 if(isset($attributes[whot])){
     
-    $votes = intval($attributes[votes]);
+    $votes = abs(intval($attributes[votes]));    
     
     $move = $actual_game->move((intval($attributes[whot])+1), $votes);
-    
-    echo "MOVE => $move; ...."; 
     
    if($move){
        header ("location:index.php?act=main");
@@ -45,6 +60,5 @@ if(isset($attributes[whot])){
        header ("location:index.php?act=main&check=$er");
    }
 }
-
-//print_r($actual_game); 
+ 
 ?>

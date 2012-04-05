@@ -47,24 +47,30 @@ class Game{
     }
     
     function move($figure, $vote){
-        
-        unset ($_SESSION[str]);
+
+        $close_75 = NULL;
         
         $status_vote = NULL;
         
+        $return = NULL;
+        
         $check = $this->_checkCash($vote);
-        if(!$check){
+        
+        if($check == 0){
             $this->error = "c";
-        }
+            $status_vote = 1;
+        }else{
         
-        $fig_name = $this->_figuresName($figure);
+            $fig_name = $this->_figuresName($figure);
         
-        if((($this->$fig_name)+$vote) >= 100 && $check){
-            $aga = $this->_getVote($figure);
-            if($aga > 0){
-                $status_vote = 1;
-                $this->error = "v";
-             }
+            if((($this->$fig_name)+$vote) >= 100 && $check){
+                $aga = $this->_getVote($figure);
+                 if($aga > 0){
+                     $status_vote = 1;
+                     $this->error = "v";
+                }
+            }
+        
         }
         
        if(!$status_vote){
@@ -94,44 +100,97 @@ class Game{
                 
                 $afr = mysql_affected_rows();
                 
-                $query = "SELECT square, circle, triangle FROM election WHERE id = $this->id";
+                if($afr != 0){
+                    
+                                    
+                    $query = "SELECT square, circle, triangle FROM election WHERE id = $this->id";
                 
-                $result = mysql_query($query) or die($query);
+                    $result = mysql_query($query) or die($query);
                 
-                $row = mysql_fetch_assoc($result);
+                    $row = mysql_fetch_assoc($result);
                 
-                $check_75 = $this->_check75($row);
+                    $check_75 = $this->_check75($row);
                 
-                if($check_75){
-                    $_SESSION[str] .= "....na close = $check_75";
-                    $ret = $this->_close($check_75);  
-                }
+                    if($check_75 == 2){
+                        $close_75 = $this->_close(2);  
+                    }
                 
-                if($row[$name] >= 100 && !$ret){
-                    $ret = $this->_roundClose();
-                }
+                    if($row[$name] >= 100 && !$close_75){
+                        $this->_roundClose($row);
+                    }
                 
-                if($afr > 0 && !$ret){
-                    $ret = 1;
-                }
+                    if($afr > 0 && !$return){
+                         $return = 1;
+                        }
+                    
+                    }
+
               }
   
-        }
+        } 
         
-        return $ret;
+        return $return;
         
     }
-    function _roundClose(){
+    
+    function _checkCash($vote){
+            
+         $query = "SELECT Count(id) FROM my_account WHERE user_id = $this->user AND cash >= $vote";
+    
+         $result = mysql_query($query) or die ($query);
+    
+         $row = mysql_fetch_row($result);
+    
+         $count = $row[0];
+    
+        return $count;
+    }
         
-//        $str = NULL;
+    function _check75($data){
+
+        /*
+         * если в раунде голосуют только за две фигуры (одна из фигур остается нулевой)
+         * а одна из двух набирают более чем 75 голосов 
+         * раунд прекращается 
+         */
+        $out = NULL;
+        $ch75 = NULL;
+        $ch0 = NULL;
+        $chno0 = NULL;
+
+        foreach ($data as $value) {
+            if($value >= 75){$ch75+=1;}
+            if($value == 0){$ch0 +=1;}
+            if($value > 0){$chno0 +=1;}
+        }
         
-        $query = "SELECT square, circle, triangle FROM election WHERE id = $this->id";
+       if($ch0 == 1){
+           if($ch75 == 1 && $chno0 == 2){
+               $out = 2;
+           }
+       }
+ 
+        return $out;
+        
+    }
+    
+        
+    function _close($status){
+        
+        $query = "UPDATE election SET stop_round = 1 WHERE id = $this->id";
         
         $result = mysql_query($query) or die($query);
         
-        $data = mysql_fetch_assoc($result);
-
-//        $with_its = array();
+        $num_aff = mysql_affected_rows();
+        
+        $out =$this->_game_results($status);
+        
+        return $out;
+    }
+    
+    function _roundClose($data){
+        
+        $_SESSION[r_close] = " _roundClose";
         
         $null = NULL;
         
@@ -141,11 +200,11 @@ class Game{
          * три фигуры и одна дошла до финиша
          * 
          */
-        foreach ($data as $key => $value) {
+        foreach ($data as $value) {
             if($value > 0)$status += 1;
         }
         if($status != 3){
-            foreach ($data as $key => $value) {
+            foreach ($data as $value) {
                 if($value == 0)$null+=1;
                 
             }
@@ -154,8 +213,9 @@ class Game{
             $status = 1;
         }
         
-$_SESSION[str] .= " ....STATUS (_roundClose) = $status"; 
         $closed = $this->_close ($status);
+        
+        return $closed;
  
     /*
      *
@@ -163,33 +223,9 @@ $_SESSION[str] .= " ....STATUS (_roundClose) = $status";
      *
      * если в раунде голосовали только за одну фигуру
      *  она остается в статусе при своих(with its)
-     */
-    return $closed;
-        
+     */        
     }
-    
-    function _check75($data){
-        /*
-         * если в раунде голосуют только за две фигуры (одна из фигур остается нулевой)
-         * а одна из двух набирают более чем 75 голосов 
-         * раунд прекращается 
-         */
-        $out = NULL;
-        
-        foreach ($data as $key => $value) {
-            if($value >= 75)$ch75+=1;
-            if($value == 0)$ch0 +=1;            
-        }
-        
-        if($ch0 == 1 && $ch75 >= 1){
-            $out = 1;
-            }
-            
-  $_SESSION[str] .= "....STATUS (_check75) = $ch0 + $ch75 = $out"; 
-  
-        return $out;
-        
-    }
+
 
     function _figuresName($figure){
         
@@ -202,26 +238,6 @@ $_SESSION[str] .= " ....STATUS (_roundClose) = $status";
         return $name;
 
     }
-    function _checkCash($vote){
-     
-        $check = NULL;
-            
-         $query = "SELECT cash FROM my_account WHERE user_id = $this->user";
-    
-         $result = mysql_query($query) or die ($query);
-    
-         $row = mysql_fetch_row($result);
-    
-         $cash = $row[0];
-    
-        if($cash >= $vote){
-        
-            $check = 1;
-            
-         }
-         
-         return $check;
-    }
     
     function _getVote($figure){
         
@@ -232,26 +248,6 @@ $_SESSION[str] .= " ....STATUS (_roundClose) = $status";
         $row = mysql_fetch_row($result);
         
         return $row[0];
-    }
-    
-    function _close($status){
-        $_SESSION[str] .= "....STATUS (_close)stat  = $status....."; 
-        
-        $duery = "UPDATE election SET stop_round = 1 WHERE id = $this->id";
-        
-        $_SESSION[str] .= $query;
-        
-        $result = mysql_query($query) or die($query);
-        
-        $num_aff = mysql_affected_rows();
-        
-        $_SESSION[str] .= "....STATUS (_close)NA  = $num_aff"; 
-        
-        $out =$this->_game_results($status);
-        
-         $_SESSION[str] .= "....STATUS (_close)  = $out"; 
-        
-        return $out;
     }
     
     function _game_results($with_its){
@@ -267,8 +263,6 @@ $_SESSION[str] .= " ....STATUS (_roundClose) = $status";
     * выбираем список игроков - участников
     * 
     */
-         $_SESSION[str] .= "....STATUS (__game_results)  = $with_its";
-        
         $out = NULL;
         
         $query = "SELECT user_id FROM `rate` WHERE election_id = $this->id GROUP BY user_id";
