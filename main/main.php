@@ -15,16 +15,34 @@ if($_SESSION[auth] == 1){
     
     $cash = $user->data[cash];
  ?>
-<div style="position: relative;float: left;width: 100%;height: 32px;z-index: 6;">
+<div class="element">
   <?php
   for($i=0;$i<$games->count;$i++){
       $dis='';
-      if(($i+1) == $actual_game->level)$dis = 'disabled';
+      if(($i+1) == $actual_game->level){
+          $dis = 'disabled';
+          $str_style = "style='color: green;'";
+      }else{
+          $str_style = "style='color: black;'";
+      }
       ?>
-    <input style="font-size: 14px;font-weight: bold;color: black;" type="button" value="<?php echo $status_array[$i];?>" onclick="javascript:document.location.href = 'http://altforex.ru/index.php?act=main&level=<?php echo ($i+1);?>';" <?php echo $dis;?>/>
+    <input class="element" <?php echo $str_style;?> type="button" value="<?php echo $status_array[$i];?>" onclick="javascript:document.location.href = 'http://altforex.ru/index.php?act=main&level=<?php echo ($i+1);?>';" <?php echo $dis;?>/>
     <?php
   }
+
+  if(isset ($_SESSION[auto]) && $_SESSION[auto]==1){
+      $str_value = "AUTO OFF";
+      $str_color = "color: red;";
+      $str_out = "index.php?act=main&auto=0";
+  }else{
+      $str_value = "AUTO ON";
+      $str_color = "color: black;";
+      $str_out = "index.php?act=main&auto=1";
+  }
   ?>
+    <div class="auto_on">
+        <input class="element" style="<?php echo $str_color;?>" type="button" value="<?php echo $str_value;?>" onclick="javascript:document.location.href = '<?php echo $str_out;?>';"/>
+    </div>
 </div>
 <?php
 

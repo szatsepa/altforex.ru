@@ -59,10 +59,10 @@ if(isset ($_SESSION[id])) {
 switch ($attributes[act]) {
     case 'main':
         $title = "MAIN";
+        include 'main/header.php';
         if(isset ($_SESSION[auth]) && $_SESSION[auth] == 1){
             include 'query/about_games.php'; 
         }
-        include 'main/header.php';
         include 'main/selector.php';
         include 'main/main.php';
         break;
@@ -91,25 +91,25 @@ switch ($attributes[act]) {
         include 'main/selector.php';
         include 'main/about_me.php';
         break;
-//    
-//    case 'vote':
-//        include 'main/header.php';  
-//        include 'action/vote.php';
-//        break;
-//    
-//    case 'avote':
-//        print_r($attributes);
-//        include 'action/vote_automatic.php';
-//        break;
-//    
-//    case 'onauto':
-//        include 'action/onauto.php';
-//        break;
-//    
-//    case 'addrow':
-//        include 'action/addrow_auto.php';
-//        break;
-//     
+    
+    case 'vote':
+        include 'main/header.php';  
+        include 'action/vote.php';
+        break;
+    
+    case 'avote':
+        print_r($attributes);
+        include 'action/vote_automatic.php';
+        break;
+    
+    case 'onauto':
+        include 'action/onauto.php';
+        break;
+    
+    case 'addrow':
+        include 'action/addrow_auto.php';
+        break;
+     
     case 'setvote':
         include 'query/auto_vote.php'; 
         include 'main/header.php';

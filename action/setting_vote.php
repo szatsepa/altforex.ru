@@ -16,6 +16,8 @@ $figure = intval($attributes[figure]);
 
 $auto = $attributes[activ];
 
+$level = intval($attributes[level]);
+
 //echo "AUTO $auto<br/>";
 
 if(!$auto){
@@ -24,11 +26,9 @@ if(!$auto){
     $auto = 1;
 }
 
-$query = "UPDATE user_task SET round = $round, count = $count, figure_id = $figure, auto = $auto WHERE id = $id";
+$query = "UPDATE user_task SET round = $round, count = $count, figure_id = $figure, auto = $auto, level = $level WHERE id = $id";
 
 $result = mysql_query($query) or die($query);
-
-//echo "$query";
 
 header("location:index.php?act=setvote");
 ?>

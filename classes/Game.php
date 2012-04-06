@@ -19,13 +19,25 @@ class Game{
     var $triangle;
     var $user;
     var $error;
+    var $level_name;
     
     function Game($user){
         $this->user = $user;
     }
     function setGame($id){
         
-        $query = "SELECT * FROM election WHERE id = $id";
+        $query = "SELECT e.date_event,
+        e.date_change AS 'update', 
+        e.square, 
+        e.circle, 
+        e.triangle, 
+        e.level, 
+        l.name AS level_name 
+        FROM election AS e, 
+        elements AS l 
+        WHERE e.stop_round <> 1 
+        AND e.level = l.id 
+        AND e.id = $id";
         
         $this->id = $id;
         
@@ -44,6 +56,8 @@ class Game{
         $this->circle = $tmp[circle];
         
         $this->triangle = $tmp[triangle];
+        
+        $this->level_name = $tmp[level_name];
     }
     
     function move($figure, $vote){
@@ -387,7 +401,7 @@ class Game{
     
         return $num_aff;
     }
-    function _autoVote(){
+    function _autoVote($task){
     /*
      *       игрок может выбрать режим «автоматической игры»: 
      *  - в этом режиме он назначает цепочку-очередность  фигур
@@ -395,6 +409,32 @@ class Game{
      *  в результате вероятных выигрышей  при поступлении в кошелек необходимой суммы
      *  голосования продолжаются за заранее выбранные фигуры но на более дорогом поле.
      */
+        if($_SESSION[num_task] == $task[count_task]){
+            
+                $str_out = "index.php?act=main&auto=0";
+            
+            }else{
+                $str_out = "index.php?act=main&whot=$figure&votes=$task[count]";
+            }
+            
+        $task[num] = $_SESSION[num_task]+1;
+        
+        $_SESSION[num_task]++;
+        
+        $figure = ($task[figure_id]-1);
+        
+        
+        
+    return $str_out; 
+    }
+    function setLevel($task){
+        
+        $level= ($task[level]);
+        
+        $str_out = "index.php?act=main&level=$level&av=1";
+        
+        return $str_out;
+        
     }
 }
 

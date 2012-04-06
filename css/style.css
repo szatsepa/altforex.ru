@@ -402,3 +402,20 @@ div.insert{
     z-index: 13;
     background-color: aquamarine;
 }
+div.element{
+    position: relative;
+    float: left;
+    width: 100%;
+    height: 32px;
+    z-index: 6;
+}
+input.element{
+    font-size: 14px;
+    font-weight: bold;
+    color: black;
+}
+div.auto_on{
+    position: relative;
+    float: right;
+    right: 64px;
+}

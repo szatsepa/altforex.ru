@@ -8,11 +8,11 @@ class User{
     
     var $data;
     var $id;
-    var $task;
+    var $tasks;
     
     function User(){
         $this->data = array();
-        $this->task = new Tasks();
+        $this->tasks = new Tasks();
     }
     
     function setUser($id){  
@@ -26,7 +26,8 @@ class User{
                          a.cash, 
                          a.level,  
                          (SELECT Count(u.id) FROM users AS u, user_task AS t WHERE u.id = t.user_id AND u.id = $id) AS task,
-                         (SELECT Count(u.id) FROM users AS u, user_task AS t WHERE u.id = t.user_id AND u.id = $id AND t.auto = 1) AS auto 
+                         (SELECT Count(u.id) FROM users AS u, user_task AS t WHERE u.id = t.user_id AND u.id = $id AND t.auto = 1) AS auto, 
+                         a.auto_on
                  FROM users AS u   
                  LEFT JOIN my_account AS a 
                  ON u.id = a.user_id 
@@ -41,7 +42,7 @@ class User{
         $this->data = $row; 
         
         if($this->data[task] > 0){
-            $this->task->setTasks($this->id);
+            $this->tasks->setTasks($this->id);
         }
         
         unset($row); 
@@ -70,6 +71,31 @@ class User{
         }
 
         return $cod;
+    }
+    function setAuto(){
+        
+        $query = "SELECT auto_on FROM my_account WHERE user_id = $this->id";
+        
+        $result = mysql_query($query) or die($query);
+        
+        $row = mysql_fetch_row($result);
+        
+        $on_off = $row[0];
+        
+        if($on_off == 0){
+                $on_off = 1;
+            }  else {
+                $on_off = 0;
+            }
+         $query = "UPDATE my_account SET auto_on = $on_off WHERE user_id = $this->id";
+         
+         $result = mysql_query($query) or die($query);
+         
+         return 1;
+    }
+    function getTask($id){
+        
+        return ($this->tasks->data[$id]);
     }
  
 }

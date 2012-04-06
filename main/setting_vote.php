@@ -3,9 +3,10 @@
 /*
  * created by arcady.1254@gmail.com 29/3/2012
  */
-//print_r($auto_array);
+print_r($user->data[level]);
 
 $coll_array = array('Раунд','Квадрат','Круг','Треугольник','Активировать');
+$level_array = array('1'=>'Воздух','2'=>'Сталь','3'=>'Медь','4'=>'Серебро','5'=>'Золото','6'=>'Платина','7'=>'Бриллиант')
      
 ?>
 <div class="envelope_base">
@@ -17,7 +18,7 @@ $coll_array = array('Раунд','Квадрат','Круг','Треугольн
         <?php
         $n = 0;
         foreach ($coll_array as $value) {
-            if($n==0)echo "<td colspan='2'>$value</td>";
+            if($n==0)echo "<td colspan='3'>$value</td>";
             if($n!=0)echo "<td>$value</td>";
             $n++;
         }
@@ -46,6 +47,22 @@ $coll_array = array('Раунд','Квадрат','Круг','Треугольн
                         <input name='count' value='<?php echo $value[count];?>' size='3' onblur="javascript:document.forms['set_vote_<?php echo $n;?>'].submit();"/> 
                     </td>
                     <td>
+                        <select name="level" onchange="javascript:document.forms['set_vote_<?php echo $n;?>'].submit();">
+                            <?php
+                                    for ($i = 1;$i<=($user->data[level]);$i++){
+                            
+                                             if($i == ($user->tasks->data[$n][level])){
+                                                     echo "<option value='$i' selected >$level_array[$i]</option>";
+                                                }else{
+                                                      echo "<option value='$i'>$level_array[$i]</option>";
+                                                }
+                                   }
+                            ?>
+                           
+                        </select>
+                        
+                    </td>
+                    <td>
                         <input type='radio' name='figure' value='1' <?php echo $sq;?>  onchange='javascript:document.forms["set_vote_<?php echo $n;?>"].submit();'/>
                     </td>
                     <td>
@@ -72,6 +89,19 @@ $coll_array = array('Раунд','Квадрат','Круг','Треугольн
                     </td>
                     <td>
                         <input name='count' size='3' onblur="javascript:document.forms['set_vote_<?php echo $n;?>'].submit();"/>
+                    </td>
+                                        <td>
+                        <select name="level" onchange="javascript:document.forms['set_vote_<?php echo $n;?>'].submit();">
+                            <?php
+                                   for ($i = 1;$i<=($user->data[level]);$i++){
+                            
+                                         echo "<option value='$i'>$level_array[$i]</option>";
+                                                
+                                   }
+                            ?>
+                           
+                        </select>
+                        
                     </td>
                     <td>
                         <input type='radio' name='figure' value='1' <?php echo $sq;?>  onchange='javascript:document.forms["set_vote_<?php echo $n;?>"].submit();'/>

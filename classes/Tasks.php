@@ -25,7 +25,8 @@ class Tasks {
                  t.round, 
                  t.count, 
                  t.figure_id, 
-                 f.name
+                 f.name,
+                 t.level
             FROM user_task AS t 
             LEFT JOIN figures AS f 
             ON  t.figure_id = f.id

@@ -8,7 +8,7 @@ $us = 0;
 if(isset($user)){
     $us = 1;
     $checked = '';
-    if($user->data[task] >= 1){
+    if($user->data[auto_on] == 1){
         $checked = "checked";
     }
 }

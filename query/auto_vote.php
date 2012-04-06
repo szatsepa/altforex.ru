@@ -23,7 +23,8 @@ $result = mysql_query($query) or die($query);
 $num_rows = mysql_num_rows($result);
 
 if($num_rows == 0){
-    header ("location:index.php?act=regu");
+    mysql_query("INSERT INTO user_task (user_id) VALUES ($user_id)");
+    header("location:index.php?act=setvote");
 }else{
 
 $auto_array = array();
