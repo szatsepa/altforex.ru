@@ -199,6 +199,8 @@ class Game{
         
         $out =$this->_game_results($status);
         
+        unset ($_SESSION[gid]);
+        
         return $out;
     }
     
@@ -426,15 +428,6 @@ class Game{
         
         
     return $str_out; 
-    }
-    function setLevel($task){
-        
-        $level= ($task[level]);
-        
-        $str_out = "index.php?act=main&level=$level&av=1";
-        
-        return $str_out;
-        
     }
 }
 

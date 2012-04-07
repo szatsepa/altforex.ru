@@ -139,3 +139,23 @@ function _chngAuto(ID){
 function _onauto(ID){
     document.location = "index.php?act=onauto";
 }
+function _autoMove(figure,votes){
+    
+    document.write("<form action='index.php?act=main' method='post'><input type='hidden' name='whot' value='"+figure+"'/><input type='hidden' name='votes' value='"+votes+"'</form>");
+    document.forms[0].submit();
+}
+    
+function _insertVote(ID, fig){
+
+        var obj = document.getElementById(ID); 
+
+        document.getElementById('fig').value = fig;
+
+        obj.style.display = "block";            
+
+        var vt = document.getElementById('vt');
+
+        vt.focus();
+
+        vt.select();
+}

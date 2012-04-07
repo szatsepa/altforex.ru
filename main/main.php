@@ -26,7 +26,7 @@ if($_SESSION[auth] == 1){
           $str_style = "style='color: black;'";
       }
       ?>
-    <input class="element" <?php echo $str_style;?> type="button" value="<?php echo $status_array[$i];?>" onclick="javascript:document.location.href = 'http://altforex.ru/index.php?act=main&level=<?php echo ($i+1);?>';" <?php echo $dis;?>/>
+    <input class="element" <?php echo $str_style;?> type="button" value="<?php echo $status_array[$i];?>" onclick="javascript:document.location.href = 'http://altforex.ru/index.php?act=main&gid=<?php echo $games->data[$i][id];?>';" <?php echo $dis;?>/>
     <?php
   }
 
@@ -94,27 +94,24 @@ if($_SESSION[auth] == 1){
     </form>
     
 </div>
-<?php if(isset ($_SESSION[auth]) && $_SESSION[auth] == 1){ ?>
+<?php if(isset ($_SESSION[auth]) && $_SESSION[auth] == 1 && !isset ($_SESSION[auto])){ ?>
 <script language="javascript">
    
-    var min = 1;
-    var sec = 30;
+    var min = 1;    
+    var sec = 30;  
     var timerid;
     timerid = setInterval(timer,1000); /* запускаем таймер */
-    
-   function _insertVote(ID, fig){
-       
-            var obj = document.getElementById(ID); 
-       
-            document.getElementById('fig').value = fig;
 
-            obj.style.display = "block";            
-      
-            var vt = document.getElementById('vt');
-            
-            vt.focus();
-            
-            vt.select();
-   }
 </script>
+<?php }else if(isset ($_SESSION[auto]) && $_SESSION[auto] == 1){ ?>
+<script language="javascript">
+   
+     var min = 1;    
+    var sec = 30;  
+    var timerid;
+    var auto;
+    auto = setInterval(function(){document.location.href="index.php?act=main&whot=<?php echo $_SESSION[auto_task][figure_id]; ?>&votes=<?php echo $_SESSION[auto_task][count];?>&at=1"},30000); 
+    timerid = setInterval(timer,1000); 
+    /* запускаем таймер */
+</script>    
 <?php } ?>

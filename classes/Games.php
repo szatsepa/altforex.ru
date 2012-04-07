@@ -25,19 +25,17 @@ class Games{
         $this->level = $level;
         
         $query = "SELECT e.id, 
-        e.date_change AS 'update', 
         e.square, 
         e.circle, 
         e.triangle, 
         e.level, 
-        l.name AS level_name,
-        l.id
+        l.name AS level_name
         FROM election AS e, 
         elements AS l 
         WHERE e.stop_round <> 1 
         AND e.level = l.id 
         AND l.id <= $this->level
-                ORDER BY l.id";
+                ORDER BY e.level";
         
         $result = mysql_query($query) or die($query);
         
@@ -94,6 +92,13 @@ class Games{
             array_push($this->data, $var);
         }
         $this->count = count($this->data);
+    }
+    function getActualG($level){
+        $out=NULL;
+        foreach ($this->data as $value) {
+            if($value[level] == $level)$out = $value;
+        }
+        return $out;
     }
 }
 

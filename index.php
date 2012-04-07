@@ -19,14 +19,12 @@ include 'classes/Tasks.php';
 }
 if(!isset($_SESSION)){
 
-    session_start();  
+    session_start();    
 }
 
 //print_r($_SESSION);
 //echo "-5<br/>";
 //print_r($attributes);
-
-echo $_SESSION[str]."<br/>";
 
 if($_SESSION[auth] != 1)$_SESSION[auth] = 0;
 
@@ -60,8 +58,8 @@ switch ($attributes[act]) {
     case 'main':
         $title = "MAIN";
         include 'main/header.php';
-        if(isset ($_SESSION[auth]) && $_SESSION[auth] == 1){
-            include 'query/about_games.php'; 
+        if(isset ($_SESSION[auth]) && $_SESSION[auth] == 1){ 
+            include 'controller/setting_main.php'; 
         }
         include 'main/selector.php';
         include 'main/main.php';
