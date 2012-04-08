@@ -101,7 +101,14 @@ class User{
         
         $query = "UPDATE `user_task` SET `auto` = '1' WHERE user_id = $this->id";
         
-        mysql_query($query) or die ($query);
+        $result = mysql_query($query) or die ($query);
+        
+        if(!$result){
+            return NULL;
+        }  else {
+            return 1;
+        }
+        
     }
 }
 ?>

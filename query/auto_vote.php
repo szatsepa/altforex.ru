@@ -11,7 +11,8 @@ $query = "SELECT t.id,
                  t.count, 
                  t.figure_id, 
                  f.name,
-                 t.auto
+                 t.auto,
+                 t.level
             FROM user_task AS t 
             LEFT JOIN figures AS f 
             ON  t.figure_id = f.id
@@ -34,6 +35,10 @@ while ($var = mysql_fetch_assoc($result)){
 }
 
 mysql_free_result($result);
+
+$user->tasks->setVote($auto_array);
+
+unset ($auto_array);
 
 }
 ?>

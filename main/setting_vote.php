@@ -3,8 +3,11 @@
 /*
  * created by arcady.1254@gmail.com 29/3/2012
  */
-print_r($user->data[level]);
-
+if(isset ($attributes[activate])){
+    if($user->reactivTasks()){
+        header("location:index.php?act=setvote");
+    }
+}
 $coll_array = array('Раунд','Квадрат','Круг','Треугольник','Активировать');
 $level_array = array('1'=>'Воздух','2'=>'Сталь','3'=>'Медь','4'=>'Серебро','5'=>'Золото','6'=>'Платина','7'=>'Бриллиант')
      
@@ -28,7 +31,7 @@ $level_array = array('1'=>'Воздух','2'=>'Сталь','3'=>'Медь','4'=>
             <tbody style="font-size: 12px;font-weight: normal;">
                 <?php
                 $n = 0;
-    foreach ($auto_array as $value) {
+    foreach ($user->tasks->data as $value) {
         $sc = $cr = $tr = $check = NULL;
         if($value[figure_id] == 1)$sq = 'checked';
         if($value[figure_id] == 2)$cr = 'checked';
@@ -41,7 +44,7 @@ $level_array = array('1'=>'Воздух','2'=>'Сталь','3'=>'Медь','4'=>
                 <tr align='center'>
                     <td>
                         <input type='hidden' name='row' value='<?php echo $value[id];?>'/>
-                        <input name='round' value='<?php echo $value[round];?>' size='2'/>
+                        <input name='round' value='<?php echo ($n+1);?>' size='2'/> 
                     </td>
                     <td>
                         <input name='count' value='<?php echo $value[count];?>' size='3'/> 
@@ -86,7 +89,7 @@ $level_array = array('1'=>'Воздух','2'=>'Сталь','3'=>'Медь','4'=>
                 <tr align='center'>
                     <td>
                         <input type='hidden' name='row' value='<?php echo $value[id];?>'/>
-                        <input name='round' value='1' size='2'/>
+                        <input name='round' value='<?php echo ($n+1);?>' size='2'/>
                     </td>
                     <td>
                         <input name='count' size='3'/>
@@ -127,6 +130,7 @@ $level_array = array('1'=>'Воздух','2'=>'Сталь','3'=>'Медь','4'=>
                 <tr align="right">
                     <td colspan="7">
                         <input type="button" value="Добавить строку" onclick="javascript:document.location.href='http://altforex.ru/index.php?act=addrow';" <?php echo $add_row;?>/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="button" value="Активировать все" onclick="javascript:document.location.href='http://altforex.ru/index.php?act=setvote&activate=1';"/>
                     </td>
                 </tr>
             </tbody>

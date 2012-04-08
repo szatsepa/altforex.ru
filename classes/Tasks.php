@@ -44,6 +44,10 @@ class Tasks {
         
         $this->count = count($this->data);
     }
+    function setVote($data){
+        $this->data = $data;
+        $this->count = count($data);
+    }
     
 }
 
