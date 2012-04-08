@@ -41,13 +41,13 @@ $level_array = array('1'=>'Воздух','2'=>'Сталь','3'=>'Медь','4'=>
                 <tr align='center'>
                     <td>
                         <input type='hidden' name='row' value='<?php echo $value[id];?>'/>
-                        <input name='round' value='<?php echo $value[round];?>' size='2' onblur="javascript:document.forms['set_vote_<?php echo $n;?>'].submit();"/>
+                        <input name='round' value='<?php echo $value[round];?>' size='2'/>
                     </td>
                     <td>
-                        <input name='count' value='<?php echo $value[count];?>' size='3' onblur="javascript:document.forms['set_vote_<?php echo $n;?>'].submit();"/> 
+                        <input name='count' value='<?php echo $value[count];?>' size='3'/> 
                     </td>
                     <td>
-                        <select name="level" onchange="javascript:document.forms['set_vote_<?php echo $n;?>'].submit();">
+                        <select name="level">
                             <?php
                                     for ($i = 1;$i<=($user->data[level]);$i++){
                             
@@ -63,16 +63,17 @@ $level_array = array('1'=>'Воздух','2'=>'Сталь','3'=>'Медь','4'=>
                         
                     </td>
                     <td>
-                        <input type='radio' name='figure' value='1' <?php echo $sq;?>  onchange='javascript:document.forms["set_vote_<?php echo $n;?>"].submit();'/>
+                        <input type='radio' name='figure' value='1' <?php echo $sq;?>/>
                     </td>
                     <td>
-                        <input type='radio' name='figure' value='2' <?php echo $cr;?>  onchange='javascript:document.forms["set_vote_<?php echo $n;?>"].submit();'/>
+                        <input type='radio' name='figure' value='2' <?php echo $cr;?>/>
                     </td>
                     <td>
-                        <input type='radio' name='figure' value='3' <?php echo $tr;?>  onchange='javascript:document.forms["set_vote_<?php echo $n;?>"].submit();'/>
+                        <input type='radio' name='figure' value='3' <?php echo $tr;?>/>
                     </td>
                     <td>
-                        <input type='checkbox' name='activ' onchange='javascript:document.forms["set_vote_<?php echo $n;?>"].submit();' <?php echo $check;?>/>
+                        <input type='checkbox' name='activ' <?php echo $check;?>/>
+                        <input type="button" value=">" onclick='javascript:document.forms["set_vote_<?php echo $n;?>"].submit();' />
                     </td>
                 </tr>
             </form> 
@@ -85,13 +86,13 @@ $level_array = array('1'=>'Воздух','2'=>'Сталь','3'=>'Медь','4'=>
                 <tr align='center'>
                     <td>
                         <input type='hidden' name='row' value='<?php echo $value[id];?>'/>
-                        <input name='round' value='1' size='2' onblur="javascript:document.forms['set_vote_<?php echo $n;?>'].submit();"/>
+                        <input name='round' value='1' size='2'/>
                     </td>
                     <td>
-                        <input name='count' size='3' onblur="javascript:document.forms['set_vote_<?php echo $n;?>'].submit();"/>
+                        <input name='count' size='3'/>
                     </td>
                                         <td>
-                        <select name="level" onchange="javascript:document.forms['set_vote_<?php echo $n;?>'].submit();">
+                        <select name="level">
                             <?php
                                    for ($i = 1;$i<=($user->data[level]);$i++){
                             
@@ -104,16 +105,17 @@ $level_array = array('1'=>'Воздух','2'=>'Сталь','3'=>'Медь','4'=>
                         
                     </td>
                     <td>
-                        <input type='radio' name='figure' value='1' <?php echo $sq;?>  onchange='javascript:document.forms["set_vote_<?php echo $n;?>"].submit();'/>
+                        <input type='radio' name='figure' value='1'/>
                     </td>
                     <td>
-                        <input type='radio' name='figure' value='2' <?php echo $cr;?>  onchange='javascript:document.forms["set_vote_<?php echo $n;?>"].submit();'/>
+                        <input type='radio' name='figure' value='2'/>
                     </td>
                     <td>
-                        <input type='radio' name='figure' value='3' <?php echo $tr;?>  onchange='javascript:document.forms["set_vote_<?php echo $n;?>"].submit();'/>
+                        <input type='radio' name='figure' value='3'/>
                     </td>
                     <td>
-                        <input type='checkbox' name='activ' onchange='javascript:document.forms["set_vote_<?php echo $n;?>"].submit();' <?php echo $check;?>/>
+                        <input type='checkbox' name='activ' <?php echo $check;?>/>
+                        <input type="button" value=">" onclick='javascript:document.forms["set_vote_<?php echo $n;?>"].submit();' />
                     </td>
                 </tr>
             </form>

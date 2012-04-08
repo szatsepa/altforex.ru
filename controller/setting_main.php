@@ -3,16 +3,22 @@
 /*
  * created by arcady.1254@gmail.com 7/4/2012 
  */
-//print_r($_SESSION);
-//echo "<br/>";
-$games = new Games();
+
+if(!isset ($_SESSION[num_task])){
+    
+    $count = $user->tasks->count;
+    
+    $_SESSION[num_task] = ($count-1);
+    
+    if($count == 0){
+            
+        header ("location:index.php?act=main&auto=0");       
+            
+    }
+}
+
 
 $actual_game = new Game($user->data[id]);
-
-$games->setGames($user->data[level]);
-
-//print_r($games->data);
-//echo "<br/>";
 
 if(isset ($attributes[gid])){
     
@@ -29,15 +35,18 @@ if(isset ($attributes[gid])){
     
 }
 
-$actual_game->setGame($num_g);
+if(!$actual_game->setGame($num_g)){
+    header("location:index.php?act=logaut");
+}
 
 if(isset ($attributes[auto]) && $attributes[auto] == 1){
     
     $_SESSION[auto] = 1;
 }
 if(isset ($attributes[auto]) && $attributes[auto] == 0){
-    
+    unset ($_SESSION[num_task]);
     unset ($_SESSION[auto]);
+//    $user->reactivTasks();
 }
 
 
@@ -47,53 +56,93 @@ if(isset ($attributes[whot]) && isset ($attributes[votes]) && !isset ($_SESSION[
     
     $votes = abs(intval($attributes[votes]));
     
-    move_G($whot, $votes, $actual_game);
+    $move = move_G($whot, $votes, $actual_game);
 }
-if(isset ($attributes[whot]) && isset ($attributes[votes]) && isset ($attributes[at])){
+
+if(isset ($_SESSION[auto])){
     
     $auto = ($_SESSION[auto])*($user->data[auto_on]);
+    
+    $whot = $user->tasks->data[$_SESSION[num_task]][figure_id];
 
-    if(!isset ($_SESSION[num_task])){
-        $_SESSION[num_task] = 0;
+    $votes = $user->tasks->data[$_SESSION[num_task]][count];
+
+    $task_id = $user->tasks->data[$_SESSION[num_task]][id];
+
+    if($auto == 0){
+        
+         header ("location:index.php?act=main&auto=0");
+    }
+    if($auto == 1){
+
+        $level = $user->tasks->data[$_SESSION[num_task]];
+
+        $tmp = $games->getActualG($level[level]);
+
+        $_SESSION[gid] = $tmp[id];
+        
+        if(!$tmp[id]){
+            
+            header ("location:index.php?act=main&auto=0");
+            
+        }  else {
+
+            if(!$actual_game->setGame($tmp[id])){
+                    header("location:index.php?act=logaut");
+                }
+        }
+        
+        if(isset ($attributes[at])){
+            $_SESSION[move]=1;
+        }
+        if(isset ($attributes[move])){
+            
+            unset ($_SESSION[num_task]);
+            
+            $move = move_A($whot, $votes, $actual_game, $task_id);
+             
+        }
+
     }
     
-echo "...$_SESSION[num_task]..........$auto...........<br/>";
-
-    if($auto == 1){
-        
-       $_SESSION[auto_task] = $user->tasks->data[$_SESSION[num_task]];
-        
-        print_r($_SESSION[auto_task]); 
-
-//        $_SESSION[auto_task][count_task]=$user->tasks->count;
-//
-//        $_SESSION[did] = $_SESSION[auto_task][id];
-//
-//        $actual_game->setGame(intval($_SESSION[did]));
-//
-//        $whot = intval($attributes[whot])+1;
-//    
-//        $votes = abs(intval($attributes[votes]));
-//    
-////        move_G($whot, $votes, $actual_game);
-
-        $_SESSION[num_task]++;
-
-    }
 }
-
-//print_r($actual_game);
 
 function move_G($whot, $votes, $actual_game){
         
-    
     $move = $actual_game->move($whot, $votes);
     
    if($move){       
-       header ("location:index.php?act=main");
+      $out = header ("location:index.php?act=main");
    }else{
        $er = $actual_game->error;
-       header ("location:index.php?act=main&check=$er");
+       $out = header ("location:index.php?act=main&check=$er");
    }
+   return $out;
+}
+function move_A($whot, $votes, $actual_game, $task_id){
+       
+    $out = NULL;
+    
+    if(!$votes){
+        
+         $out = header ("location:index.php?act=main&auto=0&round=0");
+         
+    }  else {
+            
+        $move = $actual_game->_autoMove($whot, $votes, $task_id);
+
+           if($move){ 
+               
+                $out = header ("location:index.php?act=main&auto=1");
+          
+           }else{
+
+               $out = header ("location:index.php?act=main&auto=0");
+           }
+    }
+
+
+   return $out;
+    
 }
 ?>

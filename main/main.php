@@ -103,15 +103,29 @@ if($_SESSION[auth] == 1){
     timerid = setInterval(timer,1000); /* запускаем таймер */
 
 </script>
-<?php }else if(isset ($_SESSION[auto]) && $_SESSION[auto] == 1){ ?>
+<?php }else if(isset ($_SESSION[auto]) && $_SESSION[auto] == 1 && isset ($_SESSION[move])){ 
+     unset ($_SESSION[move]);
+    ?>
 <script language="javascript">
    
      var min = 1;    
     var sec = 30;  
     var timerid;
     var auto;
-    auto = setInterval(function(){document.location.href="index.php?act=main&whot=<?php echo $_SESSION[auto_task][figure_id]; ?>&votes=<?php echo $_SESSION[auto_task][count];?>&at=1"},30000); 
+    auto = setInterval(function(){document.location.href="index.php?act=main&move=1"},3000); 
     timerid = setInterval(timer,1000); 
     /* запускаем таймер */
 </script>    
+<?php }else if(isset ($_SESSION[auto]) && $_SESSION[auto] == 1 && !isset ($_SESSION[move])){ ?>
+<script language="javascript">
+   
+     var min = 1;    
+    var sec = 30;  
+    var timerid;
+    var auto;
+    auto = setInterval(function(){document.location.href="index.php?act=main&at=1"},2000); 
+    timerid = setInterval(timer,1000); 
+    /* запускаем таймер */
+</script> 
+
 <?php } ?>

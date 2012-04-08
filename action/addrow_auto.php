@@ -6,7 +6,7 @@
 
 $user_id = $user->data[id];
 
-$query = "INSERT INTO user_task (user_id,auto) VALUES ($user_id, 0)";
+$query = "INSERT INTO user_task (user_id,auto,level) VALUES ($user_id, 0, 1)";
 
 mysql_query($query);
 

@@ -23,7 +23,7 @@ if(!isset($_SESSION)){
 }
 
 //print_r($_SESSION);
-//echo "-5<br/>";
+//echo "<br/>";
 //print_r($attributes);
 
 if($_SESSION[auth] != 1)$_SESSION[auth] = 0;

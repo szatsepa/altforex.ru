@@ -41,23 +41,30 @@ class Game{
         
         $this->id = $id;
         
-        $result = mysql_query($query) or die ($query);
+        $result = mysql_query($query);
         
-        $tmp = mysql_fetch_assoc($result);
+        if(!$result){
+            return NULL;
+        }  else {
+            
+            $tmp = mysql_fetch_assoc($result);
         
-        $this->level = $tmp[level];
-        
-        $this->date_event = $tmp[date_event];
-        
-        $this->update = $tmp[date_change];
-        
-        $this->square = $tmp[square];
-        
-        $this->circle = $tmp[circle];
-        
-        $this->triangle = $tmp[triangle];
-        
-        $this->level_name = $tmp[level_name];
+            $this->level = $tmp[level];
+
+            $this->date_event = $tmp[date_event];
+
+            $this->update = $tmp[date_change];
+
+            $this->square = $tmp[square];
+
+            $this->circle = $tmp[circle];
+
+            $this->triangle = $tmp[triangle];
+
+            $this->level_name = $tmp[level_name];
+            
+            return 1;
+        }
     }
     
     function move($figure, $vote){
@@ -403,7 +410,7 @@ class Game{
     
         return $num_aff;
     }
-    function _autoVote($task){
+    function _autoMove($figure, $vote,$task){
     /*
      *       игрок может выбрать режим «автоматической игры»: 
      *  - в этом режиме он назначает цепочку-очередность  фигур
@@ -411,23 +418,84 @@ class Game{
      *  в результате вероятных выигрышей  при поступлении в кошелек необходимой суммы
      *  голосования продолжаются за заранее выбранные фигуры но на более дорогом поле.
      */
-        if($_SESSION[num_task] == $task[count_task]){
-            
-                $str_out = "index.php?act=main&auto=0";
-            
-            }else{
-                $str_out = "index.php?act=main&whot=$figure&votes=$task[count]";
+        $close_75 = NULL;
+        
+        $status_vote = NULL;
+        
+        $return = NULL;
+        
+        $check = $this->_checkCash($vote);
+        
+        if($check == 0){
+            $status_vote = 1;
+        }else{
+        
+            $fig_name = $this->_figuresName($figure);
+        
+            if((($this->$fig_name)+$vote) >= 100 && $check){
+                $aga = $this->_getVote($figure);
             }
+        
+        }
+               if(!$status_vote){
             
-        $task[num] = $_SESSION[num_task]+1;
+            
+            $name = $this->_figuresName($figure);
+/*
+ *  создаем соотв запись в таблице
+ */
+
+            mysql_query("INSERT INTO rate (user_id, election_id, figure_id, point) VALUES ($this->user, $this->id, $figure, $vote)");
+
+/*
+ * минусуем количество голосов в кошельке участника игры
+ */ 
+            $query = "UPDATE my_account SET cash = (cash - $vote) WHERE user_id = $this->user";
+
+            $result = mysql_query($query) or die ($query); 
+/*
+ * изменяем запись в таблице теккущего голосования и перезагружаем страницу
+ */
+            if(mysql_affected_rows() > 0){
+    
+                $query = "UPDATE `election` SET `$name` = (`$name` + $vote), `date_change` = now() WHERE id = $this->id";
+    
+                $result = mysql_query($query) or die ($query);
+                
+                $afr = mysql_affected_rows();
+                
+                if($afr != 0){
+                    
+                                    
+                    $query = "SELECT square, circle, triangle FROM election WHERE id = $this->id";
+                
+                    $result = mysql_query($query) or die($query);
+                
+                    $row = mysql_fetch_assoc($result);
+                
+                    $check_75 = $this->_check75($row);
+                
+                    if($check_75 == 2){
+                        $close_75 = $this->_close(2);  
+                    }
+                
+                    if($row[$name] >= 100 && !$close_75){
+                        $this->_roundClose($row);
+                    }
+                
+                    if($afr > 0 && !$return){
+                         $return = 1;
+                        }
+                    
+                    }
+
+              }
+  
+        }
         
-        $_SESSION[num_task]++;
+       if($return) mysql_query("UPDATE user_task SET auto = 0 WHERE id = $task");
         
-        $figure = ($task[figure_id]-1);
-        
-        
-        
-    return $str_out; 
+    return $return;  
     }
 }
 

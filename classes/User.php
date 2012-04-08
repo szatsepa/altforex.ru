@@ -97,6 +97,11 @@ class User{
         
         return ($this->tasks->data[$id]);
     }
- 
+    function reactivTasks(){
+        
+        $query = "UPDATE `user_task` SET `auto` = '1' WHERE user_id = $this->id";
+        
+        mysql_query($query) or die ($query);
+    }
 }
 ?>
