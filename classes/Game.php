@@ -20,6 +20,8 @@ class Game{
     var $user;
     var $error;
     var $level_name;
+    var $factor;
+    
     
     function Game($user){
         $this->user = $user;
@@ -32,7 +34,8 @@ class Game{
         e.circle, 
         e.triangle, 
         e.level, 
-        l.name AS level_name 
+        l.name AS level_name ,
+        l.weight AS factor 
         FROM election AS e, 
         elements AS l 
         WHERE e.stop_round <> 1 
@@ -63,6 +66,8 @@ class Game{
 
             $this->level_name = $tmp[level_name];
             
+            $this->factor = $tmp[factor];
+            
             return 1;
         }
     }
@@ -89,6 +94,11 @@ class Game{
                  if($aga > 0){
                      $status_vote = 1;
                      $this->error = "v";
+                }else{
+                    
+                    $delivery = $vote - (100 - ($this->$fig_name));
+                    $vote = (100 - ($this->$fig_name));
+                    $ahtung = 1;
                 }
             }
         
@@ -110,10 +120,21 @@ class Game{
             $query = "UPDATE my_account SET cash = (cash - $vote) WHERE user_id = $this->user";
 
             $result = mysql_query($query) or die ($query); 
+            
+            $num_aff = mysql_affected_rows();
+            
+            if($num_aff != 0){
+            
+            $query = "INSERT INTO trunk (user_id, added,game,figure) VALUES ($this->user, -($vote*($this->factor)), $this->id, $figure)";
+            
+            $result = mysql_query($query) or die($query);
+            
+            $num_aff = mysql_insert_id();
+        }
 /*
  * изменяем запись в таблице теккущего голосования и перезагружаем страницу
  */
-            if(mysql_affected_rows() > 0){
+            if($num_aff){
     
                 $query = "UPDATE `election` SET `$name` = (`$name` + $vote), `date_change` = now() WHERE id = $this->id";
     
@@ -407,6 +428,15 @@ class Game{
         $result = mysql_query($query) or die ($query);
     
         $num_aff = mysql_affected_rows();
+        
+        if($num_aff!=0){
+            
+            $query = "INSERT INTO trunk (user_id, added, game, figure) VALUES ($user_id, ($cash*($this->factor)), $this->id, 'R')";
+            
+            $result = mysql_query($query) or die($query);
+            
+            $num_aff = mysql_insert_id();
+        }
     
         return $num_aff;
     }
@@ -434,7 +464,12 @@ class Game{
         
             if((($this->$fig_name)+$vote) >= 100 && $check){
                 $aga = $this->_getVote($figure);
-            }
+            }else{
+                    
+                    $delivery = $vote - (100 - ($this->$fig_name));
+                    $vote = (100 - ($this->$fig_name));
+                    $ahtung = 1;
+                }
         
         }
                if(!$status_vote){

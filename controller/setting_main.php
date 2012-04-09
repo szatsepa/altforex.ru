@@ -54,7 +54,7 @@ if(isset ($attributes[whot]) && isset ($attributes[votes]) && !isset ($_SESSION[
     
     $whot = intval($attributes[whot])+1;
     
-    $votes = abs(intval($attributes[votes]));
+    $votes = abs(intval($attributes[votes])); 
     
     $move = move_G($whot, $votes, $actual_game);
 }
@@ -69,11 +69,11 @@ if(isset ($_SESSION[auto])){
 
     $task_id = $user->tasks->data[$_SESSION[num_task]][id];
 
-    if($auto == 0){
+    if($auto == 0){ 
         
          header ("location:index.php?act=main&auto=0");
     }
-    if($auto == 1){
+    if($auto == 1){ 
 
         $level = $user->tasks->data[$_SESSION[num_task]];
 

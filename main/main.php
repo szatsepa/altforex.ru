@@ -31,11 +31,11 @@ if($_SESSION[auth] == 1){
   }
 
   if(isset ($_SESSION[auto]) && $_SESSION[auto]==1){
-      $str_value = "AUTO OFF";
+      $str_value = "AUTO ON";
       $str_color = "color: red;";
       $str_out = "index.php?act=main&auto=0";
   }else{
-      $str_value = "AUTO ON";
+      $str_value = "AUTO OFF";
       $str_color = "color: black;";
       $str_out = "index.php?act=main&auto=1";
   }
@@ -91,6 +91,7 @@ if($_SESSION[auth] == 1){
         <input id="fig" type="hidden" name="figure_id" value=""/>
         <input id="vt" size="2" name="votes" value="1"/>
         <input type="button" value="Голосовать" onclick="javascript:_goRmail('<?php echo $_SESSION[auth];?>','votes',<?php echo $cash;?>);"/>
+        <input type="button" value="X" onclick="javascript:_closeForm();"/>
     </form>
     
 </div>
@@ -129,3 +130,11 @@ if($_SESSION[auth] == 1){
 </script> 
 
 <?php } ?>
+<script language="javascript">
+    function _closeForm(){
+        var obj = document.getElementById('ins');
+//        alert(obj.style);
+        obj.style.display = 'none';
+    }
+
+</script>

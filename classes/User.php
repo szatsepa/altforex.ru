@@ -9,6 +9,7 @@ class User{
     var $data;
     var $id;
     var $tasks;
+    var $factor;
     
     function User(){
         $this->data = array();
@@ -27,7 +28,8 @@ class User{
                          a.level,  
                          (SELECT Count(u.id) FROM users AS u, user_task AS t WHERE u.id = t.user_id AND u.id = $id) AS task,
                          (SELECT Count(u.id) FROM users AS u, user_task AS t WHERE u.id = t.user_id AND u.id = $id AND t.auto = 1) AS auto, 
-                         a.auto_on
+                         a.auto_on,
+                         (SELECT e.weight FROM elements AS e, my_account AS a, users AS u WHERE u.id = a.user_id AND a.level = e.id AND u.id = 1) AS factor
                  FROM users AS u   
                  LEFT JOIN my_account AS a 
                  ON u.id = a.user_id 
@@ -40,6 +42,8 @@ class User{
         $this->id = $row[id];
                 
         $this->data = $row; 
+        
+        $this->factor = $row[factor];
         
         if($this->data[task] > 0){
             $this->tasks->setTasks($this->id);
