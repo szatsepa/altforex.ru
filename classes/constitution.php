@@ -333,107 +333,107 @@ class Task{
         
     }
 }
-class Game{
-    
-    var $id;
-    var $time;
-    var $vote;
-    var $square;
-    var $circle;
-    var $triangle;
-    var $gamer_id;
-    
-    function Game(){
-        
-        $this->updateGame();
-    }
-    
-    function updateGame(){
-            
-            $figures = array('square', 'circle','triangle');  
-    
-            $step = 0;
-    
-            $tmp_arr = array();
-    
-            $query = "SELECT MAX(id) AS ID, MAX(time) AS time
-                         FROM rate WHERE election_id = ((SELECT MAX( id ) 
-                         FROM election_archiv )+1)";
-    
-            $result = mysql_query($query) or die($query);
-    
-            $tmp_arr = mysql_fetch_assoc($result);
-    
-            $fig_array = array();
-    
-            for ($i=0;$i<3;$i++){
-        
-                $query = "SELECT id
-                            FROM rate 
-                         WHERE election_id = ((SELECT MAX( id ) 
-                             FROM election_archiv )+1)
-                        AND figure_id = ($i+1)";
-            
-                    $result = mysql_query($query) or die($query);
-            
-                    $figure_votes = 0;
-            
-                    while ($var = mysql_fetch_assoc($result)){
-                 
-                         $figure_votes++;
-                 
-                         $step++;
-
-                }
-            
-             $fig_array[$figures[$i]] = $figure_votes;
-            }
-    
-            $tmp_arr['step']= $tmp_arr['vote'] = $step;
-            $tmp =  array_merge($tmp_arr,$fig_array);
-            
-            $this->id = $tmp[ID];
-            $this->time = $tmp[time];
-            $this->vote = $tmp[vote];
-            $this->square = $tmp[square];
-            $this->circle = $tmp[circle];
-            $this->triangle = $tmp[triangle];
-    
-    }
-    function checkStep($check, $user_id){
-        
-            $query = "SELECT MAX(id) AS ID 
-                            FROM rate WHERE election_id = ((SELECT MAX( id ) 
-                            FROM election_archiv )+1)";
-    
-            $result = mysql_query($query) or die($query);
-            
-            $row = mysql_fetch_row($result);
-            
-            $max_id = $row[0];
-            
-            if($check < $max_id){ }  else {
-                
-                $step = 0;
-            }
-                
-                 $query = "SELECT Count(user_id) AS ID 
-                            FROM rate WHERE election_id = ((SELECT MAX( id ) 
-                            FROM election_archiv )+1) AND id = $max_id AND user_id <> $user_id";
-    
-                 $result = mysql_query($query) or die($query);
-            
-                $row = mysql_fetch_row($result);
-            
-                $this->gamer_id = $row[0];
-                
-                $this->updateGame();
-                
-                $step = $row[0];
-                
-           
-            
-            return $step;
-    }
-}
+//class Game{
+//    
+//    var $id;
+//    var $time;
+//    var $vote;
+//    var $square;
+//    var $circle;
+//    var $triangle;
+//    var $gamer_id;
+//    
+//    function Game(){
+//        
+//        $this->updateGame();
+//    }
+//    
+//    function updateGame(){
+//            
+//            $figures = array('square', 'circle','triangle');  
+//    
+//            $step = 0;
+//    
+//            $tmp_arr = array();
+//    
+//            $query = "SELECT MAX(id) AS ID, MAX(time) AS time
+//                         FROM rate WHERE election_id = ((SELECT MAX( id ) 
+//                         FROM election_archiv )+1)";
+//    
+//            $result = mysql_query($query) or die($query);
+//    
+//            $tmp_arr = mysql_fetch_assoc($result);
+//    
+//            $fig_array = array();
+//    
+//            for ($i=0;$i<3;$i++){
+//        
+//                $query = "SELECT id
+//                            FROM rate 
+//                         WHERE election_id = ((SELECT MAX( id ) 
+//                             FROM election_archiv )+1)
+//                        AND figure_id = ($i+1)";
+//            
+//                    $result = mysql_query($query) or die($query);
+//            
+//                    $figure_votes = 0;
+//            
+//                    while ($var = mysql_fetch_assoc($result)){
+//                 
+//                         $figure_votes++;
+//                 
+//                         $step++;
+//
+//                }
+//            
+//             $fig_array[$figures[$i]] = $figure_votes;
+//            }
+//    
+//            $tmp_arr['step']= $tmp_arr['vote'] = $step;
+//            $tmp =  array_merge($tmp_arr,$fig_array);
+//            
+//            $this->id = $tmp[ID];
+//            $this->time = $tmp[time];
+//            $this->vote = $tmp[vote];
+//            $this->square = $tmp[square];
+//            $this->circle = $tmp[circle];
+//            $this->triangle = $tmp[triangle];
+//    
+//    }
+//    function checkStep($check, $user_id){
+//        
+//            $query = "SELECT MAX(id) AS ID 
+//                            FROM rate WHERE election_id = ((SELECT MAX( id ) 
+//                            FROM election_archiv )+1)";
+//    
+//            $result = mysql_query($query) or die($query);
+//            
+//            $row = mysql_fetch_row($result);
+//            
+//            $max_id = $row[0];
+//            
+//            if($check < $max_id){ }  else {
+//                
+//                $step = 0;
+//            }
+//                
+//                 $query = "SELECT Count(user_id) AS ID 
+//                            FROM rate WHERE election_id = ((SELECT MAX( id ) 
+//                            FROM election_archiv )+1) AND id = $max_id AND user_id <> $user_id";
+//    
+//                 $result = mysql_query($query) or die($query);
+//            
+//                $row = mysql_fetch_row($result);
+//            
+//                $this->gamer_id = $row[0];
+//                
+//                $this->updateGame();
+//                
+//                $step = $row[0];
+//                
+//           
+//            
+//            return $step;
+//    }
+//}
 ?>
