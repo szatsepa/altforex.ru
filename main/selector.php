@@ -4,6 +4,7 @@
  * created by arcady.1254@gmail.com 2/2/2012
  */
 //print_r($user);
+echo "Баланс ".$user->result.". ";
 ?>
 <div class="selector">&nbsp;
 <?php 

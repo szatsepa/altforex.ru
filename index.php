@@ -10,6 +10,10 @@ include 'classes/Games.php';
 include 'classes/Game.php';
 
 include 'classes/Tasks.php';
+
+include 'classes/Elements.php';
+
+include 'classes/Element.php';
  
  if(!isset($attributes) || !is_array($attributes)) {
      

@@ -10,6 +10,8 @@ class User{
     var $id;
     var $tasks;
     var $factor;
+    var $element;
+    var $result;
     
     function User(){
         $this->data = array();
@@ -29,7 +31,8 @@ class User{
                          (SELECT Count(u.id) FROM users AS u, user_task AS t WHERE u.id = t.user_id AND u.id = $id) AS task,
                          (SELECT Count(u.id) FROM users AS u, user_task AS t WHERE u.id = t.user_id AND u.id = $id AND t.auto = 1) AS auto, 
                          a.auto_on,
-                         (SELECT e.weight FROM elements AS e, my_account AS a, users AS u WHERE u.id = a.user_id AND a.level = e.id AND u.id = 1) AS factor
+                         (SELECT e.weight FROM elements AS e, my_account AS a, users AS u WHERE u.id = a.user_id AND a.level = e.id AND u.id = $id) AS factor,
+                         (SELECT SUM(added) FROM trunk WHERE user_id = $id) AS result
                  FROM users AS u   
                  LEFT JOIN my_account AS a 
                  ON u.id = a.user_id 
@@ -44,6 +47,8 @@ class User{
         $this->data = $row; 
         
         $this->factor = $row[factor];
+        
+        $this->result = $row[result];
         
         if($this->data[task] > 0){
             $this->tasks->setTasks($this->id);
@@ -113,6 +118,28 @@ class User{
             return 1;
         }
         
+    }
+    function _checkLevel($data){
+        $level = 1;
+        $scale = 0;
+        foreach ($data as $value) {
+            
+            if($this->data[cash] >= $value->scale){
+                $level = $value->id;
+                $this->element = $value;
+                $scale = $value->scale;
+                }
+        }
+        
+        
+        if($this->data[level] != $level){
+            
+            $query = "UPDATE my_account SET level = $level WHERE user_id = $this->id";
+        
+            mysql_query($query) or die($query);
+            
+            $this->data[level] = $level;
+        }
     }
 }
 ?>

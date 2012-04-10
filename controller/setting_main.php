@@ -3,7 +3,7 @@
 /*
  * created by arcady.1254@gmail.com 7/4/2012 
  */
-
+//print_r($user);
 if(!isset ($_SESSION[num_task])){
     
     $count = $user->tasks->count;
