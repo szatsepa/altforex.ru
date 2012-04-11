@@ -3,7 +3,7 @@
 /*
  * created by arcady.1254@gmail.com 7/4/2012 
  */
-//print_r($user);
+//print_r($games);
 if(!isset ($_SESSION[num_task])){
     
     $count = $user->tasks->count;
@@ -12,7 +12,7 @@ if(!isset ($_SESSION[num_task])){
     
     if($count == 0){
             
-        header ("location:index.php?act=main&auto=0");       
+//        header ("location:index.php?act=main&auto=0");       
             
     }
 }
@@ -106,7 +106,10 @@ if(isset ($_SESSION[auto])){
     }
     
 }
-
+//echo "<br/>";
+//print_r($actual_game);
+$game_status = $user->data[level] - $actual_game->level;
+//echo "$game_status";
 function move_G($whot, $votes, $actual_game){
         
     $move = $actual_game->move($whot, $votes);

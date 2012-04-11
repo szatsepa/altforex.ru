@@ -33,9 +33,8 @@ class Games{
         FROM election AS e, 
         elements AS l 
         WHERE e.stop_round <> 1 
-        AND e.level = l.id 
-        AND l.id <= $this->level
-                ORDER BY e.level";
+        AND e.level = l.id
+        ORDER BY e.level";
         
         $result = mysql_query($query) or die($query);
         
@@ -46,11 +45,11 @@ class Games{
         
         $this->count = count($this->data);
         
-        if($this->level > $this->count)$this->_start();   
+        if(8 > $this->count)$this->_start();   
     }
     function _start(){
         $tmp_arr = array();
-        for($i=1;$i<(($this->level)+1);$i++){
+        for($i=1;$i<8;$i++){
             $tmp_arr[$i] = $i;
             foreach ($this->data as $value){
                 if($i == $value[level])$tmp_arr[$i] = NULL;
@@ -83,8 +82,8 @@ class Games{
         FROM election AS e, 
         elements AS l 
         WHERE e.stop_round <> 1 
-        AND e.level = l.id 
-        AND l.id <= $this->level";
+        AND e.level = l.id
+        ORDER BY e.level";
         
         $result = mysql_query($query) or die($query);
         

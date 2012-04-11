@@ -17,7 +17,7 @@ if($_SESSION[auth] == 1){
  ?>
 <div class="element">
   <?php
-  for($i=0;$i<$games->count;$i++){
+  for($i=0;$i<6;$i++){
       $dis='';
       if(($i+1) == $actual_game->level){
           $dis = 'disabled';
@@ -66,20 +66,20 @@ if($_SESSION[auth] == 1){
         <p>Голосование.</p>
     </div>
     <div class="square"> 
-        <input type="image" src="http://<?php echo $host;?>/images/square.gif" alt="Button" onclick="javascript:_insertVote('ins', '0');"/>
+        <input type="image" src="http://<?php echo $host;?>/images/square.gif" alt="Button" onclick="javascript:_insertVote('ins', '0',<?php echo $game_status;?>);"/>
         <div class="rate" title="Показать статистику.">
 
             <p class="rate"><a style="color: firebrick;" href="http://<?php echo $host;?>/index.php?act=stat" target="_blank" onclick="popupWin = window.open(this.href, 'statistics', 'location,width=600,height=300,top=0,scrollbars'); return false;"><?php echo $square;?></a></p>
         </div>
     </div>
     <div class="circle">
-         <input type="image" src="http://<?php echo $host;?>/images/circle.gif" alt="Button" onclick="javascript:_insertVote('ins', '1');"/>
+         <input type="image" src="http://<?php echo $host;?>/images/circle.gif" alt="Button" onclick="javascript:_insertVote('ins', '1',<?php echo $game_status;?>);"/>
          <div class="rate" title="Показать статистику.">
             <p class="rate"><a style="color: firebrick;" href="http://<?php echo $host;?>/index.php?act=stat" target="_blank" onclick="popupWin = window.open(this.href, 'statistics', 'location,width=600,height=300,top=0,scrollbars'); return false;"><?php echo $circle;?></a></p>
         </div>
     </div>
     <div class="triangle">
-         <input type="image" src="http://<?php echo $host;?>/images/triangle.gif" alt="Button" onclick="javascript:_insertVote('ins', '2');"/>
+         <input type="image" src="http://<?php echo $host;?>/images/triangle.gif" alt="Button" onclick="javascript:_insertVote('ins', '2',<?php echo $game_status;?>);"/>
          <div class="rate" title="Показать статистику.">
             <p class="rate"><a style="color: firebrick;" href="http://<?php echo $host;?>/index.php?act=stat" target="_blank" onclick="popupWin = window.open(this.href, 'statistics', 'location,width=600,height=300,top=0,scrollbars'); return false;"><?php echo $triangle;?></a></p>
         </div>

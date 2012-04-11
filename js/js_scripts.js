@@ -145,8 +145,11 @@ function _autoMove(figure,votes){
     document.forms[0].submit();
 }
     
-function _insertVote(ID, fig){
+function _insertVote(ID, fig, status){
 
+    if(status < 0){
+        alert("Вы не можете учавствовать в этой игре\n\t - не достаточно голосов!");
+    }else{
         var obj = document.getElementById(ID); 
 
         document.getElementById('fig').value = fig;
@@ -158,4 +161,6 @@ function _insertVote(ID, fig){
         vt.focus();
 
         vt.select();
+    }
+
 }
