@@ -17,6 +17,8 @@ if (isset($_SESSION[auth]) and !isset($attributes[out])) {
        if($_SESSION[auth] == 1){
 
            $user->setAdmin($user_id);
+           
+           $users = new Users();
 
        }
      

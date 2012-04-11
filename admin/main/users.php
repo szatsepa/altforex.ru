@@ -21,9 +21,9 @@ $header_array = array('Имя','Фамилия','Е-мейл','Статус','Б
         </thead>
         <tbody style="font-weight: normal;text-align: left;">
                     <?php
-                    foreach ($user_array as $value) {
+                    foreach ($users->data as $value) {
                         echo " <tr>";
-                        echo "<td>$value[name]</td><td>$value[surname]</td><td>$value[email]</td><td>$value[status]</td><td>$value[cash]</td><td><a href='#' onclick='javascript:_delUserWindow($value[id]);'>Удалить</a></td><td><a href='#' onclick='javascript:_redUserWindow($value[id]);'>Изменить</a></td>";
+                        echo "<td>$value->name</td><td>$value->surname</td><td>$value->email</td><td>$value->element</td><td>$value->votes</td><td><a href='#' onclick='javascript:_delUserWindow($value->id);'>Удалить</a></td><td><a href='#' onclick='javascript:_redUserWindow($value->id);'>Изменить</a></td>";
                         echo "</tr>";
                     }
            ?>

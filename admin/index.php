@@ -4,6 +4,10 @@
  * created by arcady.1254@gmail.com 27/3/2012
  */
  include '../classes/Admin.php';
+ 
+ include '../classes/Users.php';
+ 
+ include '../classes/Player.php';
 
 
  if(!isset($attributes) || !is_array($attributes)) {
@@ -39,11 +43,7 @@ if(isset($attributes[di]) && !isset ($_SESSION[auth]) && $attributes[di] != ''){
    $_SESSION[auth] = 1;
          
 } 
-
-//include '../classes/User.php';
-
-include '../classes/constitution.php'; 
-  
+   
 include '../action/connect.php';
 
 include '../action/quotesmart.php';
@@ -68,7 +68,6 @@ switch ($attributes[act]) {
         break;
     
     case 'players':
-        include 'query/users.php';
         include 'main/main_menu.php'; 
         include 'main/users.php';
         break;

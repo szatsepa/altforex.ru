@@ -3,7 +3,7 @@
 /*
  * created by arcady.1254@gmail.com 28/3/2012
  */
- 
+//print_r($users);
 ?>
 <div class="main_menu">
     

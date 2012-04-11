@@ -15,6 +15,7 @@ class Admin {
     var $name;
     var $email;
     var $phone;
+    var $players;
     
     function Admin(){
     }
