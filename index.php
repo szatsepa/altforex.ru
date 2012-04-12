@@ -61,10 +61,10 @@ if(isset ($_SESSION[id])) {
 switch ($attributes[act]) {
     case 'main':
         $title = "MAIN";
-        include 'main/header.php';
         if(isset ($_SESSION[auth]) && $_SESSION[auth] == 1){ 
             include 'controller/setting_main.php'; 
         }
+        include 'main/header.php';
         include 'main/selector.php';
         include 'main/main.php';
         break;

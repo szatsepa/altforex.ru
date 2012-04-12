@@ -3,7 +3,8 @@
 /*
  * created by arcady.1254@gmail.com 7/4/2012 
  */
-//print_r($games);
+$images_array = array(NULL,'o2','fe','cu','ag','au','pt','c');
+
 if(!isset ($_SESSION[num_task])){
     
     $count = $user->tasks->count;
@@ -106,10 +107,13 @@ if(isset ($_SESSION[auto])){
     }
     
 }
-//echo "<br/>";
-//print_r($actual_game);
+//echo "<br/>images";
+////$fig = $actual_game->level;
+//print_r($images_array[$actual_game->level]);
+////echo "<br/>$fig images".$images_array[$fig];
+
 $game_status = $user->data[level] - $actual_game->level;
-//echo "$game_status";
+
 function move_G($whot, $votes, $actual_game){
         
     $move = $actual_game->move($whot, $votes);
