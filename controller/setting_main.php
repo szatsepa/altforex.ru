@@ -10,12 +10,6 @@ if(!isset ($_SESSION[num_task])){
     $count = $user->tasks->count;
     
     $_SESSION[num_task] = ($count-1);
-    
-    if($count == 0){
-            
-//        header ("location:index.php?act=main&auto=0");       
-            
-    }
 }
 
 
@@ -100,6 +94,8 @@ if(isset ($_SESSION[auto])){
             
             unset ($_SESSION[num_task]);
             
+            if(!isset($_SESSION[how_many]))$_SESSION[how_many]=1;
+            
             $move = move_A($whot, $votes, $actual_game, $task_id);
              
         }
@@ -107,10 +103,6 @@ if(isset ($_SESSION[auto])){
     }
     
 }
-//echo "<br/>images";
-////$fig = $actual_game->level;
-//print_r($images_array[$actual_game->level]);
-////echo "<br/>$fig images".$images_array[$fig];
 
 $game_status = $user->data[level] - $actual_game->level;
 
@@ -130,6 +122,8 @@ function move_A($whot, $votes, $actual_game, $task_id){
        
     $out = NULL;
     
+    $_SESSION[how_many] += 1;
+    
     if(!$votes){
         
          $out = header ("location:index.php?act=main&auto=0&round=0");
@@ -137,15 +131,17 @@ function move_A($whot, $votes, $actual_game, $task_id){
     }  else {
             
         $move = $actual_game->_autoMove($whot, $votes, $task_id);
-
-           if($move){ 
-               
-                $out = header ("location:index.php?act=main&auto=1");
-          
-           }else{
-
-               $out = header ("location:index.php?act=main&auto=0");
-           }
+//
+//           if($move){ 
+//               
+//                $out = header ("location:index.php?act=main&auto=1");
+//          
+//           }else{
+//
+//               $out = header ("location:index.php?act=main&auto=0");
+//           }
+           
+           $out = header ("location:index.php?act=main&auto=1");
     }
 
 

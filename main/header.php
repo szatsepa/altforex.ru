@@ -2,6 +2,11 @@
 header('Content-Type: text/html; charset=utf-8');
  echo '<?xml version="1.0" encoding="utf-8"?>';
  
+ if($_SESSION[auth] == 1){
+    $img_prefix = $images_array[$actual_game->level];
+}  else {
+    $img_prefix = "o2";
+}
  ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -19,5 +24,11 @@ header('Content-Type: text/html; charset=utf-8');
         <script type="text/javascript" src="../js/js_scripts.js"></script>
 </head>
     <body onload="">
-        <div class="main" style="background-image: url('../images/<?php echo $images_array[$actual_game->level];?>_bg.png')">
+        <?php 
+        if($attributes[act] == 'main'){
+        ?>
+        <div class="main" style="background-image: url('../images/<?php echo $img_prefix;?>_bg.png')">
+           <?php }else{ ?>
+            <div class="main" style="background-image: url('../images/ag_bg.png')"> 
+            <?php }?>
             <div class="main_0">

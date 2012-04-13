@@ -538,7 +538,7 @@ class Game{
   
         }
         
-       if($return) mysql_query("UPDATE user_task SET auto = 0 WHERE id = $task");
+    mysql_query("UPDATE user_task SET auto = 0 WHERE id = $task");
         
     return $return;  
     }
