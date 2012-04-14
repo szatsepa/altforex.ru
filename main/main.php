@@ -3,7 +3,7 @@
 /*
  * created by arcady.1254@gmail.com
  */
-echo "                                           $img_prefix";
+//echo "                                           $img_prefix";
 
 $status_array = array('Воздух','Сталь','Медь','Серебро','Золото','Платина','Бриллиант');
 
@@ -16,7 +16,7 @@ if($_SESSION[auth] == 1){
     $triangle = $actual_game->triangle;
     
     $cash = $user->data[cash];
- ?>
+        ?>
 <div class="element">
   <?php
   for($i=0;$i<7;$i++){
@@ -56,7 +56,7 @@ if($_SESSION[auth] == 1){
 
 <div class="glagne">
     <div class="title_main">
-        <div id="time" style="font-size: 14px;">	
+<!--        <div id="time" style="font-size: 14px;">	
             <?php
             if($_SESSION[auth] == 1){?> 
             1:30
@@ -64,7 +64,7 @@ if($_SESSION[auth] == 1){
                 $senya = date("d M g:i");
                  echo "$senya";
             } ?>
-        </div> 
+        </div> -->
         <p>Голосование.</p>
     </div>
     <div class="square"> 

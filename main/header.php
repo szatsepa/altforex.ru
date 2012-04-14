@@ -24,11 +24,9 @@ header('Content-Type: text/html; charset=utf-8');
         <script type="text/javascript" src="../js/js_scripts.js"></script>
 </head>
     <body onload="">
-        <?php 
-        if($attributes[act] == 'main'){
-        ?>
-        <div class="main" style="background-image: url('../images/<?php echo $img_prefix;?>_bg.png')">
+       <div class="main"> 
+         <?php if($_SESSION[auth] == 1 && $attributes[act] == 'main'){   ?>
+        <div class="main_0" style="background-image: url('../images/<?php echo $img_prefix;?>_bg.png');">
            <?php }else{ ?>
-            <div class="main" style="background-image: url('../images/ag_bg.png')"> 
+            <div class="main_0" style="background-image: url('../images/ag_bg.png');"> 
             <?php }?>
-            <div class="main_0">

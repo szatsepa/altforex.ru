@@ -7,6 +7,15 @@
 //echo "Баланс ".$user->result.". ";
 ?>
 <div class="selector">&nbsp;
+    <div id="time">	
+            <?php
+            if($_SESSION[auth] == 1){?> 
+            1:30
+            <?php }else{
+                $senya = date("d M g:i");
+                 echo "$senya";
+            } ?>
+        </div> 
 <?php 
 
 if (!isset ($_SESSION[id]) && $_SESSION[auth] == 0) { 
@@ -54,6 +63,3 @@ if (!isset ($_SESSION[id]) && $_SESSION[auth] == 0) {
 
 ?>
 </div>
-<!--<script language="javascript">
-
-</script>-->

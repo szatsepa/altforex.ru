@@ -164,3 +164,11 @@ function _insertVote(ID, fig, status){
     }
 
 }
+function _deleteTask(ID){
+    
+    var obj = document.getElementById(ID);
+    
+    if(confirm("Удалить строку задания?")){
+        document.location.href = "index.php?act=deltask&row="+obj.row.value;
+    }
+}

@@ -29,6 +29,7 @@ div.main{
 }
 div.main_0{
     width: 1024px;
+    height: 618px;
     margin: 0 auto;
 /*    outline: 1px solid red;*/
 }
@@ -382,9 +383,13 @@ p.reg{
     color: #000000;
 }
 #time {
-  position: fixed;
-  top: 18px;
-  left: 20px;
+  position: relative;
+  float: left;
+  top: 3px;
+  left: 12px;
+  font-size: 14px;
+  color: red;
+  font-weight: bold;
 }
 div.insert{
     position: absolute;

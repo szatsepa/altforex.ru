@@ -41,7 +41,6 @@ if(isset ($attributes[auto]) && $attributes[auto] == 1){
 if(isset ($attributes[auto]) && $attributes[auto] == 0){
     unset ($_SESSION[num_task]);
     unset ($_SESSION[auto]);
-//    $user->reactivTasks();
 }
 
 

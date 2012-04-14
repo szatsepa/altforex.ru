@@ -77,6 +77,7 @@ $level_array = array('1'=>'Воздух','2'=>'Сталь','3'=>'Медь','4'=>
                     <td>
                         <input type='checkbox' name='activ' <?php echo $check;?>/>&nbsp;&nbsp;&nbsp;&nbsp;
                         <input type="button" value="Записать" onclick='javascript:document.forms["set_vote_<?php echo $n;?>"].submit();' />
+                        <input style="color:red;" type="button" value="X" onclick='javascript:_deleteTask("set_vote_<?php echo $n;?>");' />
                     </td>
                 </tr>
             </form> 
