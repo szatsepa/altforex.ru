@@ -147,9 +147,12 @@ function _autoMove(figure,votes){
     
 function _insertVote(ID, fig, status){
 
+    if(status == 'false'){
+        document.location.href = "index.php?act=regu";
+    }
     if(status < 0){
         alert("Вы не можете учавствовать в этой игре\n\t - не достаточно голосов!");
-    }else{
+    }else if(status >= 0){
         var obj = document.getElementById(ID); 
 
         document.getElementById('fig').value = fig;
@@ -171,4 +174,12 @@ function _deleteTask(ID){
     if(confirm("Удалить строку задания?")){
         document.location.href = "index.php?act=deltask&row="+obj.row.value;
     }
+}
+function openStat(){
+
+    popupWin = window.open("http://altforex.ru/index.php?act=stat", 'statistics', 'location,width=600,height=300,status=no,toolbar=no,menubar=no,scrollbars'); return false
+}
+function _closeForm(){
+    var obj = document.getElementById('ins');
+    obj.style.display = 'none';
 }

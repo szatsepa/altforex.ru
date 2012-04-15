@@ -3,6 +3,7 @@
 /*
  * created by arcady.1254@gmail.com 23/3/2012.
  */
+//print_r($statistics);
 ?>
 <div class="stat_head">
 <p class="stat_head">Раунд <?php echo $statistics[0][round];?></p>
@@ -20,7 +21,7 @@
                              Фигура 
                          </td>
                          <td>
-                             Ставка
+                             Голосов
                          </td>
                      </tr>
                  </thead>
@@ -41,7 +42,7 @@
                              <?php echo $value[email];?>
                          </td>
                          <td >
-                             <?php  echo $figures[$value[figures]];?>
+                             <?php  echo $value[figures];?>
                          </td>
                          <td align="center">
                              <?php  echo $value[point]; $all += $value[point];?> 

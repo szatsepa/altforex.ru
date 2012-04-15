@@ -60,6 +60,7 @@ if(isset ($_SESSION[id])) {
  
 switch ($attributes[act]) {
     case 'main':
+        $game_status = "false";
         $title = "MAIN";
         if(isset ($_SESSION[auth]) && $_SESSION[auth] == 1){include 'controller/setting_main.php';  }
         
@@ -129,10 +130,9 @@ switch ($attributes[act]) {
         include 'query/authentication.php';
         break;
     
-    case 'stat':  
+    case 'stat':
+        include 'main/header.php'; 
         include 'query/statistics.php';
-        include 'main/header.php';  
-        include 'main/statistics.php';
         break;
     
      case "logout":

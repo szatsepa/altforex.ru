@@ -68,22 +68,22 @@ if($_SESSION[auth] == 1){
         <p>Голосование.</p>
     </div>
     <div class="square"> 
-        <input type="image" src="http://<?php echo $host;?>/images/<?php echo $img_prefix;?>_square.png" alt="Button" onclick="javascript:_insertVote('ins', '0',<?php echo $game_status;?>);"/>
+        <input type="image" src="http://<?php echo $host;?>/images/<?php echo $img_prefix;?>_square.png" alt="Button" onclick="javascript:_insertVote('ins', '0','<?php echo $game_status;?>');"/>
         <div class="rate" title="Показать статистику.">
 
-            <p class="rate"><a style="color: firebrick;" href="http://<?php echo $host;?>/index.php?act=stat" target="_blank" onclick="popupWin = window.open(this.href, 'statistics', 'location,width=600,height=300,top=0,scrollbars'); return false;"><?php echo $square;?></a></p>
+            <p class="rate"><a style="color: firebrick;" target="_blank" onclick="javascript:openStat();"><?php echo $square;?></a></p>
         </div>
     </div>
     <div class="circle">
-         <input type="image" src="http://<?php echo $host;?>/images/<?php echo $img_prefix;?>_circle.png" alt="Button" onclick="javascript:_insertVote('ins', '1',<?php echo $game_status;?>);"/>
+         <input type="image" src="http://<?php echo $host;?>/images/<?php echo $img_prefix;?>_circle.png" alt="Button" onclick="javascript:_insertVote('ins', '1','<?php echo $game_status;?>');"/>
          <div class="rate" title="Показать статистику.">
-            <p class="rate"><a style="color: firebrick;" href="http://<?php echo $host;?>/index.php?act=stat" target="_blank" onclick="popupWin = window.open(this.href, 'statistics', 'location,width=600,height=300,top=0,scrollbars'); return false;"><?php echo $circle;?></a></p>
+            <p class="rate"><a style="color: firebrick;" target="_blank" onclick="javascript:openStat();"><?php echo $circle;?></a></p>
         </div>
     </div>
     <div class="triangle">
-         <input type="image" src="http://<?php echo $host;?>/images/<?php echo $img_prefix;?>_triangle.png" alt="Button" onclick="javascript:_insertVote('ins', '2',<?php echo $game_status;?>);"/>
+         <input type="image" src="http://<?php echo $host;?>/images/<?php echo $img_prefix;?>_triangle.png" alt="Button" onclick="javascript:_insertVote('ins', '2','<?php echo $game_status;?>');"/>
          <div class="rate" title="Показать статистику.">
-            <p class="rate"><a style="color: firebrick;" href="http://<?php echo $host;?>/index.php?act=stat" target="_blank" onclick="popupWin = window.open(this.href, 'statistics', 'location,width=600,height=300,top=0,scrollbars'); return false;"><?php echo $triangle;?></a></p>
+            <p class="rate"><a style="color: firebrick;" target="_blank" onclick="javascript:openStat();"><?php echo $triangle;?></a></p>
         </div>
     </div>
 </div>
@@ -132,11 +132,3 @@ if($_SESSION[auth] == 1){
 </script> 
 
 <?php } ?>
-<script language="javascript">
-    function _closeForm(){
-        var obj = document.getElementById('ins');
-//        alert(obj.style);
-        obj.style.display = 'none';
-    }
-
-</script>
