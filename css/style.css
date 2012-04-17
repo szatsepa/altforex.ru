@@ -22,14 +22,14 @@ html, body {
  font-family: arial, sans-serif;  	
  font-size: 10pt;
 }
-div.main{
+div.main{ 
     width: 100%;
     height: 768px;
 /*    background-color: #eeeeee;*/
 }
 div.main_0{
-    width: 1024px;
-    height: 618px;
+    width: 800px;
+    height: 600px;
     margin: 0 auto;
 /*    outline: 1px solid red;*/
 }
@@ -63,7 +63,6 @@ div.title_main{
     position: relative;
     width: 100%;
     font-size: 36px;
-/*    font-weight: bold;*/
     color:firebrick;
     text-align: center;
 /*    outline: 1px solid aqua;*/
@@ -71,41 +70,43 @@ div.title_main{
 div.square{
     position: relative;
     float: left;
-    width: 232px;
-    height: 340px;
-/*    background-image: url("../images/square.gif");*/
-/*    outline: 1px solid green;*/
+    width: 195px;
+    height: 240px;
+    padding-left: 1px;
+    padding-top: 3px;
+/*    outline: 1px solid red;*/
     z-index: 1;
 }
 div.circle{
     position: absolute;
-/*    float: left;*/
-    margin-left: 232px;
-/*    margin-top: 33px;*/
-    width: 232px;
-    height: 340px;
-/*    background-image: url("../images/circle.gif");*/
-/*    outline: 1px solid green;*/
+    margin-left: 250px;
+    margin-top: 2px;
+    padding-left: 1px;
+    padding-top: 3px;
+    width: 195px;
+    height: 240px;
+/*    outline: 1px solid red;*/
     z-index: 2;
 }
 div.triangle{
     position: absolute;
-    margin-left: 464px;
-    width: 232px;
-    height: 340px;
-/*    background-image: url("../images/triangle.gif"); */
-/*    outline: 1px solid green;*/
+    margin-left: 500px;
+    margin-top: 2px;
+    padding-left: 1px;
+    padding-top: 3px;
+    width: 195px;
+    height: 240px;
+/*    outline: 1px solid red;*/
     z-index: 3;
 }
 div.rate{
     position: absolute;
     width: 100%;
-/*    height: 32px;*/
-    top: 260px;
+    top: 220px;
 /*    outline: 1px solid yellow;*/
 }
 p.rate{
-    font: 27px Arial;
+    font: 32px Arial;
     font-weight: bold;
     text-align: center;
     color: firebrick;
