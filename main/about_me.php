@@ -36,7 +36,7 @@ if(isset($attributes[eps]) && isset ($attributes[key])){
             </div>
                 </div>
             <div class="r_surname">
-               <div class="t_surname">Емейл</div> 
+               <div class="t_surname">Емейл*</div> 
                <div class="input_surname">
                    <input size="36" type="text" required name="email" value="<?php echo $user->data[email];?>"/>
                 </div>
@@ -54,11 +54,25 @@ if(isset($attributes[eps]) && isset ($attributes[key])){
                 </div>
                 </div>
         </div>
-        <div class="reg_submit"> 
+        <div class="reg_submit">
+            
+            <?php 
+            if($_SESSION[auth] == 1){
+            ?>
             <input type="button" value="Сохранить" onclick="javascript:_writeUser('reg_form_<?php echo $us;?>');"/>
+       <?php } else {
+           ?>
+            <input type="button" value="Сохранить" onclick="javascript:_regUser('reg_form_<?php echo $us;?>');"/>
+            <?php
+       } ?>
         </div>
      </form> 
-        <div class="auto_vote">
+        <?php 
+        if($_SESSION[auth] == 1){
+            $style = "style='display: block;'";
+        }
+        ?>
+        <div class="auto_vote" <?php echo $style;?>> 
             <form id="auto_vote">
                 <div class="auto_chbox">
                    Включить автоматическое голосование - 
@@ -69,10 +83,11 @@ if(isset($attributes[eps]) && isset ($attributes[key])){
             </form>
          </div>
         <div class="stamp" title="Вернутся на главную" onclick="javascript:document.location.href='index.php?act=main';">
-            <p>У Вас есть</p>
-            <p style="font-size: 22px;font-weight: bold;"><?php echo $user->data[cash];?></p>
-            <p>голосов</p>
-
+            <div class="yourhave" <?php echo $style;?>>
+                <p>У Вас есть</p>
+                <p style="font-size: 22px;font-weight: bold;"><?php echo $user->data[cash];?></p>
+                <p>голосов</p>
+            </div>
         </div>
     </div>
 </div>

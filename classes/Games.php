@@ -34,7 +34,7 @@ class Games{
         elements AS l 
         WHERE e.stop_round <> 1 
         AND e.level = l.id
-        ORDER BY e.level";
+        ORDER BY e.level DESC";
         
         $result = mysql_query($query) or die($query);
         

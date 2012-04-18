@@ -24,7 +24,9 @@ $figures = array('square'=>'квадрат', 'circle'=>'круг', 'triangle'=>'
 //    
 //    $round = 1;
 //}
-$round = $_SESSION[gid];
+$round = $_SESSION[game_id];
+
+unset($_SESSION[game_id]);
 /*
  * определяем ставки по фигурам и участникам в актуальном раунде
  */

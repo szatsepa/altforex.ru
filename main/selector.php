@@ -6,7 +6,7 @@
 //print_r($user);
 //echo "Баланс ".$user->result.". ";
 ?>
-<div class="selector">&nbsp;
+<div class="selector" style="display: none;">&nbsp; 
     <div id="time">	
             <?php
             if($_SESSION[auth] == 1){?> 

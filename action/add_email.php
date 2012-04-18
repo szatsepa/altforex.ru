@@ -28,7 +28,7 @@ if($row[0] == 0){
  */
 $key_code = _cod(6, 3);
 
-$query = "INSERT INTO users (email, key_code) VALUES ('$email', '$key_code')";
+    $query = "INSERT INTO users (email, key_code) VALUES ('$email', '$key_code')";
 
 $result = mysql_query($query) or die($query);
 

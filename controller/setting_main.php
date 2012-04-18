@@ -105,7 +105,9 @@ if(isset ($_SESSION[auto])){
 
 $game_status = $user->data[level] - $actual_game->level;
 
-//print_r($actual_game);
+//print_r($actual_game); 
+
+$_SESSION[game_id] = $actual_game->id;
 
 function move_G($whot, $votes, $actual_game){
         

@@ -24,9 +24,9 @@ function _regUser(ID){
     if(!_emlWalidation(email)){
             alert("Пожалуйста, проверте правильно ли введен адрес получателя.");
         }else{
-                
+            
             document.write("<form action='index.php?act=addm' method='post'><input type='hidden' name='email' value='"+email+"'/></form>");
-            document.forms[0].submit();
+                document.forms[0].submit();
         }
 }
 function _writeUser(ID){
@@ -43,18 +43,22 @@ function _writeUser(ID){
        act = "chngus";
    }
   
-  var obj = document.getElementById(ID);
+  var obj = document.getElementById(ID); 
   
   var email = obj.email.value;
   
 //   alert(email); 
   
    if(!_emlWalidation(email)){
-            alert("Пожалуйста, проверте правильно ли введен адрес получателя.");
+                alert("Пожалуйста, проверте правильно ли введен адрес получателя.\n\t\t Адрес обязательный елемент.");
+                document.location.href = "index.php?act=regu"; 
+        }else{
+            
+            document.write("<form action='index.php?act="+act+"' method='post'><input type='hidden' name='user_id' value='"+obj.user_id.value+"'/><input type='hidden' name='surname' value='"+obj.surname.value+"'/><input type='hidden' name='name' value='"+obj.name.value+"'/><input type='hidden' name='email' value='"+obj.email.value+"'/><input type='hidden' name='phone' value='"+obj.phone.value+"'/><input type='hidden' name='word' value='"+obj.word.value+"'/></form>");
+            document.forms[0].submit();
         }
 
-    document.write("<form action='index.php?act="+act+"' method='post'><input type='hidden' name='user_id' value='"+obj.user_id.value+"'/><input type='hidden' name='surname' value='"+obj.surname.value+"'/><input type='hidden' name='name' value='"+obj.name.value+"'/><input type='hidden' name='email' value='"+obj.email.value+"'/><input type='hidden' name='phone' value='"+obj.phone.value+"'/><input type='hidden' name='word' value='"+obj.word.value+"'/></form>");
-    document.forms[0].submit();
+    
     
 }
 function _goAbout(ID){
@@ -148,7 +152,8 @@ function _autoMove(figure,votes){
 function _insertVote(ID, fig, status){
 
     if(status == 'false'){
-        document.location.href = "index.php?act=regu";
+//        document.location.href = "index.php?act=regu";
+        document.location='http://altforex.ru/index.php?act=rmail';
     }
     if(status < 0){
         alert("Вы не можете учавствовать в этой игре\n\t - не достаточно голосов!");
