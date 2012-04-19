@@ -265,6 +265,7 @@ div.stamp{
     color: firebrick;
     text-align: center;
     padding-top: 10px;
+    outline: 2px solid black;
 }
 div.recipe{
     position: relative;
