@@ -38,6 +38,8 @@ class User{
                  ON u.id = a.user_id 
                  WHERE u.id = $id AND u.activ = 1";
         
+//        echo "$query<br/>";
+        
         $result = mysql_query($query) or die ($query);
         
         $row = mysql_fetch_assoc($result);

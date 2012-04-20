@@ -57,7 +57,7 @@ div.glagne{
 /*    background-color: #eeeeee;*/
     width: 696px;
     margin: 0 auto;
-/*    outline: 1px solid grey;*/
+/*    outline: 1px solid red;*/
 }
 div.title_main{
     position: relative;
@@ -65,7 +65,7 @@ div.title_main{
     font-size: 36px;
     color:firebrick;
     text-align: center;
-/*    outline: 1px solid aqua;*/
+/*    outline: 1px solid black;*/
 }
 div.square{
     position: relative;
@@ -102,7 +102,7 @@ div.triangle{
 div.rate{
     position: absolute;
     width: 100%;
-    top: 220px;
+    top: 198px;
 /*    outline: 1px solid yellow;*/
 }
 p.rate{

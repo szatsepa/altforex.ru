@@ -53,6 +53,10 @@ include 'action/connect.php';
 
 include 'action/quotesmart.php';
 
+ if(isset ($attributes[pwd])){
+            include 'action/activation.php';
+        }
+//print_r($_SESSION);
 if(isset ($_SESSION[id])) {
     include 'query/checkauth.php';
 }
@@ -62,8 +66,9 @@ switch ($attributes[act]) {
     case 'main':
         $game_status = "false";
         $title = "MAIN";
-        if(isset ($_SESSION[auth]) && $_SESSION[auth] == 1){include 'controller/setting_main.php';  }
-        
+        if(isset ($_SESSION[auth]) && $_SESSION[auth] == 1){
+            include 'controller/setting_main.php'; 
+            }
         include 'main/header.php';
         include 'main/selector.php';
         include 'main/main.php';

@@ -17,13 +17,13 @@ if (isset($_SESSION[auth]) and !isset($attributes[out])) {
     $user_id = $_SESSION[id];
     
        if($_SESSION[auth] == 1){
-
+           
            $user->setUser($user_id);
            
            $elements = new Elements();
-           
+
            $user->_checkLevel($elements->data);
-           
+
            $games->setGames($user->data[level]);
 
        }

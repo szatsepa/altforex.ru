@@ -28,7 +28,7 @@ if($row[0] == 0){
  */
 $key_code = _cod(6, 3);
 
-    $query = "INSERT INTO users (email, key_code) VALUES ('$email', '$key_code')";
+    $query = "INSERT INTO users (email, key_code,activ) VALUES ('$email', '$key_code', 0)";
 
 $result = mysql_query($query) or die($query);
 
@@ -45,9 +45,9 @@ $result = mysql_query($query) or die($query);
  * отправляем письмо и переходим на главную страницу
  */
     
-    if(_gomail($email, $key_code)){ 
+    if(_gomail($email, $key_code, $new_id)){ 
         
-                 header("location:index.php?act=main&id=$new_id&email=$email");
+                 header("location:index.php?act=main");
         }
               
 }else{
@@ -69,13 +69,13 @@ $result = mysql_query($query) or die($query);
     * и отправляем его письмом на указаный адрес после чего переходим на главную
     */
     
-    _gomail($email, $key_code);
+    _gomail($email, $key_code, $user_id);
     
-    header("location:index.php?act=main&id=$user_id&email=$email");
+    header("location:index.php?act=main");
 }
-function _gomail($email, $key){ 
+function _gomail($email, $key,$id){ 
 
-            $message ="Здравствуйте! Почтовый ящик  - $email зарегистрирован на altforex.ru.\r\n Пароль для входа - $key.\r\nВ личный кабинет для дачи показаний можно перейти по ссылке - http://altforex.ru/index.php?act=regu&pwd=$key\r\n C уважением. Администрация. ";              
+            $message ="Здравствуйте! Почтовый ящик  - $email зарегистрирован на altforex.ru.\r\n Пароль для входа - $key.\r\nВ личный кабинет для дачи показаний можно перейти по ссылке - http://altforex.ru/index.php?act=regu&id=$id&pwd=$key\r\n C уважением. Администрация. ";              
              
             $headers = 'From: administrator@altforex.ru\r\n';
             

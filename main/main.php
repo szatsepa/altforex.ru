@@ -65,7 +65,8 @@ if($_SESSION[auth] == 1){
                  echo "$senya";
             } ?>
         </div> -->
-        <p>Голосование.</p>
+<!--        <p>Голосование.</p>-->
+<p><img src="http://<?php echo $host;?>/images/logo.png" alt="Голосование." width="256" height="64"/></p>
     </div>
     <div class="square"> 
         <input type="image" src="http://<?php echo $host;?>/images/<?php echo $img_prefix;?>_square.png" alt="Button" onclick="javascript:_insertVote('ins', '0','<?php echo $game_status;?>');" width="194"/>
