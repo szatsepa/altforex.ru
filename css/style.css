@@ -116,6 +116,7 @@ div.envelope_base{
     width: 1024px;
     height: 800px;
     background-color: #dddddd;
+/*    outline: 1px solid red;*/
 }
 div.envelope{
     position: relative;
@@ -127,6 +128,15 @@ div.envelope{
     background-image: url("../images/cover.png");
     display: block;
 }
+div.round_link{
+    position: absolute; 
+    margin-left: 120px; 
+    margin-top: 333px; 
+/*    outline: 1px solid blue;*/
+    width: 800px;
+    text-align: center;
+    z-index: 12;
+}
 div.registration{ 
     position: relative;
     float: left;
@@ -136,6 +146,7 @@ div.registration{
     margin-left: 120px;
     background-color: #eeeeee;
     display: block;
+    z-index: 11;
 /*    outline: 1px solid green;*/
 }
 div.regs_fields{
@@ -430,4 +441,9 @@ div.auto_on{
     position: relative;
     float: right;
     right: 64px;
+}
+div.pro_round{
+    position: relative;
+    margin: 12px auto;
+    width: 800px;
 }

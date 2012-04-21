@@ -90,4 +90,13 @@ if(isset($attributes[eps]) && isset ($attributes[key])){
             </div>
         </div>
     </div>
+    <div class="round_link" style="font-size: 14px;font-weight: bold;">
+        <p> Голосования с Вашим участием.</p>
+        <?php
+        foreach ($my_round as $value) {
+            ?>
+        <p><a href="index.php?act=round&rid=<?php echo $value[id];?>" target="_self">Раунд N<?php echo $value[id];?> от <?php echo $value[date_event];?></a></p> 
+        <?php
+        }?>
+    </div>
 </div>

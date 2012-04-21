@@ -94,9 +94,17 @@ switch ($attributes[act]) {
         break;
 //    cabinet
     case 'regu':
+        include 'query/my_round.php';
         include 'main/header.php';
         include 'main/selector.php';
         include 'main/about_me.php';
+        break;
+    
+    case 'round':
+        include 'query/any_round.php';
+        include 'main/header.php';
+        include 'main/selector.php';
+        include 'main/about_round.php';
         break;
     
     case 'vote':
