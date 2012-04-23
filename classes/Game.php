@@ -30,6 +30,8 @@ class Game{
     }
     function setGame($id){
         
+//        $l_n = array('','','','','','','');
+        
         $query = "SELECT e.date_event,
         e.date_change AS 'update', 
         e.square, 
@@ -310,7 +312,6 @@ class Game{
     * выбираем список игроков - участников
     * 
     */
-        $message = '';
         
         $out = NULL;
         
@@ -553,6 +554,10 @@ class Game{
     }
     function _resultMessage(){
         
+        $figures_array = array('1'=>'квадрат','2'=>'круг','3'=>'треугольник','R'=>'возврат','square'=>'квадрат','circle'=>'круг','triangle'=>'треугольник');
+        
+        $message ="Здравствуйте!\n Раунд №-".$this->id." в уровне ".$this->level_name.", закончен с результатами: \n";
+        
         $query = "SELECT e.id, u.name, u.surname, f.name AS figure, r.point, r.time 
             FROM rate AS r, election AS e, users AS u, figures AS f 
             WHERE e.id=$this->user 
@@ -564,23 +569,40 @@ class Game{
         $steps_array = array();
 
         $result = mysql_query($query) or die($query);
+        
+        $n = 1;
+        
+        $rashod = 0;
 
-        while ($var = mysql_fetch_assoc($result)){
-            array_push($steps_array, $var);
+        while ($value = mysql_fetch_assoc($result)){
+            
+            $message .= "| ".$n." | ".$value[name]." ".$value[surname]." | ".$figures_array[$value[figure]]." | ".$value[point]." | ".$value[time]." |\n"; 
+            
+            $rashod += $value[point];
+            
+            $n++;
         }
 
         mysql_free_result($result);
         
-        $message ="Здравствуйте!\n";
+       $query = "SELECT t.added AS vote, t.figure FROM trunk AS t WHERE t.user_id = $this->user AND t.game = $this->id";
         
-        $n = 1;
+        $result = mysql_query($query) or die($query);
+                
+        $message .= "\n\n";
         
-        foreach ($steps_array as $value){
+        $prihod = 0;
+        
+        while ($var = mysql_fetch_assoc($result)){
             
-           $message .= "| $n | $value[name] $value[surname] | $value[figure] | $value[point] | $value[time] |\n"; 
-           
-           $n++;
+            $message .= "| ".$var[vote]." | ".$figures_array[$var[figure]]." |\n";
+            
+            if($var[figure] == 'R')$prihod += $var[vote];
         }
+        
+        mysql_free_result($result);
+        
+        $message .= "Итого: затрачено $rashod голосов, \n\t получено $prihod голосов. \n";
         
         $message .= "C уважением. Администрация. ";              
 
@@ -591,6 +613,8 @@ class Game{
         $headers .= 'Content-type: text/plain; charset=utf-8' . "\r\n";
 
         mail($this->email, 'Результаты раунда', $message, $headers);
+        
+        return;
         
      }
 }
