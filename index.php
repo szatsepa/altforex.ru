@@ -61,11 +61,12 @@ if(isset ($_SESSION[id])) {
     include 'query/checkauth.php';
 }
 
- 
+$title = "Алгоритм Кузнецова - самый честный в мире!";
+
 switch ($attributes[act]) {
     case 'main':
         $game_status = "false";
-        $title = "MAIN";
+//        $title = "Алгоритм Кузнецова - самый честный в мире!";
         if(isset ($_SESSION[auth]) && $_SESSION[auth] == 1){
             include 'controller/setting_main.php'; 
             }
@@ -75,7 +76,7 @@ switch ($attributes[act]) {
         break;
     
     case 'rmail':
-        $title = 'KABINET';
+//        $title = 'KABINET';
         include 'main/header.php';
         include 'main/selector.php';
         include 'main/regmail.php';
@@ -160,6 +161,8 @@ switch ($attributes[act]) {
         include 'action/redirect.php';
         break;
 }
+
 include 'main/footer.php';
+
 mysql_close($link);
 ?>

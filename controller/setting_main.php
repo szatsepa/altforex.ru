@@ -13,7 +13,7 @@ if(!isset ($_SESSION[num_task])){
 }
 
 
-$actual_game = new Game($user->data[id]);
+$actual_game = new Game($user->data[id], $user->data[email]);
 
 if(isset ($attributes[gid])){
     

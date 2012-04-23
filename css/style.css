@@ -21,11 +21,13 @@ html, body {
   height:100%;
  font-family: arial, sans-serif;  	
  font-size: 10pt;
+/* background-color: #eeeeee;*/
 }
 div.main{ 
     width: 100%;
-    height: 768px;
-/*    background-color: #eeeeee;*/
+/*    height: 602px;*/
+    background-color: #eeeeee;
+/*    outline: 1px solid red;*/
 }
 div.main_0{
     width: 800px;
@@ -35,7 +37,7 @@ div.main_0{
 }
 div.selector {
 	background-color:#cccccc;
-	border-top:3px solid #a7a7a7;
+	border-top:1px solid #a7a7a7;
 	border-bottom:1px solid white;
 	font-size:4ex;
 	padding: 0 0 0 0;
@@ -54,7 +56,6 @@ span.selector3 {
 }
 div.glagne{
     position: relative;
-/*    background-color: #eeeeee;*/
     width: 696px;
     margin: 0 auto;
 /*    outline: 1px solid red;*/
@@ -113,16 +114,17 @@ p.rate{
 }
 div.envelope_base{
     position: relative;
+    float: left;
     width: 1024px;
-    height: 800px;
-    background-color: #dddddd;
+    height: auto;
+    background-color: #eeeeee;
 /*    outline: 1px solid red;*/
 }
 div.envelope{
     position: relative;
     float: left;
     width: 801px;
-    height: 563px;
+    height: auto;
     margin-top: 20px;
     margin-left: 120px;
     background-image: url("../images/cover.png");
@@ -141,7 +143,7 @@ div.registration{
     position: relative;
     float: left;
     width: 801px;
-    height: 313px;
+    height: auto;
     margin-top: 20px;
     margin-left: 120px;
     background-color: #eeeeee;
@@ -446,4 +448,12 @@ div.pro_round{
     position: relative;
     margin: 12px auto;
     width: 800px;
+}
+div.footer{
+    text-align: center;
+    color: black;
+    position: relative;
+    background-color: #dddddd;
+    width: 1024px;
+    margin: 0 auto;
 }

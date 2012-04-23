@@ -18,13 +18,15 @@ class Game{
     var $circle;
     var $triangle;
     var $user;
+    var $email;
     var $error;
     var $level_name;
     var $factor;
     
     
-    function Game($user){
+    function Game($user, $email){
         $this->user = $user;
+        $this->email = $email;
     }
     function setGame($id){
         
@@ -73,6 +75,9 @@ class Game{
     }
     
     function move($figure, $vote){
+        /*
+         *  ход в ручную
+         */
 
         $close_75 = NULL;
         
@@ -305,6 +310,8 @@ class Game{
     * выбираем список игроков - участников
     * 
     */
+        $message = '';
+        
         $out = NULL;
         
         $query = "SELECT user_id FROM `rate` WHERE election_id = $this->id GROUP BY user_id";
@@ -413,6 +420,8 @@ class Game{
                  }
             }
         }
+        
+        $this->_resultMessage();
 
         return $out;
 
@@ -542,6 +551,48 @@ class Game{
         
     return $return;  
     }
+    function _resultMessage(){
+        
+        $query = "SELECT e.id, u.name, u.surname, f.name AS figure, r.point, r.time 
+            FROM rate AS r, election AS e, users AS u, figures AS f 
+            WHERE e.id=$this->user 
+            AND r.election_id = e.id 
+            AND r.user_id = u.id 
+            AND r.figure_id = f.id
+            ORDER BY r.time DESC";
+
+        $steps_array = array();
+
+        $result = mysql_query($query) or die($query);
+
+        while ($var = mysql_fetch_assoc($result)){
+            array_push($steps_array, $var);
+        }
+
+        mysql_free_result($result);
+        
+        $message ="Здравствуйте!\n";
+        
+        $n = 1;
+        
+        foreach ($steps_array as $value){
+            
+           $message .= "| $n | $value[name] $value[surname] | $value[figure] | $value[point] | $value[time] |\n"; 
+           
+           $n++;
+        }
+        
+        $message .= "C уважением. Администрация. ";              
+
+        $headers = 'From: administrator@altforex.ru\r\n';
+
+        $headers  .= 'MIME-Version: 1.0' . "\r\n";
+
+        $headers .= 'Content-type: text/plain; charset=utf-8' . "\r\n";
+
+        mail($this->email, 'Результаты раунда', $message, $headers);
+        
+     }
 }
 
 ?>
