@@ -28,5 +28,6 @@ header('Content-Type: text/html; charset=utf-8');
          <?php if($_SESSION[auth] == 1 && $attributes[act] == 'main'){   ?>
         <div class="main_0" style="background-image: url('../images/<?php echo $img_prefix;?>_bg.png');">
            <?php }else{ ?>
-            <div class="main_0" style="background-color: #eeeeee;width: 1024px;"> 
+            <div class="main_0"> 
+<!--                 style="background-color: #eeeeee;width: 1024px;"-->
             <?php }?>

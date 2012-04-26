@@ -26,7 +26,7 @@ html, body {
 div.main{ 
     width: 100%;
 /*    height: 602px;*/
-    background-color: #eeeeee;
+/*    background-color: #eeeeee;*/
 /*    outline: 1px solid red;*/
 }
 div.main_0{
@@ -117,7 +117,7 @@ div.envelope_base{
     float: left;
     width: 1024px;
     height: auto;
-    background-color: #eeeeee;
+/*    background-color: #eeeeee;*/
 /*    outline: 1px solid red;*/
 }
 div.envelope{
@@ -146,7 +146,7 @@ div.registration{
     height: auto;
     margin-top: 20px;
     margin-left: 120px;
-    background-color: #eeeeee;
+/*    background-color: #eeeeee;*/
     display: block;
     z-index: 11;
 /*    outline: 1px solid green;*/
@@ -253,7 +253,7 @@ div.setting_vote{
 /*    height: 313px;*/
     margin-top: 20px;
     margin-left: 120px;
-    background-color: #eeeeee;
+/*    background-color: #eeeeee;*/
     display: block;
 /*    outline: 1px solid green;*/
 }
@@ -312,7 +312,7 @@ div.add_mail{
     height: 563px;
     margin-top: 20px;
     margin-left: 120px;
-    background-color: #eeeeee;
+/*    background-color: #eeeeee;*/
     display: block;
     z-index: 0;
 }
