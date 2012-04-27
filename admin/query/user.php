@@ -18,7 +18,7 @@ $user_id = intval($attributes[uid]);
 
 $query = "SELECT u.id, u.name, u.surname, u.email, a.cash, e.name AS status, e.id AS element 
             FROM `users` u, `my_account` a, `elements` e 
-            WHERE u.id = a.user_id AND a.element_id = e.id
+            WHERE u.id = a.user_id AND a.level = e.id
             AND u.id = $user_id";
 
 $result = mysql_query($query) or die($query);

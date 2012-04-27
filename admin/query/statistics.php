@@ -9,9 +9,8 @@ $statistics = array();
 $figures = array('square'=>'квадрат', 'circle'=>'круг', 'triangle'=>'треугольник');
 
 
-$round = $_SESSION[game_id];
+$round = $attributes[rid];
 
-unset($_SESSION[game_id]);
 /*
  * определяем ставки по фигурам и участникам в актуальном раунде
  */
@@ -42,27 +41,6 @@ foreach ($figures as $key => $value) {
 mysql_fetch_array($result);
 
 sort($statistics);
-/*
- * если раунд не начат(ставок еще не было) сообщаем об этом
- */
-if(!count($statistics)){
-    
-    ?>
-<script language="javascript">
-    document.write("<br/><br/><br/><br/><br/><br/><br/><p style='font-size: 16px; font-weight: bold;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;К сожалению даных по этому раунду еще нет.</p><br/>");
-</script>
-<?php
-}else{
-    $all = 0;
-     
-    include 'main/statistics.php';
-}
-
-
 
 ?>
-<script type="text/javascript">
-    function _wClose(){
-       self.close();
-    }
-</script>
+

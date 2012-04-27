@@ -63,13 +63,32 @@ switch ($attributes[act]) {
         include 'query/authentication.php';
         break;
     
-    case 'cab':
+    case 'cab': 
+        include 'main/selector.php';
         include 'main/main_menu.php';
         break;
     
     case 'players':
+        include 'main/selector.php';
         include 'main/main_menu.php'; 
         include 'main/users.php';
+        break;
+    case 'arch':
+        include 'main/selector.php';
+        include 'main/main_menu.php';
+        include 'main/time_selector.php';
+        break;
+    case 'stime':
+        include 'main/selector.php';
+        include 'main/main_menu.php';
+        include 'query/rounds.php';
+        include 'main/rounds.php';
+        break;
+    case 'round':
+        include 'main/selector.php';
+        include 'main/main_menu.php';
+        include 'query/statistics.php';
+        include 'main/statistics.php';
         break;
     
     case 'redu':

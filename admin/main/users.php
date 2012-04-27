@@ -9,7 +9,7 @@
 $header_array = array('Имя','Фамилия','Е-мейл','Статус','Баланс','Удалить','Редактировать'); 
 
 ?>
-    <table border="1" width="800">
+    <table border="0" width="800">
         <thead>
             <tr style="font-size: 14px;font-weight: bold;text-align: center;">
                 <?php

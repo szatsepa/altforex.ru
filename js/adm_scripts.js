@@ -11,14 +11,14 @@ function _entryA(ID){
 function _delUserWindow(id){
     
     if(confirm("Вы действительно желаете удалить игрока?")){
-        var str = 'http://altforex.ru/administrator/index.php?act=delu&uid='+id;
+        var str = 'http://altforex.ru/admin/index.php?act=delu&uid='+id;
     }else{
-        var str = 'http://altforex.ru/administrator/index.php?act=players';
+        var str = 'http://altforex.ru/admin/index.php?act=players';
     }
     document.location.href = str;
 }
 function _redUserWindow(id){
-    var str = 'http://altforex.ru/administrator/index.php?act=redu&uid='+id;
+    var str = 'http://altforex.ru/admin/index.php?act=redu&uid='+id;
     document.location.href = str;
 }
 function _regUser(ID){

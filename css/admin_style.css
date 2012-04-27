@@ -83,3 +83,30 @@ div.user_red{
     padding-top: 0;
     padding-left: 8px;;
 }
+div.footer{
+    text-align: center;
+    color: black;
+    position: relative;
+    background-color: #dddddd;
+    width: 1024px;
+    margin: 0 auto;
+}
+span.selector3 {
+	display: inline;
+	position: relative;
+        float: right;
+	margin:auto 27px auto auto;
+	padding-top: 2px;
+	font-size: 1ex;
+}
+div.selector {
+	background-color:#cccccc;
+	border-top:1px solid #a7a7a7;
+	border-bottom:1px solid white;
+	font-size:4ex;
+	padding: 0 0 0 0;
+        padding-left: 22px;
+	margin-top:7px;
+	width:98%;
+        height: 28px;
+}

@@ -16,6 +16,7 @@ header('Content-Type: text/html; charset=utf-8');
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
         <link rel="icon" href="/favicon.ico" type="image/x-icon" />
         <link rel="stylesheet" href="../css/admin_style.css" type="text/css" media="screen, projection" />
+        <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen, projection" />
         <script type="text/javascript" src="../js/adm_scripts.js"></script>
 </head>
     <body onload="">
