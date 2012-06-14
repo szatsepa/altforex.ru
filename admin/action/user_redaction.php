@@ -10,7 +10,7 @@ $status = intval($attributes[status]);
 
 $cash = quote_smart($attributes[cash]);
 
-$query = "UPDATE my_account SET cash = (cash + $cash), levels = $status WHERE user_id = $user_id";
+$query = "UPDATE my_account SET cash = (cash + $cash), level = $status WHERE user_id = $user_id";
 
 mysql_query($query) or die($query);
 
