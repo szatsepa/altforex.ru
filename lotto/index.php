@@ -28,6 +28,7 @@ include 'main/header.php';
 
 switch ($attributes[act]) {
     case 'main':
+        include 'main/subheader.php';
         include 'main/main.php';
         break;
     

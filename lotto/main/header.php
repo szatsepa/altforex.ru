@@ -19,10 +19,11 @@ header('Content-Type: text/html; charset=utf-8');
         <link href="css/jquery-ui-1.css" rel="stylesheet" type="text/css"/>
        
         <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
-        <script type="text/javascript" src="../js/my_request.js"></script>
-        <script type="text/javascript" src="../js/in_form.js"></script>
-        <script type="text/javascript" src="../js/<?php echo $_GET[act];?>.js"></script>
-        <script type="text/javascript" src="../js/queryLoader.js"></script>
+        <script type="text/javascript" src="js/my_request.js"></script>
+        <script type="text/javascript" src="js/in_form.js"></script>
+        <script type="text/javascript" src="js/ticket_check.js"></script>
+        <script type="text/javascript" src="js/<?php echo $_GET[act];?>.js"></script>
+        <script type="text/javascript" src="js/queryLoader.js"></script>
         
 </head>
     <body onload="">
@@ -40,5 +41,4 @@ if(isset($user)){
     <?php
 }
  ?>
-<!--        <div class="main"> -->
-<!--                <div class="main_n"> -->
+        <div class="main"> 

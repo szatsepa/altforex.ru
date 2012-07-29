@@ -10,10 +10,10 @@
 </div>
 <?php if($_GET[act]!= 'cart'){ ?>
 <div id="preload"></div>
-
+</div>
 <script type="text/javascript">
-	QueryLoader.selectorPreload = "body";
-	QueryLoader.init();
+//	QueryLoader.selectorPreload = "body";
+//	QueryLoader.init();
 </script>
 <?php } ?>
     </body>
