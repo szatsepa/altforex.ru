@@ -9,24 +9,8 @@
     var i = 0;
     var k = 1;
 
-    var B1 = 0;
-    var B2 = 0;
-    var B3 = 0;
-    var B4 = 0;
-    var B5 = 0;
-    var B6 = 0;
-    var B7 = 0;
-    var B8 = 0;
-    var B9 = 0;
-    var C1 = 0;
-    var C2 = 0;
-    var C3 = 0;
-    var C4 = 0;
-    var C5 = 0;
-    var C6 = 0;
-    var C7 = 0;
-    var C8 = 0;
-    var C9 = 0;
+    var check_B = new Array(0,0,0,0,0,0,0,0,0);
+    var check_C = new Array(0,0,0,0,0,0,0,0,0);
 </script>
 <div id="content" style="height: 643px">
 						
