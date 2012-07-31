@@ -47,7 +47,7 @@ a.footer{
 }
 .login_content{
 	float: left;
-	width: 800px;
+	width: 640px;
 	padding-top: 20px;
 	padding-left: 5px;
 }
@@ -57,35 +57,41 @@ a.footer{
 #ticket_form_txt{
 	padding-top: 5px;
 	padding-bottom: 5px;
+/*        outline: 1px solid red;*/
 }
 #quick_button {
 /*	background-image: url(../images/bimbam_btn.jpg); */
         background-color: burlywood;
 	border-bottom: 0px; 
 	border-left: 0px; 
-	width: 111px; 
+	width: 121px; 
 	background-repeat: no-repeat; 
 	height: 28px; 
 	border-top: 0px; 
 	cursor: pointer; 
-	border-right: 0px
+	border-right: 0px;
+        font-size: 16px;
+        font-weight: bold;
+        color: black;
 }
 #quick_button:hover {
 /*	background-image: url(../images/bimbam_o.jpg); */
         background-color: brown;
-	border-bottom: 0px; 
+/*	border-bottom: 0px; 
 	border-left: 0px; 
 	width: 111px; 
 	background-repeat: no-repeat; 
 	height: 28px; 
 	border-top: 0px; 
 	cursor: pointer; 
-	border-right: 0px
+	border-right: 0px;*/
+        background-color: brown;
+        color: white;
 }
 .clear_btn {
 	display: block; 
 	cursor: pointer; 
-	width:111px;
+	width:121px;
 	height:28px;
 /*	background: url('../images/clear_btn.jpg') no-repeat;*/
         background-color: burlywood;
@@ -177,4 +183,23 @@ a.footer{
 .my_button[disabled] {
 	background: #f8eddc;
 	color: #a2220c;
+}
+#sale_ticket{
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+}
+#sale_ticket:hover{
+    color: blueviolet;
+}
+#my_cart{
+    position: absolute;
+    width: 160px;
+    left: 846px;
+    top: 4px;
+    text-align: left;
+    visibility: hidden;
+    color: gold;
 }

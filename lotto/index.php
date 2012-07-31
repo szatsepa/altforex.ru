@@ -36,7 +36,6 @@ switch ($attributes[act]) {
         include 'action/logout.php';
         break;
 
-    
     default :
         header("location:?act=main");
         break;

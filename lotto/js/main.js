@@ -24,6 +24,37 @@ $(document).ready(function () {
         
         var n = 0;
         
+        $("#vrWrapper").css({'top':'260px','left':'567px','visibility':'hidden'});
+        
+        $("#sale_ticket").mousedown(function(){
+            if(!customer['id'] || customer['id'] == undefined){
+                
+                    $("#vrWrapper").css({'z-index':'16','visibility':'visible'});
+                    $("#signin").show(300, function(){
+                        $('#loginEmail').focus();
+                    });
+
+            }else{
+                if(C_array.length){
+                    if(confirm("Купить?")){
+                        var obj_A = '';
+                        var obj_B = '';
+                        var obj_C = '';
+                        for(var i = 0;i<5;i++){
+                            obj_A += A_array[i]+'; ';
+                        }
+                        for(var i = 0;i<10;i++){
+                            obj_B += B_array[i]+'; ';
+                        }
+                        for(var i = 0;i<15;i++){
+                            obj_C += C_array[i]+'; ';
+                        }
+                    }
+                    alert(obj_A+'\n'+obj_B+'\n'+obj_C);
+                }
+            }
+        });
+        
         $('form').each(function(nf, myForm){
             // Перебираем элементы формы: input:text (текстовые поля)
             $('#' + $(myForm).attr('id') + ' input:text').each(function(nf, inputData){

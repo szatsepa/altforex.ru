@@ -22,8 +22,6 @@ class User{
                  FROM users AS u   
                  WHERE u.id = $id AND u.activ = 1";
             
-            $result = mysql_query($query) or die ($query);
-        
         $result = mysql_query($query) or die ($query);
 
         $row = mysql_fetch_assoc($result);
@@ -72,8 +70,6 @@ class Customer{
                  FROM customers AS u   
                  WHERE u.id = $id AND u.activ = 1";
             
-            $result = mysql_query($query) or die ($query);
-        
         $result = mysql_query($query) or die ($query);
 
         $row = mysql_fetch_assoc($result);

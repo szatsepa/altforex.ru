@@ -15,13 +15,11 @@ header('Content-Type: text/html; charset=utf-8');
         <meta name="description" content="" />
         
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
-        <link href="css/jquery.css" rel="stylesheet" type="text/css"/>
-        <link href="css/jquery-ui-1.css" rel="stylesheet" type="text/css"/>
+        <link href="css/user_forms.css" rel="stylesheet" type="text/css"/>
        
         <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
         <script type="text/javascript" src="js/my_request.js"></script>
         <script type="text/javascript" src="js/in_form.js"></script>
-        <script type="text/javascript" src="js/ticket_check.js"></script>
         <script type="text/javascript" src="js/<?php echo $_GET[act];?>.js"></script>
         <script type="text/javascript" src="js/queryLoader.js"></script>
         

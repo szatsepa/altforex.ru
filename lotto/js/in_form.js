@@ -11,7 +11,7 @@ $(document).ready(function () {
         
 //если клиент определен проверяем и выводим его корзину================        
         if(customer['id'] || customer['id'] != undefined){
-                checkCart(customer['id']);
+//                checkCart(customer['id']);
             }
 //начальные установки инициализация переменных
         var cart = new Object();
@@ -239,7 +239,7 @@ $(document).ready(function () {
                 $("#indicator").show();
                 
                 $.ajax({
-                    url:'../action/registration.php',
+                    url:'./action/registration.php',
                     type:'post',
                     dataType:'json',
                     data:{email:email,code:code},
@@ -257,7 +257,7 @@ $(document).ready(function () {
                         }
                     },
                     error:function(data){
-                        document.write(data['response']);
+                        document.write(data['responseText']);
                     }
 
                 });
@@ -277,11 +277,11 @@ $(document).ready(function () {
             
             var  code = $('#loginPass').val();
             var  email = $('#loginEmail').val();
-
+                        
             if ((email != "") && ValidEmail(email)) {
                 var uid = 0;
                 $.ajax({
-                    url: '../query/authorisation.php',
+                    url: './query/authorisation.php',
                     type: 'post',
                     dataType: 'json',
                     data: {email:email,code:code},
@@ -289,8 +289,8 @@ $(document).ready(function () {
                         var re = data['ok'];
                         if(re == 1){
                             customer = data;
-                            checkCart(data['id']); 
-                            $("#vrWrapper").css('display','none');
+//                            checkCart(data['id']); 
+//                            $("#vrWrapper").css({'visibility':'hidden'});
                         }else{
                             $("#signin").hide(300, function(){
                                 $("#signup").show(300);
@@ -299,7 +299,7 @@ $(document).ready(function () {
                         }
                     },
                     error:function(data){
-                        document.write(data['response']);
+                        document.write(data['responseTextText']);
                     }
                 });
 
@@ -320,7 +320,7 @@ $(document).ready(function () {
             $("#indicator").show();
                     
             $.ajax({
-                url:'../query/reminde.php',
+                url:'./query/reminde.php',
                 type:'post',
                 dataType:'json',
                 data:{email:email},
@@ -338,7 +338,7 @@ $(document).ready(function () {
                     } 
                 },
                 error:function(data){
-                    document.write(data['response']);
+                    document.write(data['responseText']);
                 }
                 
             });            
@@ -385,7 +385,7 @@ $(document).ready(function () {
     function checkCart(id){
         var id = id;
         $.ajax({
-            url:'../query/check_cart.php',
+            url:'./query/check_cart.php',
             type:'post',
             dataType:'json',
             data:{id:id},
@@ -408,7 +408,7 @@ $(document).ready(function () {
                return;
             },
             error:function(data){
-                document.write(data['response']);
+                document.write(data['responseText']);
             }
         });
         
